@@ -1,0 +1,8 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<a class="btn" href="?cmd=usuario-login">Continuar</a>
+
+
+
+
+

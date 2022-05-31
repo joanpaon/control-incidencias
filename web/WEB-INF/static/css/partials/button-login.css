@@ -1,0 +1,17 @@
+main .btn {
+  height: 3.4rem;
+  width: 12rem;
+
+  color: #333;
+  font-size: 1.6rem;
+  text-decoration: none;
+
+  background-color: #eee;
+  border: solid .1rem #aaa;
+  box-shadow: .2rem .2rem .4rem rgba(0, 0, 0, 0.5);
+  border-radius: .5rem;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

@@ -1,0 +1,182 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+html {
+    font-size: 16px;
+    font-size: 1.6vh;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+#container {
+    /*height: 100vh;*/
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+}
+
+/* --- */
+
+main {
+    height: 100%;
+
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- */
+
+main .watermark {
+    height: 30rem;
+    height: 80vh;
+
+    opacity: .2;
+
+    position: absolute;
+    position: fixed;
+    z-index: -1;
+    top: 10vh;
+}
+
+/* --- */
+
+main header {
+    height: 4rem;
+    width: 70rem;
+
+    padding: .5rem 1rem;
+
+    border: solid #999 0.1rem;
+    border-radius: 0.3rem;
+
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+main header h2 {
+    color: yellow;
+    color: gold;
+    color: #999;
+    font-size: 3rem;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: .1rem .1rem .1rem rgba(0, 0, 0, 0.7);
+}
+
+/* --- */
+
+main header .btn {
+    height: 2.0rem;
+    width: 8rem;
+
+    color: #333;
+    /*font-size: 1.6rem;*/
+    font-size: 1rem;
+    font-weight: normal;
+    text-decoration: none;
+
+    background-color: #eee;
+    border: solid .1rem #aaa;
+    box-shadow: .1rem .1rem .2rem rgba(0, 0, 0, 0.5);
+    border-radius: .2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main header .btn:first-of-type {
+    margin-left: auto;
+}
+
+/* --- */
+
+main .galeria {
+    width: 70rem;
+
+    padding: 1rem;
+    
+    font-size: 1.1rem;
+
+    border: solid #999 0.1rem;
+    border-radius: 0.2rem;
+    border-spacing: 0.2rem;
+
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 3rem;
+}
+
+/* --- */
+
+main .galeria .ficha {
+    /*height: 17rem;*/
+    width: 12rem;
+
+    padding: 1rem;
+    
+    text-decoration: none;
+    
+    border: solid .1rem #ccc;
+    box-shadow: .2rem .2rem .2rem rgba(0, 0, 0, .5);
+
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: .2rem;
+}
+
+main .galeria .ficha img {
+    width: 100%;
+    height: 13rem;
+    
+    margin-bottom: .2rem;
+}
+
+main .galeria .ficha .id {
+    margin-bottom: -.2rem;
+    
+    font-size: 1rem;
+    
+    color: #000;
+}
+
+main .galeria .ficha .nombre {
+    font-size: 2rem;
+    
+    color: orange;
+}
+
+main .galeria .ficha .perfil {
+    font-size: 1.2rem;
+    text-align: center;
+    
+    color: limegreen;
+}
+
+
+
+@media(max-width: 900px) {
+    main .btn-principal {
+        margin-left: 0;
+    }
+}

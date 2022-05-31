@@ -1,0 +1,90 @@
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+/*---*/
+
+html {
+    font-size: 16px;
+    font-size: 1.6vh;
+}
+
+/*---*/
+
+body {
+    font-family: sans-serif;
+}
+
+/*---*/
+
+#container {
+    height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+/* --- */
+
+main {
+    height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+
+    position: relative;
+}
+
+/* --- */
+
+main .watermark {
+    height: 30rem;
+    height: 80%;
+
+    opacity: .2;
+
+    position: absolute;
+    z-index: -1;
+}
+
+/* --- */
+
+main h2 {
+    margin-bottom: 5rem;
+
+    color: #333;
+    font-size: 4rem;
+    text-shadow: .2rem .2rem .4rem rgba(0, 0, 0, 0.5);
+}
+
+main .controles {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+main .btn {
+    height: 3.4rem;
+    width: 12rem;
+
+    color: #333;
+    font-size: 1.6rem;
+    text-decoration: none;
+
+    background-color: #eee;
+    border: solid .1rem #aaa;
+    box-shadow: .2rem .2rem .4rem rgba(0, 0, 0, 0.5);
+    border-radius: .5rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

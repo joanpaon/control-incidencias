@@ -1,0 +1,55 @@
+package org.japo.java.libraries;
+
+import java.io.IOException;
+import javax.servlet.http.HttpServletRequest;
+import static org.japo.java.libraries.UtilesUsuario.validarId;
+
+public final class UtilesDependencia {
+
+    // Valores Predeterminados
+    public static final int DEF_ID = 0;
+    public static final String DEF_NOMBRE = "D00";
+    public static final String DEF_INFO = "Dependencia Indefinida";
+
+    // Expresiones Regulares
+    public static final String REG_NOMBRE = "[\\w]{3,10}";
+    public static final String REG_INFO = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ]{3,100}";
+
+    private UtilesDependencia() {
+    }
+
+    public static final boolean validarId(int id) {
+        return id >= DEF_ID;
+    }
+
+    public static final boolean validarNombre(String nombre) {
+        return nombre.matches(REG_NOMBRE);
+    }
+
+    public static final boolean validarInfo(String info) {
+        return info.matches(REG_INFO);
+    }
+
+    public static final int obtenerIdRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Referencia
+        int id;
+
+        // URL > ID Objeto
+        try {
+            id = Integer.parseInt(request.getParameter("id"));
+
+            if (!validarId(id)) {
+                throw new IOException("ID de Dependencia Fuera de Rango");
+            }
+        } catch (NullPointerException e) {
+            throw new IOException(e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IOException("ID de Dependencia Incorrecta");
+        }
+
+        // Retorno
+        return id;
+    }
+}

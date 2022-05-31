@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <description>Control de Incidencias</description>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/views/message/page404.jsp</location>
+    </error-page>        
+    <error-page>
+        <error-code>500</error-code>
+        <location>/WEB-INF/views/message/page500.jsp</location>
+    </error-page>
+    <context-param>
+        <param-name>base-datos</param-name>
+        <param-value>control_incidencias</param-value>
+    </context-param>
+    <context-param>
+        <param-name>ruta-vistas</param-name>
+        <param-value>/WEB-INF/views</param-value>
+    </context-param>
+    <context-param>
+        <param-name>ruta-estatica</param-name>
+        <param-value>/WEB-INF/static</param-value>
+    </context-param>
+    <context-param>
+        <param-name>tiempo-maximo-sesion-inactiva</param-name>
+        <!-- En segundos -->
+        <param-value>1800</param-value>
+    </context-param>
+</web-app>

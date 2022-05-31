@@ -1,0 +1,41 @@
+<%@page import="org.japo.java.entities.Usuario"%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    HttpSession _sesion = request.getSession(false);
+
+    Usuario _usuario = null;
+
+    if (_sesion != null && _sesion.getAttribute("usuario") instanceof Usuario) {
+        // Sesión > Usuario
+        _usuario = (Usuario) _sesion.getAttribute("usuario");
+    }
+%>
+
+<header class="page-header">
+
+    <div class="logo">
+        <a href="?cmd=visita-landing">
+            <img src="public/img/logo.png" alt="Logo"/>
+        </a>
+    </div>
+
+    <div class="titulo">
+        <h1>Control de Incidencias</h1>
+    </div>
+
+    <div class="user">
+        <% if (_usuario != null) {%>
+        <a href="?cmd=usuario-logout">
+            <img src="<%= _usuario.getAvatar()%>" alt="Avatar"/>
+        </a>
+        <% }%>
+    </div>
+
+</header>
+
+
+
+
+

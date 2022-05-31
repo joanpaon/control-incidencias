@@ -1,0 +1,35 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<% {
+        // Parámetros Navegación
+        long rowIndex = (long) request.getAttribute("row-index");
+        long rowIndexIni = (long) request.getAttribute("row-index-ini");
+        long rowIndexAnt = (long) request.getAttribute("row-index-ant");
+        long rowIndexSig = (long) request.getAttribute("row-index-sig");
+        long rowIndexFin = (long) request.getAttribute("row-index-fin");
+        int rowsPage = (int) request.getAttribute("rows-page");
+%>
+
+<nav class="paginacion">
+    <a href="?cmd=incidencia-listado&row-index=<%=rowIndexIni%>&rows-page=<%=rowsPage%>" class="btn btn-ini" title="Principio">&lt;&lt;</a>
+    <a href="?cmd=incidencia-listado&row-index=<%=rowIndexAnt%>&rows-page=<%=rowsPage%>" class="btn btn-prv" title="Anterior">&lt;</a>
+    <a href="?cmd=incidencia-listado&row-index=<%=rowIndexSig%>&rows-page=<%=rowsPage%>" class="btn btn-nxt" title="Siguiente">&gt;</a>
+    <a href="?cmd=incidencia-listado&row-index=<%=rowIndexFin%>&rows-page=<%=rowsPage%>" class="btn btn-end" title="Final">&gt;&gt;</a>
+    |
+    <form class="rows-page" action="">
+        <input type="hidden" name="cmd" value="incidencia-listado">
+        <input type="hidden" name="row-index" value="<%= rowIndex%>">
+        <label for="rows-page">Filas</label>
+        <select id="rows-page" name="rows-page" onchange="document.querySelector('.rows-page').submit()">
+            <option value="10" <%= rowsPage == 10 ? "selected" : ""%>>10</option>
+            <option value="20" <%= rowsPage == 20 ? "selected" : ""%>>20</option>
+            <option value="40" <%= rowsPage == 40 ? "selected" : ""%>>40</option>
+            <option value="80" <%= rowsPage == 80 ? "selected" : ""%>>80</option>
+        </select>
+    </form>
+</nav>
+
+<% }%>
+
+
+
+
