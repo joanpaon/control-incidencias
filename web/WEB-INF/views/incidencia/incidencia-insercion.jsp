@@ -62,11 +62,11 @@
                     <div class="form-content">
                         <div class="field-container">
                             <div class="field-set">
-                                <label for="nombre">Nombre</label>
-                                <input id="nombre" 
+                                <label for="titulo">Título</label>
+                                <input id="titulo" 
                                        type="text" 
-                                       name="nombre" 
-                                       pattern="<%= UtilesIncidencia.REG_NOMBRE%>" 
+                                       name="titulo" 
+                                       pattern="<%= UtilesIncidencia.REG_TITULO %>" 
                                        required />
                             </div>
 

@@ -37,12 +37,12 @@ public final class Notificacion implements Serializable {
     // Constructor Predeterminado
     public Notificacion() {
         id = UtilesIncidencia.DEF_ID;
-        fecha = UtilesIncidencia.DEF_CREACION;
+        fecha = UtilesIncidencia.DEF_FECHA;
         autor = UtilesUsuario.DEF_ID;
         autorNombre = UtilesUsuario.DEF_USER;
         autorPerfil = UtilesPerfil.DEF_NOMBRE;
         incidencia = UtilesIncidencia.DEF_ID;
-        info = UtilesIncidencia.DEF_INFO;
+        info = UtilesNotificacion.DEF_INFO;
     }
 
     // Constructor Parametrizado

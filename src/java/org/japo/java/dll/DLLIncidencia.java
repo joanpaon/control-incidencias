@@ -49,10 +49,10 @@ public final class DLLIncidencia {
         String sql = ""
                 + "SELECT "
                 + "incidencias.id AS id, "
-                + "incidencias.nombre AS nombre, "
+                + "incidencias.titulo AS titulo, "
                 + "incidencias.info AS info, "
                 + "incidencias.estado AS estado, "
-                + "incidencias.creacion AS creacion, "
+                + "incidencias.fecha AS fecha, "
                 + "incidencias.autor AS autor, "
                 + "usuarios.user AS autor_nombre, "
                 + "perfiles.nombre AS autor_perfil, "
@@ -82,10 +82,10 @@ public final class DLLIncidencia {
                     while (rs.next()) {
                         // Fila Actual > Campos 
                         int id = rs.getInt("id");
-                        String nombre = rs.getString("nombre");
+                        String titulo = rs.getString("titulo");
                         String info = rs.getString("info");
                         int estado = rs.getInt("estado");
-                        Date creacion = new Date(rs.getDate("creacion").getTime());
+                        Date fecha = rs.getTimestamp("fecha");
                         int autor = rs.getInt("autor");
                         String autorNombre = rs.getString("autor_nombre");
                         String autorPerfil = rs.getString("autor_perfil");
@@ -96,7 +96,7 @@ public final class DLLIncidencia {
 
                         // Campos > Entidad
                         Incidencia incidencia = new Incidencia(
-                                id, nombre, info, estado, creacion,
+                                id, titulo, info, estado, fecha,
                                 autor, autorNombre, autorPerfil,
                                 dependencia, dependenciaNombre,
                                 especialidad, especialidadNombre);
@@ -119,10 +119,10 @@ public final class DLLIncidencia {
         String sql = ""
                 + "SELECT "
                 + "incidencias.id AS id, "
-                + "incidencias.nombre AS nombre, "
+                + "incidencias.titulo AS titulo, "
                 + "incidencias.info AS info, "
                 + "incidencias.estado AS estado, "
-                + "incidencias.creacion AS creacion, "
+                + "incidencias.fecha AS fecha, "
                 + "incidencias.autor AS autor, "
                 + "usuarios.user AS autor_nombre, "
                 + "perfiles.nombre AS autor_perfil, "
@@ -157,10 +157,10 @@ public final class DLLIncidencia {
                     while (rs.next()) {
                         // Fila Actual > Campos 
                         int id = rs.getInt("id");
-                        String nombre = rs.getString("nombre");
+                        String titulo = rs.getString("titulo");
                         String info = rs.getString("info");
                         int estado = rs.getInt("estado");
-                        Date creacion = new Date(rs.getDate("creacion").getTime());
+                        Date fecha = rs.getTimestamp("fecha");
                         String autorNombre = rs.getString("autor_nombre");
                         String autorPerfil = rs.getString("autor_perfil");
                         int dependencia = rs.getInt("dependencia");
@@ -170,7 +170,7 @@ public final class DLLIncidencia {
 
                         // Campos > Entidad
                         Incidencia incidencia = new Incidencia(
-                                id, nombre, info, estado, creacion,
+                                id, titulo, info, estado, fecha,
                                 autor, autorNombre, autorPerfil,
                                 dependencia, dependenciaNombre,
                                 especialidad, especialidadNombre);
@@ -256,10 +256,10 @@ public final class DLLIncidencia {
         String sql = ""
                 + "SELECT "
                 + "incidencias.id AS id, "
-                + "incidencias.nombre AS nombre, "
+                + "incidencias.titulo AS titulo, "
                 + "incidencias.info AS info, "
                 + "incidencias.estado AS estado, "
-                + "incidencias.creacion AS creacion, "
+                + "incidencias.fecha AS fecha, "
                 + "incidencias.autor AS autor, "
                 + "usuarios.user AS autor_nombre, "
                 + "perfiles.nombre AS autor_perfil, "
@@ -294,10 +294,10 @@ public final class DLLIncidencia {
                     while (rs.next()) {
                         // Fila Actual > Campos 
                         int id = rs.getInt("id");
-                        String nombre = rs.getString("nombre");
+                        String titulo = rs.getString("titulo");
                         String info = rs.getString("info");
                         int estado = rs.getInt("estado");
-                        Date creacion = new Date(rs.getDate("creacion").getTime());
+                        Date fecha = rs.getTimestamp("fecha");
                         int autor = rs.getInt("autor");
                         String autorNombre = rs.getString("autor_nombre");
                         String autorPerfil = rs.getString("autor_perfil");
@@ -308,7 +308,7 @@ public final class DLLIncidencia {
 
                         // Campos > Entidad
                         Incidencia incidencia = new Incidencia(
-                                id, nombre, info, estado, creacion,
+                                id, titulo, info, estado, fecha,
                                 autor, autorNombre, autorPerfil,
                                 dependencia, dependenciaNombre,
                                 especialidad, especialidadNombre);
@@ -331,10 +331,10 @@ public final class DLLIncidencia {
         String sql = ""
                 + "SELECT "
                 + "incidencias.id AS id, "
-                + "incidencias.nombre AS nombre, "
+                + "incidencias.titulo AS titulo, "
                 + "incidencias.info AS info, "
                 + "incidencias.estado AS estado, "
-                + "incidencias.creacion AS creacion, "
+                + "incidencias.fecha AS fecha, "
                 + "incidencias.autor AS autor, "
                 + "usuarios.user AS autor_nombre, "
                 + "perfiles.nombre AS autor_perfil, "
@@ -372,10 +372,10 @@ public final class DLLIncidencia {
                     while (rs.next()) {
                         // Fila Actual > Campos 
                         int id = rs.getInt("id");
-                        String nombre = rs.getString("nombre");
+                        String titulo = rs.getString("titulo");
                         String info = rs.getString("info");
                         int estado = rs.getInt("estado");
-                        Date creacion = new Date(rs.getDate("creacion").getTime());
+                        Date fecha = rs.getTimestamp("fecha");
                         String autorNombre = rs.getString("autor_nombre");
                         String autorPerfil = rs.getString("autor_perfil");
                         int dependencia = rs.getInt("dependencia");
@@ -385,7 +385,7 @@ public final class DLLIncidencia {
 
                         // Campos > Entidad
                         Incidencia incidencia = new Incidencia(
-                                id, nombre, info, estado, creacion,
+                                id, titulo, info, estado, fecha,
                                 autor, autorNombre, autorPerfil,
                                 dependencia, dependenciaNombre,
                                 especialidad, especialidadNombre);
@@ -410,10 +410,10 @@ public final class DLLIncidencia {
         String sql = ""
                 + "SELECT "
                 + "incidencias.id AS id, "
-                + "incidencias.nombre AS nombre, "
+                + "incidencias.titulo AS titulo, "
                 + "incidencias.info AS info, "
                 + "incidencias.estado AS estado, "
-                + "incidencias.creacion AS creacion, "
+                + "incidencias.fecha AS fecha, "
                 + "incidencias.autor AS autor, "
                 + "usuarios.user AS autor_nombre, "
                 + "perfiles.nombre AS autor_perfil, "
@@ -447,10 +447,10 @@ public final class DLLIncidencia {
                 try ( ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         // Fila Actual > Campos 
-                        String nombre = rs.getString("nombre");
+                        String titulo = rs.getString("titulo");
                         String info = rs.getString("info");
                         int estado = rs.getInt("estado");
-                        Date creacion = new Date(rs.getDate("creacion").getTime());
+                        Date fecha = rs.getTimestamp("fecha");
                         int autor = rs.getInt("autor");
                         String autorNombre = rs.getString("autor_nombre");
                         String autorPerfil = rs.getString("autor_perfil");
@@ -461,7 +461,82 @@ public final class DLLIncidencia {
 
                         // Campos > Entidad
                         incidencia = new Incidencia(
-                                id, nombre, info, estado, creacion,
+                                id, titulo, info, estado, fecha,
+                                autor, autorNombre, autorPerfil,
+                                dependencia, dependenciaNombre,
+                                especialidad, especialidadNombre);
+                    }
+                }
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno Entidad
+        return incidencia;
+    }
+
+    public Incidencia consultar(Date fecha, int autor) {
+        // SQL
+        String sql = ""
+                + "SELECT "
+                + "incidencias.id AS id, "
+                + "incidencias.titulo AS titulo, "
+                + "incidencias.info AS info, "
+                + "incidencias.estado AS estado, "
+                + "incidencias.fecha AS fecha, "
+                + "incidencias.autor AS autor, "
+                + "usuarios.user AS autor_nombre, "
+                + "perfiles.nombre AS autor_perfil, "
+                + "incidencias.dependencia AS dependencia, "
+                + "dependencias.nombre AS dependencia_nombre, "
+                + "incidencias.especialidad AS especialidad, "
+                + "especialidades.nombre AS especialidad_nombre "
+                + "FROM "
+                + "incidencias "
+                + "INNER JOIN "
+                + "usuarios ON usuarios.id = incidencias.autor "
+                + "INNER JOIN "
+                + "perfiles ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN "
+                + "dependencias ON dependencias.id = incidencias.dependencia "
+                + "INNER JOIN "
+                + "especialidades ON especialidades.id = incidencias.especialidad "
+                + "WHERE "
+//               + "incidencias.fecha=? "
+//                + "AND "
+                + "incidencias.autor=? "
+                + "ORDER BY incidencias.fecha DESC";
+
+        // Entidad
+        Incidencia incidencia = null;
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
+                // Parametrizar Sentencia
+//                ps.setTimestamp(1, new java.sql.Timestamp(fecha.getTime()));
+//                ps.setInt(2, autor);
+                ps.setInt(1, autor);
+                
+                // BD > Entidad
+                try ( ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        // Fila Actual > Campos 
+                        int id = rs.getInt("id");
+                        String titulo = rs.getString("titulo");
+                        String info = rs.getString("info");
+                        int estado = rs.getInt("estado");
+                        String autorNombre = rs.getString("autor_nombre");
+                        String autorPerfil = rs.getString("autor_perfil");
+                        int dependencia = rs.getInt("dependencia");
+                        String dependenciaNombre = rs.getString("dependencia_nombre");
+                        int especialidad = rs.getInt("especialidad");
+                        String especialidadNombre = rs.getString("especialidad_nombre");
+
+                        // Campos > Entidad
+                        incidencia = new Incidencia(
+                                id, titulo, info, estado, fecha,
                                 autor, autorNombre, autorPerfil,
                                 dependencia, dependenciaNombre,
                                 especialidad, especialidadNombre);
@@ -482,7 +557,7 @@ public final class DLLIncidencia {
                 + "UPDATE "
                 + "incidencias "
                 + "SET "
-                + "nombre=?, info=?, estado=?, creacion=?, "
+                + "titulo=?, info=?, estado=?, fecha=?, "
                 + "autor=?, dependencia=?, especialidad=? "
                 + "WHERE "
                 + "id=?";
@@ -494,10 +569,10 @@ public final class DLLIncidencia {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
                 // Parametrizar Sentencia
-                ps.setString(1, incidencia.getNombre());
+                ps.setString(1, incidencia.getTitulo());
                 ps.setString(2, incidencia.getInfo());
                 ps.setInt(3, incidencia.getEstado());
-                ps.setDate(4, new java.sql.Date(incidencia.getCreacion().getTime()));
+                ps.setTimestamp(4, new java.sql.Timestamp(incidencia.getFecha().getTime()));
                 ps.setInt(5, incidencia.getAutor());
                 ps.setInt(6, incidencia.getDependencia());
                 ps.setInt(7, incidencia.getEspecialidad());
@@ -520,7 +595,7 @@ public final class DLLIncidencia {
                 + "INSERT INTO "
                 + "incidencias "
                 + "("
-                + "nombre, info, estado, creacion, autor, "
+                + "titulo, info, estado, fecha, autor, "
                 + "dependencia, especialidad"
                 + ") "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -533,10 +608,10 @@ public final class DLLIncidencia {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
                 // Parametrizar Sentencia
-                ps.setString(1, incidencia.getNombre());
+                ps.setString(1, incidencia.getTitulo());
                 ps.setString(2, incidencia.getInfo());
                 ps.setInt(3, incidencia.getEstado());
-                ps.setDate(4, new java.sql.Date(incidencia.getCreacion().getTime()));
+                ps.setTimestamp(4, new java.sql.Timestamp(incidencia.getFecha().getTime()));
                 ps.setInt(5, incidencia.getAutor());
                 ps.setInt(6, incidencia.getDependencia());
                 ps.setInt(7, incidencia.getEspecialidad());

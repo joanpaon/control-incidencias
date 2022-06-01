@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2022 a las 15:31:13
+-- Tiempo de generación: 01-06-2022 a las 20:05:40
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.5
 
@@ -73,10 +73,10 @@ INSERT INTO `especialidades` (`id`, `nombre`, `info`) VALUES
 
 CREATE TABLE `incidencias` (
   `id` int(11) NOT NULL,
-  `nombre` varchar(50) NOT NULL,
+  `titulo` varchar(50) NOT NULL,
   `info` varchar(255) NOT NULL,
   `estado` int(11) NOT NULL,
-  `creacion` datetime NOT NULL,
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
   `autor` int(11) NOT NULL,
   `dependencia` int(11) NOT NULL,
   `especialidad` int(11) NOT NULL
@@ -86,10 +86,11 @@ CREATE TABLE `incidencias` (
 -- Volcado de datos para la tabla `incidencias`
 --
 
-INSERT INTO `incidencias` (`id`, `nombre`, `info`, `estado`, `creacion`, `autor`, `dependencia`, `especialidad`) VALUES
-(1, 'Luminaria no se Enciende', 'Hay una luminaria que no se enciende', 0, '2022-05-02 00:00:00', 1, 1, 2),
-(2, 'No se puede abrir el rack', 'Al intentar abrir el rack con su llave la cerradura no gira', 0, '2022-05-08 00:00:00', 1, 11, 1),
-(3, 'Los equipos no encienden', 'Al parecer no hay electricidad porque no se enciende ningún indicador', 1, '2022-05-09 00:00:00', 1, 3, 2);
+INSERT INTO `incidencias` (`id`, `titulo`, `info`, `estado`, `fecha`, `autor`, `dependencia`, `especialidad`) VALUES
+(1, 'Luminaria no se Enciende', 'Hay una luminaria que no se enciende', 0, '2022-05-01 22:00:00', 1, 1, 2),
+(2, 'No se puede abrir el rack', 'Al intentar abrir el rack con su llave la cerradura no gira', 0, '2022-05-07 22:00:00', 1, 11, 1),
+(3, 'Los equipos no encienden', 'Al parecer no hay electricidad porque no se enciende ningún indicador', 1, '2022-05-08 22:00:00', 1, 3, 2),
+(15, 'Faltan sillas y mesas', 'En el aula A103 hay 12 sillas y mesas y el grupo son 15 alumnos', 1, '2022-06-01 17:40:47', 2, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -99,7 +100,7 @@ INSERT INTO `incidencias` (`id`, `nombre`, `info`, `estado`, `creacion`, `autor`
 
 CREATE TABLE `notificaciones` (
   `id` int(11) NOT NULL,
-  `fecha` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  `fecha` timestamp NOT NULL DEFAULT current_timestamp(),
   `autor` int(11) NOT NULL,
   `incidencia` int(11) NOT NULL,
   `info` varchar(255) NOT NULL
@@ -117,7 +118,8 @@ INSERT INTO `notificaciones` (`id`, `fecha`, `autor`, `incidencia`, `info`) VALU
 (5, '2022-05-04 14:18:27', 3, 2, 'Esta es otra notificación de prueba'),
 (6, '2022-05-04 15:50:12', 3, 2, 'Incidencia Cerrada por barney'),
 (7, '2022-05-04 18:50:47', 3, 3, 'Protección contra sobrecarga reamada y equipos en marcha'),
-(8, '2022-05-04 11:41:37', 1, 3, 'Al empezar la sesión, de repente, todos los equipos se han apagado a la vez');
+(8, '2022-05-04 11:41:37', 1, 3, 'Al empezar la sesión, de repente, todos los equipos se han apagado a la vez'),
+(9, '2022-06-01 17:40:47', 2, 15, 'En el aula A103 hay 12 sillas y mesas y el grupo son 15 alumnos');
 
 -- --------------------------------------------------------
 
@@ -326,13 +328,13 @@ ALTER TABLE `especialidades`
 -- AUTO_INCREMENT de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `perfiles`

@@ -12,13 +12,13 @@ public final class UtilesIncidencia {
 
     // Valores Predeterminados
     public static final int DEF_ID = 0;
-    public static final String DEF_NOMBRE = "Indefinida";
+    public static final Date DEF_FECHA = new Date();
+    public static final String DEF_TITULO = "Indefinida";
     public static final String DEF_INFO = "Incidencia Indefinida";
     public static final int DEF_ESTADO = INCIDENCIA_ABIERTA;
-    public static final Date DEF_CREACION = new Date();
 
     // Expresiones Regulares
-    public static final String REG_NOMBRE = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ]{3,30}";
+    public static final String REG_TITULO = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ]{3,30}";
     public static final String REG_INFO = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ]{3,100}";
 
     private UtilesIncidencia() {
@@ -28,8 +28,8 @@ public final class UtilesIncidencia {
         return id >= DEF_ID;
     }
 
-    public static final boolean validarNombre(String nombre) {
-        return nombre.matches(REG_NOMBRE);
+    public static final boolean validarTitulo(String titulo) {
+        return titulo.matches(REG_TITULO);
     }
 
     public static final boolean validarInfo(String info) {
@@ -40,8 +40,8 @@ public final class UtilesIncidencia {
         return estado == INCIDENCIA_CERRADA || estado == INCIDENCIA_ABIERTA;
     }
 
-    public static final boolean validarCreacion(Date creacion) {
-        return creacion != null;
+    public static final boolean validarFecha(Date fecha) {
+        return fecha != null;
     }
 
     public static final int obtenerIdRequest(
@@ -67,19 +67,19 @@ public final class UtilesIncidencia {
         return id;
     }
 
-    public static final String obtenerNombreRequest(
+    public static final String obtenerTituloRequest(
             HttpServletRequest request)
             throws IOException {
         // Request > Dato
-        String nombre = request.getParameter("nombre");
+        String titulo = request.getParameter("titulo");
 
         // Validar Dato
-        if (!validarNombre(nombre)) {
-            throw new IOException("Nombre de Incidencia Incorrecto");
+        if (!validarTitulo(titulo)) {
+            throw new IOException("Título de Incidencia Incorrecto");
         }
 
         // Retorno
-        return nombre;
+        return titulo;
     }
 
     public static final String obtenerInfoRequest(

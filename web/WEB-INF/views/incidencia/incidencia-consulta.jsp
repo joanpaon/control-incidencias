@@ -79,8 +79,8 @@
                     <tbody>
                         <tr>
                             <td><%= incidencia.getId()%></td>
-                            <td><%= incidencia.getNombre()%></td>
-                            <td><%= sdf1.format(incidencia.getCreacion())%></td>
+                            <td><%= incidencia.getTitulo()%></td>
+                            <td><%= sdf1.format(incidencia.getFecha())%></td>
                             <td><%= incidencia.getEstado() == UtilesIncidencia.INCIDENCIA_ABIERTA ? "Abierta" : "Cerrada"%></td>
                             <td><%= incidencia.getDependenciaNombre()%></td>
                             <td><%= incidencia.getEspecialidadNombre()%></td>

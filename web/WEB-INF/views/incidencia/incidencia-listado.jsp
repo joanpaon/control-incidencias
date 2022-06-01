@@ -1,10 +1,10 @@
-<%@page import="org.japo.java.libraries.UtilesIncidencia"%>
 <%@page import="java.text.SimpleDateFormat"%>
-<%@page import="org.japo.java.entities.Incidencia"%>
-<%@page import="org.japo.java.libraries.UtilesPerfil"%>
-<%@page import="org.japo.java.entities.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
+<%@page import="org.japo.java.entities.Incidencia"%>
+<%@page import="org.japo.java.entities.Usuario"%>
+<%@page import="org.japo.java.libraries.UtilesIncidencia"%>
+<%@page import="org.japo.java.libraries.UtilesPerfil"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
@@ -14,6 +14,9 @@
 
     // Datos Inyectados
     List<Incidencia> incidencias = (ArrayList<Incidencia>) request.getAttribute("incidencias");
+    
+    // Formateador de Datos Temporales
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy"); 
 %>
 
 <!DOCTYPE html>
@@ -63,8 +66,6 @@
                     <% } else if (usuario.getPerfil() >= UtilesPerfil.ADMIN_CODE) { %>
                     <a class="btn btn-listar" href="?cmd=main-admin">Principal</a>
                     <% }%>
-
-
                 </header>
 
                 <%@include file="/WEB-INF/views/partials/browser.jspf" %>
@@ -73,7 +74,7 @@
                     <% if (incidencias.size() > 0) {%>
                     <thead>
                     <th>ID</th>
-                    <th>Nombre</th>
+                    <th>Titulo</th>
                     <th>Creacion</th>
                     <th>Estado</th>
                     <th>Dependencia</th>
@@ -86,8 +87,8 @@
 
                         <tr>
                             <td class="id"><%= i.getId()%></td>
-                            <td><%= i.getNombre()%></td>
-                            <td><%= new SimpleDateFormat("dd/MM/yyyy").format(i.getCreacion())%></td>
+                            <td><%= i.getTitulo()%></td>
+                            <td><%= sdf.format(i.getFecha())%></td>
                             <td><%= i.getEstado() == UtilesIncidencia.INCIDENCIA_ABIERTA ? "Abierta" : "Cerrada"%></td>
                             <td><%= i.getDependenciaNombre()%></td>
                             <td><%= i.getEspecialidadNombre()%></td>

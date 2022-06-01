@@ -23,11 +23,14 @@ import java.util.List;
 import org.japo.java.dll.DLLDependencia;
 import org.japo.java.dll.DLLEspecialidad;
 import org.japo.java.dll.DLLIncidencia;
+import org.japo.java.dll.DLLNotificacion;
 import org.japo.java.entities.Dependencia;
 import org.japo.java.entities.Especialidad;
 import org.japo.java.entities.Incidencia;
+import org.japo.java.entities.Notificacion;
 import org.japo.java.entities.Usuario;
 import org.japo.java.libraries.UtilesIncidencia;
+import org.japo.java.libraries.UtilesNotificacion;
 
 /**
  *
@@ -63,32 +66,51 @@ public final class CommandIncidenciaInsercion extends Command {
                 Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
                 // Capas de Datos
-                DLLIncidencia dllincidencia = new DLLIncidencia(config);
+                DLLIncidencia dllIncidencia = new DLLIncidencia(config);
+                DLLNotificacion dllNotificacion = new DLLNotificacion(config);
 
-                // Request > Parámetros
-                String nombre = UtilesIncidencia.obtenerNombreRequest(request);
+                // Request > Incidencia
+                String titulo = UtilesIncidencia.obtenerTituloRequest(request);
                 String info = UtilesIncidencia.obtenerInfoRequest(request);
-                int estado = UtilesIncidencia.INCIDENCIA_ABIERTA;
-                Date creacion = new Date();
-                int autor = usuario.getId();
+                Date fecha = new Date();
                 int dependencia = UtilesIncidencia.obtenerDependenciaRequest(request);
                 int especialidad = UtilesIncidencia.obtenerEspecialidadRequest(request);
 
                 // Parámetros > Incidencia
-                Incidencia incidencia = new Incidencia(UtilesIncidencia.DEF_ID,
-                        nombre, info, estado, creacion,
-                        autor, "", "",
+                Incidencia incidencia = new Incidencia(
+                        UtilesIncidencia.DEF_ID, titulo, info,
+                        UtilesIncidencia.INCIDENCIA_ABIERTA, fecha,
+                        usuario.getId(), "", "",
                         dependencia, "", especialidad, "");
 
                 // Entidad > Inserción BD - true | false
-                boolean checkOK = dllincidencia.insertar(incidencia);
+                boolean checkOK = dllIncidencia.insertar(incidencia);
 
                 // Validar Operación
                 if (checkOK) {
-                    out = "controller?cmd=incidencia-listado";
+                    // BD > Incidencia
+                    incidencia = dllIncidencia.consultar(fecha, usuario.getId());
+
+                    // Parámetros > Notificación
+                    Notificacion notificacion = new Notificacion(
+                            UtilesNotificacion.DEF_ID, fecha,
+                            usuario.getId(), usuario.getUser(), usuario.getPerfilInfo(),
+                            incidencia.getId(), incidencia.getInfo());
+
+                    // Entidad > Inserción BD - true | false
+                    checkOK = dllNotificacion.insertar(notificacion);
+
+                    // Validar Operación
+                    if (checkOK) {
+                        out = "controller?cmd=incidencia-listado";
+                    } else {
+                        out = "message/operacion-cancelada";
+                    }
                 } else {
                     out = "message/operacion-cancelada";
                 }
+            } else {
+                out = "message/operacion-desconocida";
             }
         } else {
             out = "message/sesion-invalida";

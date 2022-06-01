@@ -28,10 +28,10 @@ public final class Incidencia implements Serializable {
 
     // Campos
     private int id;
-    private String nombre;
+    private String titulo;
     private String info;
     private int estado;
-    private Date creacion;
+    private Date fecha;
     private int autor;
     private String autorNombre;
     private String autorPerfil;
@@ -43,10 +43,10 @@ public final class Incidencia implements Serializable {
     // Constructor Predeterminado
     public Incidencia() {
         id = UtilesIncidencia.DEF_ID;
-        nombre = UtilesIncidencia.DEF_NOMBRE;
+        titulo = UtilesIncidencia.DEF_TITULO;
         info = UtilesIncidencia.DEF_INFO;
         estado = UtilesIncidencia.DEF_ESTADO;
-        creacion = UtilesIncidencia.DEF_CREACION;
+        fecha = UtilesIncidencia.DEF_FECHA;
         autor = UtilesUsuario.DEF_ID;
         autorNombre = UtilesUsuario.DEF_USER;
         autorPerfil = UtilesPerfil.DEF_NOMBRE;
@@ -68,10 +68,10 @@ public final class Incidencia implements Serializable {
             this.id = UtilesIncidencia.DEF_ID;
         }
 
-        if (UtilesIncidencia.validarNombre(nombre)) {
-            this.nombre = nombre;
+        if (UtilesIncidencia.validarTitulo(nombre)) {
+            this.titulo = nombre;
         } else {
-            this.nombre = UtilesIncidencia.DEF_NOMBRE;
+            this.titulo = UtilesIncidencia.DEF_TITULO;
         }
 
         if (UtilesIncidencia.validarInfo(info)) {
@@ -86,10 +86,10 @@ public final class Incidencia implements Serializable {
             this.estado = UtilesIncidencia.DEF_ESTADO;
         }
 
-        if (UtilesIncidencia.validarCreacion(creacion)) {
-            this.creacion = creacion;
+        if (UtilesIncidencia.validarFecha(creacion)) {
+            this.fecha = creacion;
         } else {
-            this.creacion = UtilesIncidencia.DEF_CREACION;
+            this.fecha = UtilesIncidencia.DEF_FECHA;
         }
 
         if (UtilesUsuario.validarId(autor)) {
@@ -145,13 +145,13 @@ public final class Incidencia implements Serializable {
         }
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getTitulo() {
+        return titulo;
     }
 
-    public void setNombre(String nombre) {
-        if (UtilesIncidencia.validarNombre(nombre)) {
-            this.nombre = nombre;
+    public void setTitulo(String titulo) {
+        if (UtilesIncidencia.validarTitulo(titulo)) {
+            this.titulo = titulo;
         }
     }
 
@@ -175,13 +175,13 @@ public final class Incidencia implements Serializable {
         }
     }
 
-    public Date getCreacion() {
-        return creacion;
+    public Date getFecha() {
+        return fecha;
     }
 
-    public void setCreacion(Date creacion) {
-        if (UtilesIncidencia.validarCreacion(creacion)) {
-            this.creacion = creacion;
+    public void setFecha(Date fecha) {
+        if (UtilesIncidencia.validarFecha(fecha)) {
+            this.fecha = fecha;
         }
     }
 
@@ -230,7 +230,7 @@ public final class Incidencia implements Serializable {
     }
 
     public void setDependenciaNombre(String dependenciaNombre) {
-        if (UtilesIncidencia.validarNombre(dependenciaNombre)) {
+        if (UtilesIncidencia.validarTitulo(dependenciaNombre)) {
             this.dependenciaNombre = dependenciaNombre;
         }
     }
@@ -261,10 +261,10 @@ public final class Incidencia implements Serializable {
         if (o instanceof Incidencia i) {
             testOK = true
                     && id == i.getId()
-                    && nombre.equals(i.getNombre())
+                    && titulo.equals(i.getTitulo())
                     && info.equals(i.getInfo())
                     && estado == i.getEstado()
-                    && creacion.equals(i.getCreacion())
+                    && fecha.equals(i.getFecha())
                     && autor == i.getAutor()
                     && dependencia == i.getDependencia()
                     && especialidad == i.getEspecialidad();
@@ -276,10 +276,10 @@ public final class Incidencia implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 59 * hash + this.id;
-        hash = 59 * hash + Objects.hashCode(this.nombre);
+        hash = 59 * hash + Objects.hashCode(this.titulo);
         hash = 59 * hash + Objects.hashCode(this.info);
         hash = 59 * hash + this.estado;
-        hash = 59 * hash + Objects.hashCode(this.creacion);
+        hash = 59 * hash + Objects.hashCode(this.fecha);
         hash = 59 * hash + this.autor;
         hash = 59 * hash + Objects.hashCode(this.autorNombre);
         hash = 59 * hash + Objects.hashCode(this.autorPerfil);
