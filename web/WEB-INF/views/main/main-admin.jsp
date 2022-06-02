@@ -35,7 +35,6 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <h2>Página Principal del Administrador</h2>

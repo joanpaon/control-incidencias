@@ -2,7 +2,6 @@ package org.japo.java.libraries;
 
 import java.io.IOException;
 import javax.servlet.http.HttpServletRequest;
-import static org.japo.java.libraries.UtilesUsuario.validarId;
 
 public final class UtilesDependencia {
 
@@ -13,7 +12,7 @@ public final class UtilesDependencia {
 
     // Expresiones Regulares
     public static final String REG_NOMBRE = "[\\w]{3,10}";
-    public static final String REG_INFO = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ]{3,100}";
+    public static final String REG_INFO = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ\\-\\.#]{3,100}";
 
     private UtilesDependencia() {
     }

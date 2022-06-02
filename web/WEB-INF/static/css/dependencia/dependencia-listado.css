@@ -1,26 +1,18 @@
-*,
-*::before,
-*::after {
+*, *::before, *::after {
     margin: 0;
     padding: 0;
 
     box-sizing: border-box;
 }
 
-/*---*/
-
 html {
     font-size: 16px;
     font-size: 1.6vh;
 }
 
-/*---*/
-
 body {
     font-family: sans-serif;
 }
-
-/*---*/
 
 #container {
     /*height: 100vh;*/
@@ -33,7 +25,7 @@ body {
     position: relative;
 }
 
-/*---*/
+/* --- */
 
 main {
     height: 100%;
@@ -77,8 +69,6 @@ main header {
     gap: 1rem;
 }
 
-/* --- */
-
 main header h2 {
     color: yellow;
     color: gold;
@@ -117,134 +107,147 @@ main header .btn:first-of-type {
 
 /* --- */
 
-main .content {
+main table {
     width: 70rem;
 
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 1rem;
-}
-
-/* --- */
-
-main table {
-    height: 18rem;
+    font-size: 1.1rem;
 
     border: solid #999 0.1rem;
-    border-radius: 0.3rem;
-    border-spacing: 0.5rem;
-
-    flex: auto;
+    border-radius: 0.2rem;
+    border-spacing: 0.2rem;
 }
 
 /* --- */
 
-main th {
+main table tr:nth-child(odd) td {
+    background-color: lavenderblush;
+    background-color: rgba(255, 240, 245, 0.6);
+}
+
+main table tr:nth-child(even) td {
+    background-color: lightcyan;
+    background-color: rgba(224, 255, 255, 0.6);
+}
+
+main table tr:hover {
+    font-weight: bold;
+
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+/* --- */
+
+main table th {
     padding: 0.2rem 0.5rem;
 
-    text-align: left;
+    font-style: normal;
+    text-align: center;
 
     background-color: honeydew;
     background-color: rgba(240, 255, 240, 0.5);
 }
 
-main th:first-child {
-    width: 6rem;
+/* --- */
+
+
+main table .id {
+    width: 5rem;
+
+    text-align: center;
 }
 
-main th:last-child {
-    /*width: 15rem;*/
+main table .mensaje {
+    width: 100%;
+
+    text-align: center;
+    
+    background-color: tomato;
 }
 
 /* --- */
 
-main td {
-    padding: 0.2rem 0.5rem;
-}
+main table th:nth-child(2), td:nth-child(2) {
+    width: 30rem;
 
-main tr:nth-child(odd) td {
-    background-color: lavenderblush;
-    background-color: rgba(255, 240, 245, 0.6);
-}
-
-main tr:nth-child(even) td {
-    background-color: lightcyan;
-    background-color: rgba(224, 255, 255, 0.6);
+    text-align: left;
 }
 
 /* --- */
 
-main .imagen {
-    height: 18rem;
-    width: 24rem;
+main table th:nth-child(3), td:nth-child(3) {
+    width: 15rem;
+    width: auto;
 
-    padding: .5rem;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
 
-    /*background-color: blueviolet;*/
-    border: solid #999 0.1rem;
-    border-radius: 0.3rem;
+/* --- */
 
+main table th:nth-child(4), td:nth-child(4) {
+    width: 7rem;
+
+    text-align: center;
+}
+
+/* --- */
+
+main table td {
+    height: 2rem;
+
+    padding: 0 0.5rem;
+}
+
+main table td:last-child {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: none;
+    gap: .4rem;
 }
 
-main .imagen-margen {
-    height: 100%;
-    width: 100%;
 
-    background-color: white;
-    background-color: transparent;
-    border-radius: 0.3rem;
-    filter: drop-shadow(.1rem .1rem .2rem rgba(0, 0, 0, 0.5));
+/* --- */
+
+main table .btn {
+    width: 3rem;
+    height: 1.8rem;
+
+    /*padding-top: .1rem;*/
+
+    color: #333;
+    font-family: sans-serif;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    background-color: #eee;
+    border: solid .05rem grey;
+    border-radius: .2rem;
+    box-shadow: .05rem .05rem .1rem rgba(0, 0, 0, 0.5);
     overflow: hidden;
 
     display: flex;
     justify-content: center;
     align-items: center;
-    flex: none;
+
+    transition: box-shadow .3s, background-color .3s;
 }
 
-main .imagen img {
-    height: 100%;
+main table .btn:hover  {
+    background-color: #ddd;
+    box-shadow: .1rem .1rem .2rem rgba(0, 0, 0, 0.5);
+}
+
+main table .btn:active  {
+    background-color: #fff;
+    box-shadow: 0rem 0rem .1rem rgba(0, 0, 0, 0.5);
 }
 
 /* --- */
 
-main .controles {
-    height: 4rem;
-    width: 70rem;
-
-    padding: .5rem 1rem;
-
-    border: solid #999 0.1rem;
-    border-radius: 0.3rem;
-
-    display: flex;
-    justify-content: center;
-    /*justify-content: space-between;*/
-    align-items: center;
-    gap: 1rem;
-}
-
-main .controles .btn {
-    height: 2.0rem;
-    width: 8rem;
-
-    color: #333;
-    /*font-size: 1.6rem;*/
-    font-size: 1rem;
-    font-weight: normal;
-    text-decoration: none;
-
-    background-color: #eee;
-    border: solid .1rem #aaa;
-    box-shadow: .1rem .1rem .2rem rgba(0, 0, 0, 0.5);
-    border-radius: .2rem;
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+@media(max-width: 900px) {
+    main .btn-principal {
+        margin-left: 0;
+    }
 }

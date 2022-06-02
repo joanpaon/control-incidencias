@@ -1,22 +1,17 @@
-<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.japo.java.libraries.UtilesPerfil"%>
+<%@page import="org.japo.java.entities.Usuario"%>
+<%@page import="org.japo.java.entities.Dependencia"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
-<%@page import="org.japo.java.entities.Incidencia"%>
-<%@page import="org.japo.java.entities.Usuario"%>
-<%@page import="org.japo.java.libraries.UtilesIncidencia"%>
-<%@page import="org.japo.java.libraries.UtilesPerfil"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
-    // Usuario
-    Usuario usuario = (Usuario) session.getAttribute("usuario");
+    // Session > Usuario
+    Usuario usuario = (Usuario) (session.getAttribute("usuario"));
 
     // Datos Inyectados
-    List<Incidencia> incidencias = (ArrayList<Incidencia>) request.getAttribute("incidencias");
-
-    // Formateador de Datos Temporales
-    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+    List<Dependencia> dependencias = (ArrayList<Dependencia>) request.getAttribute("dependencias");
 %>
 
 <!DOCTYPE html>
@@ -25,6 +20,7 @@
     <head>
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
+        <meta http-equiv="x-ua-compatible" content="ie=edge" />
         <title>Control de Incidencias</title>
 
         <!-- References -->
@@ -39,10 +35,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
         <!-- Favicon -->
-        <link href="public/img/logo.png" rel="icon" type="image/png" />
+        <link href="public/img/logo.png" rel="icon" type="image/x-icon" />
 
         <!-- Style Sheet Links -->
-        <link rel="stylesheet" href="public/css/incidencia/incidencia-listado.css" /> 
+        <link rel="stylesheet" href="public/css/dependencia/dependencia-listado.css" /> 
         <link rel="stylesheet" href="public/css/partials/header.css" />
         <link rel="stylesheet" href="public/css/partials/footer.css" />
         <link rel="stylesheet" href="public/css/partials/browser.css" />
@@ -54,17 +50,16 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
-                    <h2>Listado de Incidencias</h2>
+                    <h2>Listado de Dependencias</h2>
 
-                    <a class="btn btn-insertar" href="?cmd=incidencia-insercion&op=captura" title="Nueva Incidencia">Nueva</a>
+                    <a class="btn btn-insertar" href="?cmd=dependencia-insercion&op=captura" title="Nuevo">Nuevo</a>
 
                     <% if (usuario.getPerfil() >= UtilesPerfil.DEVEL_CODE) { %>
                     <a class="btn btn-listar" href="?cmd=main-devel">Principal</a>
-                    <% } else if (usuario.getPerfil() >= UtilesPerfil.ADMIN_CODE) { %>
+                    <% } else { %>
                     <a class="btn btn-listar" href="?cmd=main-admin">Principal</a>
                     <% }%>
                 </header>
@@ -72,42 +67,27 @@
                 <%@include file="/WEB-INF/views/partials/browser.jspf" %>
 
                 <table>
-                    <% if (incidencias.size() > 0) {%>
                     <thead>
                     <th>ID</th>
-                    <th>Titulo</th>
-                    <th>Creacion</th>
-                    <th>Estado</th>
-                    <th>Dependencia</th>
-                    <th>Especialidad</th>
+                    <th>Nombre</th>
+                    <th>Info</th>
+                    <th>Acciones</th>
                     </thead>
 
                     <tbody>
-
-                        <% for (Incidencia i : incidencias) {%>
+                        <% for (Dependencia d : dependencias) {%>
 
                         <tr>
-                            <td class="id"><%= i.getId()%></td>
-                            <td><%= i.getTitulo()%></td>
-                            <td><%= sdf.format(i.getFecha())%></td>
-                            <td><%= i.getEstado() == UtilesIncidencia.INCIDENCIA_ABIERTA ? "Abierta" : "Cerrada"%></td>
-                            <td><%= i.getDependenciaNombre()%></td>
-                            <td><%= i.getEspecialidadNombre()%></td>
+                            <td><%= d.getId()%></td>
+                            <td><%= d.getNombre()%></td>
+                            <td><%= d.getInfo()%></td>
                             <td>
-                                <a class="btn" href="?cmd=incidencia-consulta&id=<%= i.getId()%>" title="Ver">👁</a>
-                                <% if (i.getEstado() == UtilesIncidencia.INCIDENCIA_ABIERTA) {%>
-                                <a class="btn" href="?cmd=incidencia-cierre&id=<%= i.getId()%>" title="Cerrar">🚪</a>
-                                <% } %>
+                                <a class="btn btn-consultar" href="?cmd=dependencia-consulta&id=<%= d.getId()%>" title="Consulta">C</a>
+                                <a class="btn btn-modificar" href="?cmd=dependencia-modificacion&id=<%= d.getId()%>" title="Modificación">M</a>
+                                <a class="btn btn-borrar" href="?cmd=dependencia-borrado&id=<%= d.getId()%>" title="Eliminación">B</a>
                             </td>
                         </tr>
 
-                        <% }%>
-                    </tbody>
-                    <% } else {%>
-                    <tbody>
-                        <tr>
-                            <td class="mensaje"><h3>No hay incidencias que mostrar</h3></td>
-                        </tr>
                         <% }%>
                     </tbody>
                 </table>
@@ -119,7 +99,7 @@
         </div>
 
         <!-- Application Scripts -->
-        <script src="public/js/incidencia/incidencia-listado.js"></script>
+        <script src="public/js/dependencia/dependencia-listado.js"></script>
         <script src="public/js/partials/header.js"></script>
         <script src="public/js/partials/footer.js"></script>
         <script src="public/js/partials/browser.js"></script>

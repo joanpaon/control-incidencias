@@ -78,6 +78,7 @@ public final class CommandUsuarioListado extends Command {
                 request.setAttribute("row-index-sig", rowIndexSig);
                 request.setAttribute("row-index-fin", rowIndexFin);
                 request.setAttribute("rows-page", rowsPage);
+                request.setAttribute("command", "usuario-listado");
             } else {
                 out = "message/acceso-denegado";
             }

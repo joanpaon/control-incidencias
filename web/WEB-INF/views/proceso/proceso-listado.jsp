@@ -12,14 +12,6 @@
 
     // Datos Inyectados
     List<Proceso> procesos = (ArrayList<Proceso>) request.getAttribute("procesos");
-
-    // Parámetros Navegación
-    long rowIndex = (long) request.getAttribute("row-index");
-    long rowIndexIni = (long) request.getAttribute("row-index-ini");
-    long rowIndexAnt = (long) request.getAttribute("row-index-ant");
-    long rowIndexSig = (long) request.getAttribute("row-index-sig");
-    long rowIndexFin = (long) request.getAttribute("row-index-fin");
-    int rowsPage = (int) request.getAttribute("rows-page");
 %>
 
 <!DOCTYPE html>
@@ -29,11 +21,11 @@
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>JAPOLabs Java Framework</title>
+        <title>Control de Incidencias</title>
 
         <!-- References -->
         <meta name="author" content="2021 - José A. Pacheco Ondoño - japolabs@gmail.com" />
-        <meta name="description" content="JAPOLabs Java Framework" />
+        <meta name="description" content="Control de Incidencias" />
 
         <!-- Configuration -->
         <meta name="keywords" content="" />
@@ -49,6 +41,7 @@
         <link rel="stylesheet" href="public/css/proceso/proceso-listado.css" /> 
         <link rel="stylesheet" href="public/css/partials/header.css" />
         <link rel="stylesheet" href="public/css/partials/footer.css" />
+        <link rel="stylesheet" href="public/css/partials/browser.css" />
     </head>
 
     <body>
@@ -58,56 +51,22 @@
 
             <main>
 
-                <img class="watermark" src="public/img/logo01.png" alt="Logo" />
+                <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
                     <h2>Listado de Procesos</h2>
+                    
                     <% if (usuario.getPerfil() >= UtilesPerfil.DEVEL_CODE) { %>
                     <a class="btn btn-principal" href="?cmd=main-devel" title="Principal">Principal</a>
-                    <% } else if (usuario.getPerfil() >= UtilesPerfil.ADMIN_CODE) { %>
-                    <a class="btn btn-principal" href="?cmd=main-admin" title="Principal">Principal</a>
                     <% } else { %>
-                    <a class="btn btn-principal" href="?cmd=main-basic" title="Principal">Principal</a>
+                    <a class="btn btn-principal" href="?cmd=main-admin" title="Principal">Principal</a>
                     <% }%>
+                    
                     <a class="btn btn-insertar" href="?cmd=proceso-insercion&op=captura" title="Nuevo">Nuevo</a>
                 </header>
 
-                <nav class="paginacion">
-                    <a href="?cmd=proceso-listado&row-index=<%=rowIndexIni%>&rows-page=<%=rowsPage%>" class="btn btn-ini" title="Principio">&lt;&lt;</a>
-                    <a href="?cmd=proceso-listado&row-index=<%=rowIndexAnt%>&rows-page=<%=rowsPage%>" class="btn btn-prv" title="Anterior">&lt;</a>
-                    <a href="?cmd=proceso-listado&row-index=<%=rowIndexSig%>&rows-page=<%=rowsPage%>" class="btn btn-nxt" title="Siguiente">&gt;</a>
-                    <a href="?cmd=proceso-listado&row-index=<%=rowIndexFin%>&rows-page=<%=rowsPage%>" class="btn btn-end" title="Final">&gt;&gt;</a>
-                    |
-                    <form class="rows-page" action="">
-                        <input type="hidden" name="cmd" value="proceso-listado">
-                        <input type="hidden" name="row-index" value="<%= rowIndex%>">
-                        <label for="rows-page">Filas</label>
-                        <select id="rows-page" name="rows-page" onchange="document.querySelector('.rows-page').submit()">
-                            <% if (rowsPage == 80) { %>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="80" selected>80</option>
-                            <% } else if (rowsPage == 40) { %>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="40" selected>40</option>
-                            <option value="80">80</option>
-                            <% } else if (rowsPage == 20) { %>
-                            <option value="10">10</option>
-                            <option value="20" selected>20</option>
-                            <option value="40">40</option>
-                            <option value="80">80</option>
-                            <% } else { %>
-                            <option value="10" selected>10</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="80">80</option>
-                            <% }%>
-                        </select>
-                    </form>
-                </nav>
-
+                <%@include file="/WEB-INF/views/partials/browser.jspf" %>
+                
                 <table>
                     <thead>
                     <th>ID</th>
@@ -134,41 +93,7 @@
                     </tbody>
                 </table>
 
-                <nav class="paginacion">
-                    <a href="?cmd=proceso-listado&row-index=<%=rowIndexIni%>&rows-page=<%=rowsPage%>" class="btn btn-ini" title="Principio">&lt;&lt;</a>
-                    <a href="?cmd=proceso-listado&row-index=<%=rowIndexAnt%>&rows-page=<%=rowsPage%>" class="btn btn-prv" title="Anterior">&lt;</a>
-                    <a href="?cmd=proceso-listado&row-index=<%=rowIndexSig%>&rows-page=<%=rowsPage%>" class="btn btn-nxt" title="Siguiente">&gt;</a>
-                    <a href="?cmd=proceso-listado&row-index=<%=rowIndexFin%>&rows-page=<%=rowsPage%>" class="btn btn-end" title="Final">&gt;&gt;</a>
-                    |
-                    <form class="rows-page" action="">
-                        <input type="hidden" name="cmd" value="proceso-listado">
-                        <input type="hidden" name="row-index" value="<%= rowIndex%>">
-                        <label for="rows-page">Filas</label>
-                        <select id="rows-page" name="rows-page" onchange="document.querySelector('.rows-page').submit()">
-                            <% if (rowsPage == 80) { %>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="80" selected>80</option>
-                            <% } else if (rowsPage == 40) { %>
-                            <option value="10">10</option>
-                            <option value="20">20</option>
-                            <option value="40" selected>40</option>
-                            <option value="80">80</option>
-                            <% } else if (rowsPage == 20) { %>
-                            <option value="10">10</option>
-                            <option value="20" selected>20</option>
-                            <option value="40">40</option>
-                            <option value="80">80</option>
-                            <% } else { %>
-                            <option value="10" selected>10</option>
-                            <option value="20">20</option>
-                            <option value="40">40</option>
-                            <option value="80">80</option>
-                            <% }%>
-                        </select>
-                    </form>
-                </nav>
+                <%@include file="/WEB-INF/views/partials/browser.jspf" %>
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>
@@ -178,5 +103,6 @@
         <script src="public/js/proceso/proceso-listado.js"></script>
         <script src="public/js/partials/header.js"></script>
         <script src="public/js/partials/footer.js"></script>
+        <script src="public/js/partials/browser.js"></script>
     </body>
 </html>

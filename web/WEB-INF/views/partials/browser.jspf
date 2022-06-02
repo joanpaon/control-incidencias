@@ -7,16 +7,17 @@
         long rowIndexSig = (long) request.getAttribute("row-index-sig");
         long rowIndexFin = (long) request.getAttribute("row-index-fin");
         int rowsPage = (int) request.getAttribute("rows-page");
+        String command = (String) request.getAttribute("command");
 %>
 
 <nav class="paginacion">
-    <a href="?cmd=incidencia-listado&row-index=<%=rowIndexIni%>&rows-page=<%=rowsPage%>" class="btn btn-ini" title="Principio">&lt;&lt;</a>
-    <a href="?cmd=incidencia-listado&row-index=<%=rowIndexAnt%>&rows-page=<%=rowsPage%>" class="btn btn-prv" title="Anterior">&lt;</a>
-    <a href="?cmd=incidencia-listado&row-index=<%=rowIndexSig%>&rows-page=<%=rowsPage%>" class="btn btn-nxt" title="Siguiente">&gt;</a>
-    <a href="?cmd=incidencia-listado&row-index=<%=rowIndexFin%>&rows-page=<%=rowsPage%>" class="btn btn-end" title="Final">&gt;&gt;</a>
+    <a href="?cmd=<%= command%>&row-index=<%=rowIndexIni%>&rows-page=<%=rowsPage%>" class="btn btn-ini" title="Principio">&lt;&lt;</a>
+    <a href="?cmd=<%= command%>&row-index=<%=rowIndexAnt%>&rows-page=<%=rowsPage%>" class="btn btn-prv" title="Anterior">&lt;</a>
+    <a href="?cmd=<%= command%>&row-index=<%=rowIndexSig%>&rows-page=<%=rowsPage%>" class="btn btn-nxt" title="Siguiente">&gt;</a>
+    <a href="?cmd=<%= command%>&row-index=<%=rowIndexFin%>&rows-page=<%=rowsPage%>" class="btn btn-end" title="Final">&gt;&gt;</a>
     |
     <form class="rows-page" action="">
-        <input type="hidden" name="cmd" value="incidencia-listado">
+        <input type="hidden" name="cmd" value="<%= command%>">
         <input type="hidden" name="row-index" value="<%= rowIndex%>">
         <label for="rows-page">Filas</label>
         <select id="rows-page" name="rows-page" onchange="document.querySelector('.rows-page').submit()">

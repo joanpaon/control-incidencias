@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.japo.java.bll.commands.proceso;
+package org.japo.java.bll.commands.dependencia;
 
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
 import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
-import org.japo.java.dll.DLLProceso;
-import org.japo.java.entities.Proceso;
+import org.japo.java.dll.DLLDependencia;
+import org.japo.java.entities.Dependencia;
 import org.japo.java.libraries.UtilesListado;
 
 /**
  *
  * @author José A. Pacheco Ondoño - japolabs@gmail.com
  */
-public final class CommandProcesoListado extends Command {
+public final class CommandDependenciaListado extends Command {
 
     @Override
     public void process() throws ServletException, IOException {
         // Salida
-        String out = "proceso/proceso-listado";
+        String out = "dependencia/dependencia-listado";
 
         // Validar Sesión
         if (validarSesion(request)) {
@@ -42,12 +42,12 @@ public final class CommandProcesoListado extends Command {
                     config, request.getSession(false));
 
             // Validar Acceso Comando
-            if (validator.validarAccesoDevel(request.getSession(false))) {
+            if (validator.validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
-                DLLProceso dllProceso = new DLLProceso(config);
+                DLLDependencia dllDependencia = new DLLDependencia(config);
 
                 // BD > Parámetros Listado
-                long rowCount = dllProceso.contar();
+                long rowCount = dllDependencia.contar();
 
                 // Request > Índice de pagina            
                 long rowIndex = UtilesListado.obtenerRowIndex(request);
@@ -67,11 +67,11 @@ public final class CommandProcesoListado extends Command {
                 // Indice Navegación - Final
                 long rowIndexFin = UtilesListado.obtenerRowIndexFin(rowIndex, rowsPage, rowCount);
 
-                // BD > Lista de Procesos
-                List<Proceso> procesos = dllProceso.paginar(rowIndex, rowsPage);
+                // BD > Lista de Dependencias
+                List<Dependencia> dependencias = dllDependencia.paginar(rowIndex, rowsPage);
 
                 // Inyecta Datos Listado > JSP
-                request.setAttribute("procesos", procesos);
+                request.setAttribute("dependencias", dependencias);
 
                 // Inyecta Parámetros Listado > JSP
                 request.setAttribute("row-index", rowIndex);
@@ -80,7 +80,7 @@ public final class CommandProcesoListado extends Command {
                 request.setAttribute("row-index-sig", rowIndexSig);
                 request.setAttribute("row-index-fin", rowIndexFin);
                 request.setAttribute("rows-page", rowsPage);
-                request.setAttribute("command", "proceso-listado");
+                request.setAttribute("command", "dependencia-listado");
             } else {
                 out = "message/acceso-denegado";
             }
