@@ -26,6 +26,7 @@ import org.japo.java.dll.DLLUsuario;
 import org.japo.java.entities.PermisoUsuario;
 import org.japo.java.entities.Usuario;
 import org.japo.java.entities.Proceso;
+import org.japo.java.libraries.UtilesPermisoUsuario;
 
 /**
  *
@@ -67,9 +68,9 @@ public final class CommandPermisoUsuarioInsercion extends Command {
                     request.setAttribute("usuarios", usuarios);
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
-                    int usuario = Integer.parseInt(request.getParameter("usuario"));
-                    int proceso = Integer.parseInt(request.getParameter("proceso"));
-                    String info = request.getParameter("info");
+                    int usuario = UtilesPermisoUsuario.obtenerUsuarioRequest(request);
+                    int proceso = UtilesPermisoUsuario.obtenerProcesoRequest(request);
+                    String info = UtilesPermisoUsuario.obtenerInfoRequest(request);
 
                     // Parámetros > Entidad
                     PermisoUsuario permiso = new PermisoUsuario(0, usuario, "", proceso, "", info);

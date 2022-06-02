@@ -53,8 +53,8 @@ public final class CommandProcesoInsercion extends Command {
                     // ---
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
-                    String nombre = request.getParameter("nombre").trim();
-                    String info = request.getParameter("info").trim();
+                    String nombre = UtilesProceso.obtenerNombreRequest(request);
+                    String info = UtilesProceso.obtenerInfoRequest(request);
 
                     // Parámetros > Entidad
                     Proceso proceso = new Proceso(UtilesProceso.DEF_ID, nombre, info);

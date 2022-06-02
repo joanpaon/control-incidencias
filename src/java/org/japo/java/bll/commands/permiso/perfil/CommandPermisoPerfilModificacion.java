@@ -78,7 +78,8 @@ public final class CommandPermisoPerfilModificacion extends Command {
                     String info = UtilesPermisoPerfil.obtenerInfoRequest(request);
 
                     // Entidad Final
-                    PermisoPerfil permiso = new PermisoPerfil(id, perfil, "", proceso, "", info);
+                    PermisoPerfil permiso = new PermisoPerfil(
+                            id, perfil, "", proceso, "", info);
 
                     // Entidad > Modificación Registro BD
                     boolean checkOK = dalPermiso.modificar(permiso);

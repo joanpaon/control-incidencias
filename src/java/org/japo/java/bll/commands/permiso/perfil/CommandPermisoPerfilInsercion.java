@@ -26,6 +26,7 @@ import org.japo.java.dll.DLLProceso;
 import org.japo.java.entities.PermisoPerfil;
 import org.japo.java.entities.Perfil;
 import org.japo.java.entities.Proceso;
+import org.japo.java.libraries.UtilesPermisoPerfil;
 
 /**
  *
@@ -67,12 +68,14 @@ public final class CommandPermisoPerfilInsercion extends Command {
                     request.setAttribute("perfiles", perfiles);
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
-                    int proceso = Integer.parseInt(request.getParameter("proceso"));
-                    int perfil = Integer.parseInt(request.getParameter("perfil"));
-                    String info = request.getParameter("info");
+                    int perfil = UtilesPermisoPerfil.obtenerPerfilRequest(request);
+                    int proceso = UtilesPermisoPerfil.obtenerProcesoRequest(request);
+                    String info = UtilesPermisoPerfil.obtenerInfoRequest(request);
 
                     // Parámetros > Entidad
-                    PermisoPerfil permiso = new PermisoPerfil(0, perfil, "", proceso, "", info);
+                    PermisoPerfil permiso = new PermisoPerfil(
+                            UtilesPermisoPerfil.DEF_ID, 
+                            perfil, "", proceso, "", info);
 
                     // Entidad > Inserción BD - true | false
                     boolean checkOK = dalPermiso.insertar(permiso);

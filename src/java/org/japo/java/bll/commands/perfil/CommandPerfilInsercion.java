@@ -21,6 +21,7 @@ import java.io.IOException;
 import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLPerfil;
 import org.japo.java.entities.Perfil;
+import org.japo.java.libraries.UtilesPerfil;
 
 /**
  *
@@ -52,9 +53,9 @@ public final class CommandPerfilInsercion extends Command {
                     // ---
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
-                    int id = Integer.parseInt(request.getParameter("id"));
-                    String nombre = request.getParameter("nombre");
-                    String info = request.getParameter("info");
+                    int id = UtilesPerfil.obtenerIdRequest(request);
+                    String nombre = UtilesPerfil.obtenerNombreRequest(request);
+                    String info = UtilesPerfil.obtenerInfoRequest(request);
 
                     // Parámetros > Entidad
                     Perfil perfil = new Perfil(id, nombre, info);

@@ -18,12 +18,11 @@ package org.japo.java.bll.commands.notificacion;
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import org.japo.java.dll.DLLNotificacion;
 import org.japo.java.entities.Notificacion;
 import org.japo.java.entities.Usuario;
+import org.japo.java.libraries.UtilesIncidencia;
 import org.japo.java.libraries.UtilesNotificacion;
 
 /**
@@ -45,26 +44,21 @@ public final class CommandNotificacionInsercion extends Command {
 
             if (op == null || op.equals("captura")) {
                 // Datos a Inyectar
-                int incidencia = Integer.parseInt(request.getParameter("id"));
+                int incidencia = UtilesIncidencia.obtenerIdRequest(request);
 
                 // Inyeccion de Datos
                 request.setAttribute("incidencia", incidencia);
             } else if (op.equals("proceso")) {
-                // Sesion > Usuario
+                // Request > Sesión > Usuario
                 Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
                 // Capas de Datos
                 DLLNotificacion dllNotificacion = new DLLNotificacion(config);
 
                 // Request > Parámetros
-                Date fecha = new Date();
-                try {
-                    fecha = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha"));
-                } catch (ParseException e) {
-                    throw new IOException(e.getMessage());
-                }
-                String info = request.getParameter("info");
-                int incidencia = Integer.parseInt(request.getParameter("incidencia"));
+                Date fecha = UtilesNotificacion.obtenerFechaRequest(request);
+                int incidencia = UtilesNotificacion.obtenerIncidenciaRequest(request);
+                String info = UtilesNotificacion.obtenerInfoRequest(request);
 
                 // Parámetros > Incidencia
                 Notificacion notificacion = new Notificacion(

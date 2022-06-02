@@ -1,8 +1,11 @@
 package org.japo.java.libraries;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.http.HttpServletRequest;
+import static org.japo.java.libraries.UtilesIncidencia.validarInfo;
 
 public final class UtilesNotificacion {
 
@@ -56,5 +59,64 @@ public final class UtilesNotificacion {
 
         // Retorno
         return id;
+    }
+
+    public static final Date obtenerFechaRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Referencia
+        Date fecha;
+
+        // Request > Dato
+        try {
+            fecha = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha"));
+
+            if (!validarFecha(fecha)) {
+                throw new IOException("Fecha incorrecta");
+            }
+        } catch (ParseException e) {
+            throw new IOException(e.getMessage());
+        }
+
+        // Retorno
+        return fecha;
+    }
+
+    public static final String obtenerInfoRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Request > Dato
+        String info = request.getParameter("info");
+
+        // Validar Dato
+        if (!validarInfo(info)) {
+            throw new IOException("Info Incorrecta");
+        }
+
+        // Retorno
+        return info;
+    }
+
+    public static final int obtenerIncidenciaRequest(
+            HttpServletRequest request) 
+            throws IOException {
+        // Referencia
+        int incidencia;
+
+        // Request > Dato
+        try {
+            incidencia = Integer.parseInt(request.getParameter("incidencia"));
+
+            if (!UtilesIncidencia.validarId(incidencia)) {
+                throw new IOException("ID de Incidencia incorrecto");
+            }
+        } catch (NullPointerException e) {
+            throw new IOException(e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IOException("ID de Incidencia Incorrecto");
+        }
+
+        // Retorno
+        return incidencia;
     }
 }
