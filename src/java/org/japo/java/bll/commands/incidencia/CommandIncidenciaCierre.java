@@ -61,8 +61,8 @@ public final class CommandIncidenciaCierre extends Command {
             String info = "Incidencia Cerrada por " + usuario.getUser();
             Notificacion notificacion = new Notificacion(
                     UtilesNotificacion.DEF_ID, fecha, 
-                    usuario.getId(), usuario.getUser(), usuario.getPerfilInfo(),
-                    id, info);
+                    usuario.getId(), "", "",
+                    incidencia.getId(), "", info);
             
             // Actualizar BD
             dllIncidencia.modificar(incidencia);

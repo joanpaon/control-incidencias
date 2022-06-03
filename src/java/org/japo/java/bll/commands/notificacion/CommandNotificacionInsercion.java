@@ -63,8 +63,9 @@ public final class CommandNotificacionInsercion extends Command {
                 // Parámetros > Incidencia
                 Notificacion notificacion = new Notificacion(
                         UtilesNotificacion.DEF_ID, fecha,
-                        usuario.getId(), usuario.getUser(), usuario.getPerfilInfo(),
-                        incidencia, info);
+                        usuario.getId(), "", "",
+                        incidencia, "", 
+                        info);
 
                 // Entidad > Inserción BD - true | false
                 boolean checkOK = dllNotificacion.insertar(notificacion);

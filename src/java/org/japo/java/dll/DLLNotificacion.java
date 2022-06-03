@@ -54,6 +54,7 @@ public final class DLLNotificacion {
                 + "usuarios.user AS autor_nombre, "
                 + "perfiles.nombre AS autor_perfil, "
                 + "notificaciones.incidencia AS incidencia, "
+                + "incidencias.titulo AS incidencia_titulo, "
                 + "notificaciones.info AS info "
                 + "FROM "
                 + "notificaciones "
@@ -62,7 +63,7 @@ public final class DLLNotificacion {
                 + "INNER JOIN "
                 + "perfiles ON perfiles.id = usuarios.perfil "
                 + "INNER JOIN "
-                + "incidencia ON incidencias.id = notificaciones.incidencia "
+                + "incidencias ON incidencias.id = notificaciones.incidencia "
                 + "ORDER BY notificaciones.fecha ASC";
 
         // Lista Vacía
@@ -82,13 +83,15 @@ public final class DLLNotificacion {
                         String autorNombre = rs.getString("autor_nombre");
                         String autorPerfil = rs.getString("autor_perfil");
                         int incidencia = rs.getInt("incidencia");
+                        String incidenciaTitulo = rs.getString("incidencia_titulo");
                         String info = rs.getString("info");
 
                         // Campos > Entidad
                         Notificacion notificacion = new Notificacion(
                                 id, fecha,
                                 autor, autorNombre, autorPerfil,
-                                incidencia, info);
+                                incidencia, incidenciaTitulo,
+                                info);
 
                         // Entidad > Lista
                         notificaciones.add(notificacion);
@@ -113,6 +116,7 @@ public final class DLLNotificacion {
                 + "usuarios.user AS autor_nombre, "
                 + "perfiles.nombre AS autor_perfil, "
                 + "notificaciones.incidencia AS incidencia, "
+                + "incidencias.titulo AS incidencia_titulo, "
                 + "notificaciones.info AS info "
                 + "FROM "
                 + "notificaciones "
@@ -145,13 +149,15 @@ public final class DLLNotificacion {
                         int autor = rs.getInt("autor");
                         String autorNombre = rs.getString("autor_nombre");
                         String autorPerfil = rs.getString("autor_perfil");
+                        String incidenciaTitulo = rs.getString("incidencia_titulo");
                         String info = rs.getString("info");
 
                         // Campos > Entidad
                         Notificacion notificacion = new Notificacion(
                                 id, fecha,
                                 autor, autorNombre, autorPerfil,
-                                incidencia, info);
+                                incidencia, incidenciaTitulo,
+                                info);
 
                         // Entidad > Lista
                         notificaciones.add(notificacion);
@@ -205,6 +211,7 @@ public final class DLLNotificacion {
                 + "usuarios.user AS autor_nombre, "
                 + "perfiles.nombre AS autor_perfil, "
                 + "notificaciones.incidencia AS incidencia, "
+                + "incidencias.titulo AS incidencia_titulo, "
                 + "notificaciones.info AS info "
                 + "FROM "
                 + "notificaciones "
@@ -213,7 +220,7 @@ public final class DLLNotificacion {
                 + "INNER JOIN "
                 + "perfiles ON perfiles.id = usuarios.perfil "
                 + "INNER JOIN "
-                + "incidencia ON incidencias.id = notificaciones.incidencia "
+                + "incidencias ON incidencias.id = notificaciones.incidencia "
                 + "LIMIT ?, ?";
 
         // Lista Vacía
@@ -231,19 +238,20 @@ public final class DLLNotificacion {
                     while (rs.next()) {
                         // Fila Actual > Campos 
                         int id = rs.getInt("id");
-//                        Date fecha = rs.getDate("fecha");
                         Date fecha = rs.getTimestamp("fecha");
                         int autor = rs.getInt("autor");
                         String autorNombre = rs.getString("autor_nombre");
                         String autorPerfil = rs.getString("autor_perfil");
-                        int incidencia = rs.getInt("incidencias.id");
-                        String info = rs.getString("notificaciones.info");
+                        int incidencia = rs.getInt("incidencia");
+                        String incidenciaTitulo = rs.getString("incidencia_titulo");
+                        String info = rs.getString("info");
 
                         // Campos > Entidad
                         Notificacion notificacion = new Notificacion(
-                                id, fecha, 
-                                autor, autorNombre, autorPerfil, 
-                                incidencia, info);
+                                id, fecha,
+                                autor, autorNombre, autorPerfil,
+                                incidencia, incidenciaTitulo,
+                                info);
 
                         // Entidad > Lista
                         notificaciones.add(notificacion);
@@ -268,6 +276,7 @@ public final class DLLNotificacion {
                 + "usuarios.user AS autor_nombre, "
                 + "perfiles.nombre AS autor_perfil, "
                 + "notificaciones.incidencia AS incidencia, "
+                + "incidencias.titulo AS incidencia_titulo, "
                 + "notificaciones.info AS info "
                 + "FROM "
                 + "notificaciones "
@@ -276,7 +285,7 @@ public final class DLLNotificacion {
                 + "INNER JOIN "
                 + "perfiles ON perfiles.id = usuarios.perfil "
                 + "INNER JOIN "
-                + "incidencia ON incidencias.id = notificaciones.incidencia "
+                + "incidencias ON incidencias.id = notificaciones.incidencia "
                 + "LIMIT ?, ? "
                 + "WHERE "
                 + "notificaciones.incidencia = ?";
@@ -302,13 +311,15 @@ public final class DLLNotificacion {
                         int autor = rs.getInt("autor");
                         String autorNombre = rs.getString("autor_nombre");
                         String autorPerfil = rs.getString("autor_perfil");
+                        String incidenciaTitulo = rs.getString("incidencia_titulo");
                         String info = rs.getString("info");
 
                         // Campos > Entidad
                         Notificacion notificacion = new Notificacion(
-                                id, fecha, 
-                                autor, autorNombre, autorPerfil, 
-                                incidencia, info);
+                                id, fecha,
+                                autor, autorNombre, autorPerfil,
+                                incidencia, incidenciaTitulo,
+                                info);
 
                         // Entidad > Lista
                         notificaciones.add(notificacion);

@@ -32,6 +32,7 @@ public final class Notificacion implements Serializable {
     private String autorNombre;
     private String autorPerfil;
     private int incidencia;
+    private String incidenciaTitulo;
     private String info;
 
     // Constructor Predeterminado
@@ -42,13 +43,15 @@ public final class Notificacion implements Serializable {
         autorNombre = UtilesUsuario.DEF_USER;
         autorPerfil = UtilesPerfil.DEF_NOMBRE;
         incidencia = UtilesIncidencia.DEF_ID;
+        incidenciaTitulo = UtilesIncidencia.DEF_TITULO;
         info = UtilesNotificacion.DEF_INFO;
     }
 
     // Constructor Parametrizado
     public Notificacion(int id, Date fecha,
             int autor, String autorNombre, String autorPerfil,
-            int incidencia, String info) {
+            int incidencia, String incidenciaTitulo,
+            String info) {
         if (UtilesNotificacion.validarId(id)) {
             this.id = id;
         } else {
@@ -83,6 +86,12 @@ public final class Notificacion implements Serializable {
             this.incidencia = incidencia;
         } else {
             this.incidencia = UtilesIncidencia.DEF_ID;
+        }
+
+        if (UtilesIncidencia.validarTitulo(incidenciaTitulo)) {
+            this.incidenciaTitulo = incidenciaTitulo;
+        } else {
+            this.incidenciaTitulo = UtilesIncidencia.DEF_TITULO;
         }
 
         if (UtilesNotificacion.validarInfo(info)) {
@@ -149,6 +158,16 @@ public final class Notificacion implements Serializable {
     public void setIncidencia(int incidencia) {
         if (UtilesIncidencia.validarId(incidencia)) {
             this.incidencia = incidencia;
+        }
+    }
+
+    public String getIncidenciaTitulo() {
+        return incidenciaTitulo;
+    }
+
+    public void setIncidenciaTitulo(String incidenciaTitulo) {
+        if (UtilesIncidencia.validarTitulo(incidenciaTitulo)) {
+            this.incidenciaTitulo = incidenciaTitulo;
         }
     }
 
