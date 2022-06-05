@@ -21,8 +21,9 @@ import java.io.IOException;
 import java.util.List;
 import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLProceso;
+import org.japo.java.entities.ParamPagina;
 import org.japo.java.entities.Proceso;
-import org.japo.java.libraries.UtilesListado;
+import org.japo.java.libraries.UtilesParamPagina;
 
 /**
  *
@@ -46,41 +47,20 @@ public final class CommandProcesoListado extends Command {
                 // Capas de Datos
                 DLLProceso dllProceso = new DLLProceso(config);
 
-                // BD > Parámetros Listado
+                // BD > Parámetro Navegación
                 long rowCount = dllProceso.contar();
 
-                // Request > Índice de pagina            
-                long rowIndex = UtilesListado.obtenerRowIndex(request);
+                // Generar Entidad Navegación
+                ParamPagina param = UtilesParamPagina.generar(
+                        request, rowCount, "proceso-listado");
 
-                // Request > Líneas por Pagina            
-                int rowsPage = UtilesListado.obtenerRowsPage(request);
+                // BD > Pagina
+                List<Proceso> procesos = dllProceso.paginar(
+                        param.getRowIndex(), param.getRowsPage());
 
-                // Indice Navegación - Inicio
-                long rowIndexIni = UtilesListado.obtenerRowIndexIni();
-
-                // Indice Navegación - Anterior
-                long rowIndexAnt = UtilesListado.obtenerRowIndexAnt(rowIndex, rowsPage);
-
-                // Indice Navegación - Siguiente
-                long rowIndexSig = UtilesListado.obtenerRowIndexSig(rowIndex, rowsPage, rowCount);
-
-                // Indice Navegación - Final
-                long rowIndexFin = UtilesListado.obtenerRowIndexFin(rowIndex, rowsPage, rowCount);
-
-                // BD > Lista de Procesos
-                List<Proceso> procesos = dllProceso.paginar(rowIndex, rowsPage);
-
-                // Inyecta Datos Listado > JSP
+                // Inyecta Datos > JSP
+                request.setAttribute("param-pagina", param);
                 request.setAttribute("procesos", procesos);
-
-                // Inyecta Parámetros Listado > JSP
-                request.setAttribute("row-index", rowIndex);
-                request.setAttribute("row-index-ini", rowIndexIni);
-                request.setAttribute("row-index-ant", rowIndexAnt);
-                request.setAttribute("row-index-sig", rowIndexSig);
-                request.setAttribute("row-index-fin", rowIndexFin);
-                request.setAttribute("rows-page", rowsPage);
-                request.setAttribute("command", "proceso-listado");
             } else {
                 out = "message/acceso-denegado";
             }

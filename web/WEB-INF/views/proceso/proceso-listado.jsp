@@ -65,7 +65,7 @@
                     <a class="btn btn-insertar" href="?cmd=proceso-insercion&op=captura" title="Nuevo">Nuevo</a>
                 </header>
 
-                <%@include file="/WEB-INF/views/partials/browser.jspf" %>
+                <%@include file="/WEB-INF/views/partials/nav.jspf" %>
                 
                 <table>
                     <thead>
@@ -93,7 +93,7 @@
                     </tbody>
                 </table>
 
-                <%@include file="/WEB-INF/views/partials/browser.jspf" %>
+                <%@include file="/WEB-INF/views/partials/nav.jspf" %>
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>
