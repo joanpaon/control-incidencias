@@ -19,7 +19,6 @@ import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
-import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLProceso;
 import org.japo.java.entities.ParamPagina;
 import org.japo.java.entities.Proceso;
@@ -38,12 +37,8 @@ public final class CommandProcesoListado extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            // Validar Acceso Comando
-            if (validator.validarAccesoDevel(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
                 DLLProceso dllProceso = new DLLProceso(config);
 

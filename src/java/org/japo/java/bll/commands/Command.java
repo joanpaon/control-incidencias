@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.japo.java.entities.Usuario;
+import org.japo.java.libraries.UtilesPerfil;
 
 /**
  *
@@ -92,6 +93,69 @@ public abstract class Command implements ICommand {
             // una sesión con el mismo id y ip que informa la sesión
             // y que el tiempo en que se inició no supera el tiempo
             // máximo que se considere
+        }
+
+        // Retorno: true | false
+        return checkOK;
+    }
+
+    public static final boolean validarAccesoDevel(HttpSession sesion) {
+        // Semáforo
+        boolean checkOK;
+
+        try {
+            // Sesión > Usuario
+            Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+
+            // Usuario > Perfil
+            int perfil = usuario.getPerfil();
+
+            // Validar Perfil Desarrollador
+            checkOK = perfil >= UtilesPerfil.DEVEL_CODE;
+        } catch (NullPointerException e) {
+            checkOK = false;
+        }
+
+        // Retorno: true | false
+        return checkOK;
+    }
+
+    public static final boolean validarAccesoAdmin(HttpSession sesion) {
+        // Semáforo
+        boolean checkOK;
+
+        try {
+            // Sesión > Usuario
+            Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+
+            // Usuario > Perfil
+            int perfil = usuario.getPerfil();
+
+            // Validar Perfil Desarrollador
+            checkOK = perfil >= UtilesPerfil.ADMIN_CODE;
+        } catch (NullPointerException e) {
+            checkOK = false;
+        }
+
+        // Retorno: true | false
+        return checkOK;
+    }
+
+    public static final boolean validarAccesoBasic(HttpSession sesion) {
+        // Semáforo
+        boolean checkOK;
+
+        try {
+            // Sesión > Usuario
+            Usuario usuario = (Usuario) sesion.getAttribute("usuario");
+
+            // Usuario > Perfil
+            int perfil = usuario.getPerfil();
+
+            // Validar Perfil Desarrollador
+            checkOK = perfil >= UtilesPerfil.BASIC_CODE;
+        } catch (NullPointerException e) {
+            checkOK = false;
         }
 
         // Retorno: true | false

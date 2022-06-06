@@ -33,14 +33,11 @@ public final class CommandUsuarioModificacion extends Command {
     public void process() throws ServletException, IOException {
         // Salida
         String out = "usuario/usuario-modificacion";
- 
+
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            if (validator.validarAccesoAdmin(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
                 DLLUsuario dalUsuario = new DLLUsuario(config);
 

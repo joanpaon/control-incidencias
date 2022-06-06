@@ -18,7 +18,6 @@ package org.japo.java.bll.commands.proceso;
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLProceso;
 import org.japo.java.entities.Proceso;
 
@@ -36,11 +35,8 @@ public final class CommandProcesoBorrado extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            if (validator.validarAccesoDevel(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
                 DLLProceso dalProceso = new DLLProceso(config);
 

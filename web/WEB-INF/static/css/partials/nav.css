@@ -1,0 +1,90 @@
+main .paginacion {
+    height: 4rem;
+    width: 70rem;
+
+    padding: 1rem;
+
+    border: solid #999 0.1rem;
+    border-radius: 0.3rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+main .paginacion .btn {
+    width: 4rem;
+    height: 1.8rem;
+
+    color: #333;
+    font-family: monospace;
+    font-size: .9rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    background-color: #eee;
+    border: solid .05rem grey;
+    border-radius: .2rem;
+    box-shadow: .05rem .05rem .1rem rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: box-shadow .3s, background-color .3s;
+}
+
+main .paginacion .btn:hover  {
+    background-color: #ddd;
+    box-shadow: .1rem .1rem .2rem rgba(0, 0, 0, 0.5);
+}
+
+main .paginacion .btn:active  {
+    background-color: #fff;
+    box-shadow: 0rem 0rem .1rem rgba(0, 0, 0, 0.5);
+}
+
+/* --- */
+
+main .paginacion .slider {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- */
+
+main .paginacion input[type="range"] {
+    width: 10rem;
+}
+
+/* --- */
+
+main .paginacion .rows-page {
+    font-weight: bolder;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- */
+
+main .paginacion select {
+    width: 5rem;
+    height: 1.8rem;
+
+    color: black;
+    font-family: monospace;
+    font-size: .9rem;
+    font-weight: bolder;
+
+    background-color: #eee;
+    border: solid .05rem grey;
+    border-radius: .2rem;
+    box-shadow: .05rem .05rem .1rem rgba(0, 0, 0, 0.5);
+}

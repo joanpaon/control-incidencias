@@ -40,7 +40,7 @@
         <link rel="stylesheet" href="public/css/usuario/usuario-listado.css" /> 
         <link rel="stylesheet" href="public/css/partials/header.css" />
         <link rel="stylesheet" href="public/css/partials/footer.css" />
-        <link rel="stylesheet" href="public/css/partials/browser.css" />
+        <link rel="stylesheet" href="public/css/partials/nav.css" />
     </head>
 
     <body>
@@ -63,7 +63,7 @@
                     <% }%>
                 </header>
 
-                <%@include file="/WEB-INF/views/partials/browser.jspf" %>
+                <%@include file="/WEB-INF/views/partials/nav.jspf" %>
 
                 <table>
                     <thead>
@@ -91,7 +91,7 @@
                     </tbody>
                 </table>
 
-                <%@include file="/WEB-INF/views/partials/browser.jspf" %>
+                <%@include file="/WEB-INF/views/partials/nav.jspf" %>
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>
@@ -101,6 +101,6 @@
         <script src="public/js/usuario/usuario-listado.js"></script>
         <script src="public/js/partials/header.js"></script>
         <script src="public/js/partials/footer.js"></script>
-        <script src="public/js/partials/browser.js"></script>
+        <script src="public/js/partials/nav.js"></script>
     </body>
 </html>

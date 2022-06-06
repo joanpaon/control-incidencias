@@ -19,10 +19,10 @@ import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
-import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLPerfil;
+import org.japo.java.entities.ParamPagina;
 import org.japo.java.entities.Perfil;
-import org.japo.java.libraries.UtilesListado;
+import org.japo.java.libraries.UtilesParamPagina;
 
 /**
  *
@@ -37,49 +37,25 @@ public final class CommandPerfilListado extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            if (validator.validarAccesoDevel(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
                 DLLPerfil dllPerfil = new DLLPerfil(config);
 
-                // BD > Parámetros Listado
+                // BD > Número Registros
                 long rowCount = dllPerfil.contar();
 
-                // Request > Índice de pagina            
-                long rowIndex = UtilesListado.obtenerRowIndex(request);
-
-                // Request > Líneas por Pagina            
-                int rowsPage = UtilesListado.obtenerRowsPage(request);
-
-                // Indice Navegación - Inicio
-                long rowIndexIni = UtilesListado.obtenerRowIndexIni();
-
-                // Indice Navegación - Anterior
-                long rowIndexAnt = UtilesListado.obtenerRowIndexAnt(rowIndex, rowsPage);
-
-                // Indice Navegación - Siguiente
-                long rowIndexSig = UtilesListado.obtenerRowIndexSig(rowIndex, rowsPage, rowCount);
-
-                // Indice Navegación - Final
-                long rowIndexFin = UtilesListado.obtenerRowIndexFin(rowIndex, rowsPage, rowCount);
+                // Generar Entidad Navegación
+                ParamPagina param = UtilesParamPagina.generar(
+                        request, rowCount, "perfil-listado");
 
                 // BD > Lista de Perfiles
-                List<Perfil> perfiles = dllPerfil.paginar(rowIndex, rowsPage);
+                List<Perfil> perfiles = dllPerfil.paginar(
+                        param.getRowIndex(), param.getRowsPage());
 
-                // Inyecta Datos Listado > JSP
+                // Inyecta Datos > JSP
+                request.setAttribute("param-pagina", param);
                 request.setAttribute("perfiles", perfiles);
-
-                // Inyecta Parámetros Listado > JSP
-                request.setAttribute("row-index", rowIndex);
-                request.setAttribute("row-index-ini", rowIndexIni);
-                request.setAttribute("row-index-ant", rowIndexAnt);
-                request.setAttribute("row-index-sig", rowIndexSig);
-                request.setAttribute("row-index-fin", rowIndexFin);
-                request.setAttribute("rows-page", rowsPage);
-                request.setAttribute("command", "perfil-listado");
             } else {
                 out = "message/acceso-denegado";
             }

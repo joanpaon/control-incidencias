@@ -45,10 +45,10 @@ public final class CommandIncidenciaInsercion extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-
             // Obtener Operación
             String op = request.getParameter("op");
 
+            
             if (op == null || op.equals("captura")) {
                 // Capas de Datos
                 DLLDependencia dllDependencia = new DLLDependencia(config);

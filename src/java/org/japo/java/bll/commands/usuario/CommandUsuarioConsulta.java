@@ -34,11 +34,8 @@ public final class CommandUsuarioConsulta extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            if (validator.validarAccesoAdmin(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoAdmin(request.getSession(false))) {
                 // Request + ID Usuario + BD > Usuario
                 Usuario usuario = UtilesUsuario.consultarUsuarioIdRequest(config, request);
 

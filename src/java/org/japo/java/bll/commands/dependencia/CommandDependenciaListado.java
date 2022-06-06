@@ -19,10 +19,10 @@ import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
-import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLDependencia;
 import org.japo.java.entities.Dependencia;
-import org.japo.java.libraries.UtilesListado;
+import org.japo.java.entities.ParamPagina;
+import org.japo.java.libraries.UtilesParamPagina;
 
 /**
  *
@@ -37,50 +37,25 @@ public final class CommandDependenciaListado extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            // Validar Acceso Comando
-            if (validator.validarAccesoAdmin(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
                 DLLDependencia dllDependencia = new DLLDependencia(config);
 
-                // BD > Parámetros Listado
+                // BD > Número Registros
                 long rowCount = dllDependencia.contar();
 
-                // Request > Índice de pagina            
-                long rowIndex = UtilesListado.obtenerRowIndex(request);
+                // Generar Entidad Navegación
+                ParamPagina param = UtilesParamPagina.generar(
+                        request, rowCount, "dependencia-listado");
 
-                // Request > Líneas por Pagina            
-                int rowsPage = UtilesListado.obtenerRowsPage(request);
+                // BD > Lista de Registros
+                List<Dependencia> dependencias = dllDependencia.paginar(
+                        param.getRowIndex(), param.getRowsPage());
 
-                // Indice Navegación - Inicio
-                long rowIndexIni = UtilesListado.obtenerRowIndexIni();
-
-                // Indice Navegación - Anterior
-                long rowIndexAnt = UtilesListado.obtenerRowIndexAnt(rowIndex, rowsPage);
-
-                // Indice Navegación - Siguiente
-                long rowIndexSig = UtilesListado.obtenerRowIndexSig(rowIndex, rowsPage, rowCount);
-
-                // Indice Navegación - Final
-                long rowIndexFin = UtilesListado.obtenerRowIndexFin(rowIndex, rowsPage, rowCount);
-
-                // BD > Lista de Dependencias
-                List<Dependencia> dependencias = dllDependencia.paginar(rowIndex, rowsPage);
-
-                // Inyecta Datos Listado > JSP
+                // Inyecta Datos > JSP
+                request.setAttribute("param-pagina", param);
                 request.setAttribute("dependencias", dependencias);
-
-                // Inyecta Parámetros Listado > JSP
-                request.setAttribute("row-index", rowIndex);
-                request.setAttribute("row-index-ini", rowIndexIni);
-                request.setAttribute("row-index-ant", rowIndexAnt);
-                request.setAttribute("row-index-sig", rowIndexSig);
-                request.setAttribute("row-index-fin", rowIndexFin);
-                request.setAttribute("rows-page", rowsPage);
-                request.setAttribute("command", "dependencia-listado");
             } else {
                 out = "message/acceso-denegado";
             }

@@ -36,11 +36,8 @@ public final class CommandUsuarioBorrado extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            if (validator.validarAccesoAdmin(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
                 DLLUsuario dalUsuario = new DLLUsuario(config);
 
@@ -57,7 +54,7 @@ public final class CommandUsuarioBorrado extends Command {
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
                     int id = UtilesUsuario.obtenerIdRequest(request);
-                    
+
                     // ID > Registro Borrado - true | false
                     boolean checkOK = dalUsuario.borrar(id);
 

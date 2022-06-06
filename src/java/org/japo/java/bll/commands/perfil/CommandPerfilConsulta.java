@@ -18,7 +18,6 @@ package org.japo.java.bll.commands.perfil;
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLPerfil;
 import org.japo.java.entities.Perfil;
 
@@ -35,11 +34,8 @@ public final class CommandPerfilConsulta extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            if (validator.validarAccesoDevel(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
                 DLLPerfil dalPerfil = new DLLPerfil(config);
 

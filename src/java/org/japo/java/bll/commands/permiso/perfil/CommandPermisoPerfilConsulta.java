@@ -18,7 +18,6 @@ package org.japo.java.bll.commands.permiso.perfil;
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLPermisoPerfil;
 import org.japo.java.entities.PermisoPerfil;
 
@@ -35,11 +34,8 @@ public final class CommandPermisoPerfilConsulta extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            if (validator.validarAccesoDevel(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
                 DLLPermisoPerfil dalPermiso = new DLLPermisoPerfil(config);
 

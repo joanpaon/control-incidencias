@@ -18,7 +18,6 @@ package org.japo.java.bll.commands.permiso.usuario;
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLPermisoUsuario;
 import org.japo.java.entities.PermisoUsuario;
 
@@ -36,11 +35,8 @@ public final class CommandPermisoUsuarioBorrado extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            if (validator.validarAccesoAdmin(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
                 DLLPermisoUsuario dalPermiso = new DLLPermisoUsuario(config);
 

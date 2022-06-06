@@ -89,7 +89,7 @@ public final class CommandUsuarioValidation {
         return checkOK;
     }
 
-    public final boolean validarAccesoDevel(HttpSession sesion) {
+    public static final boolean validarAccesoDevel(HttpSession sesion) {
         // Semáforo
         boolean checkOK;
 
@@ -110,7 +110,7 @@ public final class CommandUsuarioValidation {
         return checkOK;
     }
 
-    public final boolean validarAccesoAdmin(HttpSession sesion) {
+    public static final boolean validarAccesoAdmin(HttpSession sesion) {
         // Semáforo
         boolean checkOK;
 
@@ -131,7 +131,7 @@ public final class CommandUsuarioValidation {
         return checkOK;
     }
 
-    public final boolean validarAccesoBasic(HttpSession sesion) {
+    public static final boolean validarAccesoBasic(HttpSession sesion) {
         // Semáforo
         boolean checkOK;
 

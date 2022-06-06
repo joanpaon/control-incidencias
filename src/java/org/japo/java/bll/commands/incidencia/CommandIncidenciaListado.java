@@ -21,9 +21,8 @@ import java.io.IOException;
 import java.util.List;
 import org.japo.java.dll.DLLIncidencia;
 import org.japo.java.entities.Incidencia;
-import org.japo.java.entities.Usuario;
-import org.japo.java.libraries.UtilesListado;
-import org.japo.java.libraries.UtilesPerfil;
+import org.japo.java.entities.ParamPagina;
+import org.japo.java.libraries.UtilesParamPagina;
 
 /**
  *
@@ -38,61 +37,23 @@ public final class CommandIncidenciaListado extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Sesión > Usuario
-            Usuario usuario = (Usuario) request.getSession(false).getAttribute("usuario");
-
             // Capas de Datos
             DLLIncidencia dllIncidencia = new DLLIncidencia(config);
 
-            // BD > Número de Registros
-            long rowCount;
-            if (usuario.getPerfil() >= UtilesPerfil.ADMIN_CODE) {
-                // BD > Cuenta de TODAS las Incidencias
-                rowCount = dllIncidencia.contar();
-            } else {
-                // BD > Lista de las Incidencias del usuario actual
-                rowCount = dllIncidencia.contar(usuario.getId());
-            }
+            // BD > Número Registros
+            long rowCount = dllIncidencia.contar();
 
-            // Request > Índice de pagina            
-            long rowIndex = UtilesListado.obtenerRowIndex(request);
-
-            // Request > Líneas por Pagina            
-            int rowsPage = UtilesListado.obtenerRowsPage(request);
-
-            // Indice Navegación - Inicio
-            long rowIndexIni = UtilesListado.obtenerRowIndexIni();
-
-            // Indice Navegación - Anterior
-            long rowIndexAnt = UtilesListado.obtenerRowIndexAnt(rowIndex, rowsPage);
-
-            // Indice Navegación - Siguiente
-            long rowIndexSig = UtilesListado.obtenerRowIndexSig(rowIndex, rowsPage, rowCount);
-
-            // Indice Navegación - Final
-            long rowIndexFin = UtilesListado.obtenerRowIndexFin(rowIndex, rowsPage, rowCount);
+            // Generar Entidad Navegación
+            ParamPagina param = UtilesParamPagina.generar(
+                    request, rowCount, "incidencia-listado");
 
             // BD > Lista de Registros
-            List<Incidencia> incidencias;
-            if (usuario.getPerfil() >= UtilesPerfil.ADMIN_CODE) {
-                // BD > Lista Paginada de TODAS las Incidencias
-                incidencias = dllIncidencia.paginar(rowIndex, rowCount);
-            } else {
-                // BD > Lista Paginada de las Incidencias del usuario actual
-                incidencias = dllIncidencia.paginar(rowIndex, rowCount, usuario.getId());
-            }
+            List<Incidencia> incidencias = dllIncidencia.paginar(
+                    param.getRowIndex(), param.getRowsPage());
 
             // Inyecta Datos > JSP
+            request.setAttribute("param-pagina", param);
             request.setAttribute("incidencias", incidencias);
-
-            // Inyecta Parámetros Listado > JSP
-            request.setAttribute("row-index", rowIndex);
-            request.setAttribute("row-index-ini", rowIndexIni);
-            request.setAttribute("row-index-ant", rowIndexAnt);
-            request.setAttribute("row-index-sig", rowIndexSig);
-            request.setAttribute("row-index-fin", rowIndexFin);
-            request.setAttribute("rows-page", rowsPage);
-            request.setAttribute("command", "incidencia-listado");
         } else {
             out = "message/sesion-invalida";
         }

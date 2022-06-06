@@ -19,7 +19,6 @@ import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
-import org.japo.java.bll.commands.usuario.CommandUsuarioValidation;
 import org.japo.java.dll.DLLUsuario;
 import org.japo.java.dll.DLLPermisoUsuario;
 import org.japo.java.dll.DLLProceso;
@@ -42,11 +41,8 @@ public final class CommandPermisoUsuarioModificacion extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
-            // Validador de Acceso
-            CommandUsuarioValidation validator = new CommandUsuarioValidation(
-                    config, request.getSession(false));
-
-            if (validator.validarAccesoAdmin(request.getSession(false))) {
+            // Validar Acceso
+            if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
                 DLLPermisoUsuario dalPermiso = new DLLPermisoUsuario(config);
                 DLLProceso dalProceso = new DLLProceso(config);

@@ -23,7 +23,9 @@ import org.japo.java.dll.DLLIncidencia;
 import org.japo.java.dll.DLLNotificacion;
 import org.japo.java.entities.Incidencia;
 import org.japo.java.entities.Notificacion;
+import org.japo.java.entities.Usuario;
 import org.japo.java.libraries.UtilesIncidencia;
+import org.japo.java.libraries.UtilesPerfil;
 
 /**
  *
@@ -38,6 +40,9 @@ public final class CommandIncidenciaConsulta extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
+            // Sesión > Usuario
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
             // Request > ID Incidencia
             int id = UtilesIncidencia.obtenerIdRequest(request);
 
@@ -49,9 +54,15 @@ public final class CommandIncidenciaConsulta extends Command {
             Incidencia incidencia = dllIncidencia.consultar(id);
             List<Notificacion> notificaciones = dllNotificacion.listar(incidencia.getId());
 
-            // Enlaza Datos > JSP
-            request.setAttribute("incidencia", incidencia);
-            request.setAttribute("notificaciones", notificaciones);
+            // Valida Autoría Incidencia | Administrador
+            if (incidencia.getAutor() == usuario.getId()
+                    || usuario.getPerfil() >= UtilesPerfil.ADMIN_CODE) {
+                // Enlaza Datos > JSP
+                request.setAttribute("incidencia", incidencia);
+                request.setAttribute("notificaciones", notificaciones);
+            } else {
+                out = "message/acceso-denegado";
+            }
         } else {
             out = "message/sesion-invalida";
         }

@@ -26,6 +26,7 @@ import org.japo.java.entities.Notificacion;
 import org.japo.java.entities.Usuario;
 import org.japo.java.libraries.UtilesIncidencia;
 import org.japo.java.libraries.UtilesNotificacion;
+import org.japo.java.libraries.UtilesPerfil;
 
 /**
  *
@@ -42,7 +43,7 @@ public final class CommandIncidenciaCierre extends Command {
         if (validarSesion(request)) {
             // Sesión > Usuario
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-            
+
             // Capas de Datos
             DLLIncidencia dllIncidencia = new DLLIncidencia(config);
             DLLNotificacion dllNotificacion = new DLLNotificacion(config);
@@ -52,24 +53,30 @@ public final class CommandIncidenciaCierre extends Command {
 
             // Incidencia a Cerrar
             Incidencia incidencia = dllIncidencia.consultar(id);
-            
-            // Marcar Incidencia como cerrada
-            incidencia.setCodigo(UtilesIncidencia.INCIDENCIA_CERRADA);
-            
-            // Notificación de Cierre
-            Date fecha = new Date();
-            String info = "Incidencia Cerrada por " + usuario.getUser();
-            Notificacion notificacion = new Notificacion(
-                    UtilesNotificacion.DEF_ID, fecha, 
-                    usuario.getId(), "", "",
-                    incidencia.getId(), "", info);
-            
-            // Actualizar BD
-            dllIncidencia.modificar(incidencia);
-            dllNotificacion.insertar(notificacion);
-            
-            // Redireccion
-            out = "controller?cmd=incidencia-consulta&id=" + id;
+
+            // Valida Autoría Incidencia | Administrador
+            if (incidencia.getAutor() == usuario.getId() 
+                    || usuario.getPerfil() >= UtilesPerfil.ADMIN_CODE) {
+                // Marcar Incidencia como cerrada
+                incidencia.setCodigo(UtilesIncidencia.INCIDENCIA_CERRADA);
+
+                // Notificación de Cierre
+                Date fecha = new Date();
+                String info = "Incidencia Cerrada por " + usuario.getUser();
+                Notificacion notificacion = new Notificacion(
+                        UtilesNotificacion.DEF_ID, fecha,
+                        usuario.getId(), "", "",
+                        incidencia.getId(), "", info);
+
+                // Actualizar BD
+                dllIncidencia.modificar(incidencia);
+                dllNotificacion.insertar(notificacion);
+
+                // Redireccion
+                out = "controller?cmd=incidencia-consulta&id=" + id;
+            } else {
+                out = "message/acceso-denegado";
+            }
         } else {
             out = "message/sesion-invalida";
         }

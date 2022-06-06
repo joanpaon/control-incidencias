@@ -41,7 +41,7 @@
         <link rel="stylesheet" href="public/css/proceso/proceso-listado.css" /> 
         <link rel="stylesheet" href="public/css/partials/header.css" />
         <link rel="stylesheet" href="public/css/partials/footer.css" />
-        <link rel="stylesheet" href="public/css/partials/browser.css" />
+        <link rel="stylesheet" href="public/css/partials/nav.css" />
     </head>
 
     <body>
@@ -103,6 +103,6 @@
         <script src="public/js/proceso/proceso-listado.js"></script>
         <script src="public/js/partials/header.js"></script>
         <script src="public/js/partials/footer.js"></script>
-        <script src="public/js/partials/browser.js"></script>
+        <script src="public/js/partials/nav.js"></script>
     </body>
 </html>

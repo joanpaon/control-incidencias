@@ -23,7 +23,7 @@
 
         <!-- References -->
         <meta name="author" content="2021 - José A. Pacheco Ondoño - japolabs@gmail.com" />
-        <meta name="description" content="JAPOLabs Java Framework" />
+        <meta name="description" content="Control de Incidencias" />
 
         <!-- Configuration -->
         <meta name="keywords" content="" />
@@ -52,7 +52,7 @@
 
                 <header>
                     <h2>Inserción de Incidencias</h2>
-                    <a class="btn" href="?cmd=proceso-listado">Listado</a>
+                    <a class="btn" href="?cmd=incidencia-listado">Listado</a>
                 </header>
 
                 <form method="post" 

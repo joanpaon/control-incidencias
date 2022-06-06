@@ -52,7 +52,7 @@
 
                 <header>
                     <h2>Inserción de Permisos de Usuario</h2>
-                    <a class="btn btn-listar" href="?cmd=proceso-listado">Listado</a>
+                    <a class="btn btn-listar" href="?cmd=permiso-usuario-listado">Listado</a>
                 </header>
 
                 <form method="post" 
