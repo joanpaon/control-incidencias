@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import org.japo.java.dll.DLLPerfil;
 import org.japo.java.entities.Perfil;
+import org.japo.java.libraries.UtilesPerfil;
 
 /**
  *
@@ -36,14 +37,9 @@ public final class CommandPerfilConsulta extends Command {
         if (validarSesion(request)) {
             // Validar Acceso
             if (validarAccesoDevel(request.getSession(false))) {
-                // Capas de Datos
-                DLLPerfil dalPerfil = new DLLPerfil(config);
-
-                // Request > ID Perfil
-                int id = Integer.parseInt(request.getParameter("id"));
-
-                // ID Perfil > Perfil
-                Perfil perfil = dalPerfil.consultar(id);
+                // Request + ID Perfil + BD > Perfil
+                Perfil perfil = UtilesPerfil.
+                        consultarPerfilIdRequest(config, request);
 
                 // Inyecta Datos > JSP
                 request.setAttribute("perfil", perfil);

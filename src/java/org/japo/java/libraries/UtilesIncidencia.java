@@ -2,7 +2,10 @@ package org.japo.java.libraries;
 
 import java.io.IOException;
 import java.util.Date;
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
+import org.japo.java.dll.DLLIncidencia;
+import org.japo.java.entities.Incidencia;
 
 public final class UtilesIncidencia {
 
@@ -141,5 +144,19 @@ public final class UtilesIncidencia {
 
         // Retorno
         return especialidad;
+    }
+
+    public static final Incidencia consultarIncidenciaIdRequest(
+            ServletConfig config,
+            HttpServletRequest request)
+            throws IOException {
+        // Capas de Negocio
+        DLLIncidencia dllIncidencia = new DLLIncidencia(config);
+
+        // Request > Id de Incidencia
+        int id = obtenerIdRequest(request);
+
+        // Retorno
+        return dllIncidencia.consultar(id);
     }
 }

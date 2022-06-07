@@ -50,7 +50,7 @@ public final class CommandUsuarioProfile extends Command {
                 request.setAttribute("usuario", usuario);
             } else if (op.equals("proceso")) {
                 // Capas de Datos
-                DLLUsuario dalUsuario = new DLLUsuario(config);
+                DLLUsuario dllUsuario = new DLLUsuario(config);
 
                 // Request > Parámetros
                 String user = UtilesUsuario.obtenerUserRequest(request);
@@ -62,7 +62,7 @@ public final class CommandUsuarioProfile extends Command {
                 usuario = new Usuario(usuario.getId(), user, pass, avatar, perfil, "");
 
                 // Ejecutar Operación
-                boolean checkOK = dalUsuario.modificar(usuario);
+                boolean checkOK = dllUsuario.modificar(usuario);
 
                 // Validar Operación
                 if (checkOK) {

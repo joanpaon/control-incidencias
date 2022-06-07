@@ -18,8 +18,8 @@ package org.japo.java.bll.commands.proceso;
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import org.japo.java.dll.DLLProceso;
 import org.japo.java.entities.Proceso;
+import org.japo.java.libraries.UtilesProceso;
 
 /**
  *
@@ -36,14 +36,9 @@ public final class CommandProcesoConsulta extends Command {
         if (validarSesion(request)) {
             // Validar Acceso
             if (validarAccesoDevel(request.getSession(false))) {
-                // Capas de Datos
-                DLLProceso dalProceso = new DLLProceso(config);
-
-                // Request > ID Proceso
-                int id = Integer.parseInt(request.getParameter("id"));
-
-                // ID Proceso > Proceso
-                Proceso proceso = dalProceso.consultar(id);
+                // Request + ID Proceso + BD > Proceso
+                Proceso proceso = UtilesProceso.
+                        consultarProcesoIdRequest(config, request);
 
                 // Inyecta Datos > JSP
                 request.setAttribute("proceso", proceso);

@@ -39,7 +39,7 @@ public final class CommandUsuarioInsercion extends Command {
             // Validar Acceso
             if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
-                DLLUsuario dalUsuario = new DLLUsuario(config);
+                DLLUsuario dllUsuario = new DLLUsuario(config);
 
                 // Obtener Operación
                 String op = request.getParameter("op");
@@ -58,7 +58,7 @@ public final class CommandUsuarioInsercion extends Command {
                     Usuario usuario = new Usuario(0, user, pass, avatar, perfil, "");
 
                     // Entidad > Inserción BD - true | false
-                    boolean checkOK = dalUsuario.insertar(usuario);
+                    boolean checkOK = dllUsuario.insertar(usuario);
 
                     // Validar Operación
                     if (checkOK) {

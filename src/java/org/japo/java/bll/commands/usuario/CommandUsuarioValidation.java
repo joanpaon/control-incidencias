@@ -33,17 +33,12 @@ import org.japo.java.libraries.UtilesPerfil;
  */
 public final class CommandUsuarioValidation {
 
-    // Sesión 
-    private final HttpSession sesion;
-
     // Capas de Datos
     private final DLLPermisoPerfil dalPermisoPerfil;
     private final DLLPermisoUsuario dalPermisoUsuario;
     private final DLLProceso dalProceso;
 
     public CommandUsuarioValidation(ServletConfig config, HttpSession sesion) {
-        this.sesion = sesion;
-
         dalPermisoPerfil = new DLLPermisoPerfil(config);
         dalPermisoUsuario = new DLLPermisoUsuario(config);
         dalProceso = new DLLProceso(config);
@@ -82,69 +77,6 @@ public final class CommandUsuarioValidation {
                 }
             }
         } catch (Exception e) {
-            checkOK = false;
-        }
-
-        // Retorno: true | false
-        return checkOK;
-    }
-
-    public static final boolean validarAccesoDevel(HttpSession sesion) {
-        // Semáforo
-        boolean checkOK;
-
-        try {
-            // Sesión > Usuario
-            Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-
-            // Usuario > Perfil
-            int perfil = usuario.getPerfil();
-
-            // Validar Perfil Desarrollador
-            checkOK = perfil >= UtilesPerfil.DEVEL_CODE;
-        } catch (NullPointerException e) {
-            checkOK = false;
-        }
-
-        // Retorno: true | false
-        return checkOK;
-    }
-
-    public static final boolean validarAccesoAdmin(HttpSession sesion) {
-        // Semáforo
-        boolean checkOK;
-
-        try {
-            // Sesión > Usuario
-            Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-
-            // Usuario > Perfil
-            int perfil = usuario.getPerfil();
-
-            // Validar Perfil Desarrollador
-            checkOK = perfil >= UtilesPerfil.ADMIN_CODE;
-        } catch (NullPointerException e) {
-            checkOK = false;
-        }
-
-        // Retorno: true | false
-        return checkOK;
-    }
-
-    public static final boolean validarAccesoBasic(HttpSession sesion) {
-        // Semáforo
-        boolean checkOK;
-
-        try {
-            // Sesión > Usuario
-            Usuario usuario = (Usuario) sesion.getAttribute("usuario");
-
-            // Usuario > Perfil
-            int perfil = usuario.getPerfil();
-
-            // Validar Perfil Desarrollador
-            checkOK = perfil >= UtilesPerfil.BASIC_CODE;
-        } catch (NullPointerException e) {
             checkOK = false;
         }
 

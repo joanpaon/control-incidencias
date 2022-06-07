@@ -18,8 +18,8 @@ package org.japo.java.bll.commands.permiso.usuario;
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import org.japo.java.dll.DLLPermisoUsuario;
 import org.japo.java.entities.PermisoUsuario;
+import org.japo.java.libraries.UtilesPermisoUsuario;
 
 /**
  *
@@ -36,14 +36,9 @@ public final class CommandPermisoUsuarioConsulta extends Command {
         if (validarSesion(request)) {
             // Validar Acceso
             if (validarAccesoAdmin(request.getSession(false))) {
-                // Capas de Datos
-                DLLPermisoUsuario dalPermiso = new DLLPermisoUsuario(config);
-
-                // Request > ID Permiso Usuario
-                int id = Integer.parseInt(request.getParameter("id"));
-
-                // ID Permiso Usuario + BD > Permiso Usuario
-                PermisoUsuario permiso = dalPermiso.consultar(id);
+                // Request + ID Permiso Usuario + BD > Permiso Usuario
+                PermisoUsuario permiso = UtilesPermisoUsuario.
+                        consultarPermisoUsuarioIdRequest(config, request);
 
                 // Enlaza Datos > JSP
                 request.setAttribute("permiso", permiso);

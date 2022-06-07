@@ -35,7 +35,7 @@ public final class CommandUsuarioSignup extends Command {
         String out = "usuario/usuario-registro";
 
         // Capas de Negocio
-        DLLUsuario dalUsuario = new DLLUsuario(config);
+        DLLUsuario dllUsuario = new DLLUsuario(config);
 
         // Obtener Operación
         String op = request.getParameter("op");
@@ -54,7 +54,7 @@ public final class CommandUsuarioSignup extends Command {
             Usuario usuario = new Usuario(0, user, pass, avatar, perfil, "");
 
             // Entidad > Inserción BD - true | false
-            boolean operacionOK = dalUsuario.insertar(usuario);
+            boolean operacionOK = dllUsuario.insertar(usuario);
 
             // Validar Inserción BD
             if (operacionOK) {

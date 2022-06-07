@@ -19,7 +19,6 @@ import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
 import java.util.List;
-import org.japo.java.dll.DLLIncidencia;
 import org.japo.java.dll.DLLNotificacion;
 import org.japo.java.entities.Incidencia;
 import org.japo.java.entities.Notificacion;
@@ -43,20 +42,20 @@ public final class CommandIncidenciaConsulta extends Command {
             // Sesión > Usuario
             Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
 
-            // Request > ID Incidencia
-            int id = UtilesIncidencia.obtenerIdRequest(request);
-
             // Capas de Datos
-            DLLIncidencia dllIncidencia = new DLLIncidencia(config);
             DLLNotificacion dllNotificacion = new DLLNotificacion(config);
 
-            // Datos a Inyectar
-            Incidencia incidencia = dllIncidencia.consultar(id);
-            List<Notificacion> notificaciones = dllNotificacion.listar(incidencia.getId());
+            // Request + ID incidencia + BD > Incidencia
+            Incidencia incidencia = UtilesIncidencia.
+                    consultarIncidenciaIdRequest(config, request);
 
             // Valida Autoría Incidencia | Administrador
             if (incidencia.getAutor() == usuario.getId()
                     || usuario.getPerfil() >= UtilesPerfil.ADMIN_CODE) {
+                // Datos a Inyectar
+                List<Notificacion> notificaciones = dllNotificacion.
+                        listar(incidencia.getId());
+
                 // Enlaza Datos > JSP
                 request.setAttribute("incidencia", incidencia);
                 request.setAttribute("notificaciones", notificaciones);

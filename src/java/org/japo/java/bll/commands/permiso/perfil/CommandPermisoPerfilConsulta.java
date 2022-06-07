@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import org.japo.java.dll.DLLPermisoPerfil;
 import org.japo.java.entities.PermisoPerfil;
+import org.japo.java.libraries.UtilesPermisoPerfil;
 
 /**
  *
@@ -36,14 +37,9 @@ public final class CommandPermisoPerfilConsulta extends Command {
         if (validarSesion(request)) {
             // Validar Acceso
             if (validarAccesoDevel(request.getSession(false))) {
-                // Capas de Datos
-                DLLPermisoPerfil dalPermiso = new DLLPermisoPerfil(config);
-
-                // Request > ID Permiso Perfil
-                int id = Integer.parseInt(request.getParameter("id"));
-
-                // ID Permiso Perfil + BD > Permiso Perfil
-                PermisoPerfil permiso = dalPermiso.consultar(id);
+                // Request + ID Permiso Perfil + BD > Permiso Perfil
+                PermisoPerfil permiso = UtilesPermisoPerfil.
+                        consultarPermisoPerfilIdRequest(config, request);
 
                 // Enlaza Datos > JSP
                 request.setAttribute("permiso", permiso);
