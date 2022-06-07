@@ -39,33 +39,40 @@ public final class CommandUsuarioBorrado extends Command {
             // Validar Acceso
             if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
-                DLLUsuario dalUsuario = new DLLUsuario(config);
+                DLLUsuario dllUsuario = new DLLUsuario(config);
 
-                // request > ID Operación
-                String op = request.getParameter("op");
+                // Sesión > Usuario
+                Usuario usuarioLogin = (Usuario) request.getSession(false).
+                        getAttribute("usuario");
 
-                // ID Entidad + BD > JSP Modificación
-                if (op == null || op.equals("captura")) {
-                    // Request + ID Usuario + BD > Usuario
-                    Usuario usuario = UtilesUsuario.consultarUsuarioIdRequest(config, request);
+                // Request + ID Usuario + BD > Usuario
+                Usuario usuario = UtilesUsuario.consultarUsuarioIdRequest(
+                        config, request);
 
-                    // Inyecta Datos > JSP
-                    request.setAttribute("usuario", usuario);
-                } else if (op.equals("proceso")) {
-                    // Request > Parámetros
-                    int id = UtilesUsuario.obtenerIdRequest(request);
+                // Se impide que un usuario se pueda borrar a sí mismo
+                if (!usuarioLogin.equals(usuario)) {
+                    // request > ID Operación
+                    String op = request.getParameter("op");
 
-                    // ID > Registro Borrado - true | false
-                    boolean checkOK = dalUsuario.borrar(id);
+                    // ID Entidad + BD > JSP Modificación
+                    if (op == null || op.equals("captura")) {
+                        // Inyecta Datos > JSP
+                        request.setAttribute("usuario", usuario);
+                    } else if (op.equals("proceso")) {
+                        // ID > Registro Borrado - true | false
+                        boolean checkOK = dllUsuario.borrar(usuario.getId());
 
-                    // Validar Operación
-                    if (checkOK) {
-                        out = "controller?cmd=usuario-listado";
+                        // Validar Operación
+                        if (checkOK) {
+                            out = "controller?cmd=usuario-listado";
+                        } else {
+                            out = "message/operacion-cancelada";
+                        }
                     } else {
-                        out = "message/operacion-cancelada";
+                        out = "message/operacion-desconocida";
                     }
                 } else {
-                    out = "message/operacion-desconocida";
+                    out = "message/operacion-cancelada";
                 }
             } else {
                 out = "message/acceso-denegado";

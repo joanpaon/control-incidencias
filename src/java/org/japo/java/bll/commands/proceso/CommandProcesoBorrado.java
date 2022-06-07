@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import org.japo.java.dll.DLLProceso;
 import org.japo.java.entities.Proceso;
+import org.japo.java.libraries.UtilesProceso;
 
 /**
  *
@@ -27,7 +28,7 @@ import org.japo.java.entities.Proceso;
  */
 public final class CommandProcesoBorrado extends Command {
 
-    @Override
+    @Override 
     @SuppressWarnings("ConvertToStringSwitch")
     public void process() throws ServletException, IOException {
         // Salida
@@ -38,24 +39,22 @@ public final class CommandProcesoBorrado extends Command {
             // Validar Acceso
             if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
-                DLLProceso dalProceso = new DLLProceso(config);
+                DLLProceso dllProceso = new DLLProceso(config);
 
-                // URL > ID Objeto
-                int id = Integer.parseInt(request.getParameter("id"));
+                // Request + ID Entidad + BD > Entidad
+                Proceso proceso = UtilesProceso.consultarProcesoIdRequest(
+                        config, request);
 
                 // request > ID Operación
                 String op = request.getParameter("op");
 
                 // ID Entidad + BD > JSP Modificación
                 if (op == null || op.equals("captura")) {
-                    // ID Entidad + BD > Entidad
-                    Proceso proceso = dalProceso.consultar(id);
-
                     // Enlaza Datos > JSP
                     request.setAttribute("proceso", proceso);
                 } else if (op.equals("proceso")) {
                     // ID > Registro Borrado - true | false
-                    boolean checkOK = dalProceso.borrar(id);
+                    boolean checkOK = dllProceso.borrar(proceso.getId());
 
                     // Validar Operación
                     if (checkOK) {

@@ -20,6 +20,7 @@ import java.io.IOException;
 import org.japo.java.bll.commands.Command;
 import org.japo.java.dll.DLLPerfil;
 import org.japo.java.entities.Perfil;
+import org.japo.java.libraries.UtilesPerfil;
 
 /**
  *
@@ -38,33 +39,39 @@ public final class CommandPerfilBorrado extends Command {
             // Validar Acceso
             if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
-                DLLPerfil dalPerfil = new DLLPerfil(config);
+                DLLPerfil dllPerfil = new DLLPerfil(config);
 
-                // URL > ID Objeto
-                int id = Integer.parseInt(request.getParameter("id"));
+                // Request + ID Entidad + BD > Entidad
+                Perfil perfil = UtilesPerfil.consultarPerfilIdRequest(
+                        config, request);
 
-                // request > ID Operación
-                String op = request.getParameter("op");
+                // No se permite borrar los perfiles mínimos
+                if (true
+                        && perfil.getId() != UtilesPerfil.BASIC_CODE
+                        && perfil.getId() != UtilesPerfil.ADMIN_CODE
+                        && perfil.getId() != UtilesPerfil.DEVEL_CODE) {
+                    // request > ID Operación
+                    String op = request.getParameter("op");
 
-                // ID Entidad + BD > JSP Modificación
-                if (op == null || op.equals("captura")) {
-                    // ID Entidad + BD > Entidad
-                    Perfil perfil = dalPerfil.consultar(id);
+                    // ID Entidad + BD > JSP Modificación
+                    if (op == null || op.equals("captura")) {
+                        // Inyecta Datos > JSP
+                        request.setAttribute("perfil", perfil);
+                    } else if (op.equals("proceso")) {
+                        // ID > Registro Borrado - true | false
+                        boolean checkOK = dllPerfil.borrar(perfil.getId());
 
-                    // Inyecta Datos > JSP
-                    request.setAttribute("perfil", perfil);
-                } else if (op.equals("proceso")) {
-                    // ID > Registro Borrado - true | false
-                    boolean checkOK = dalPerfil.borrar(id);
-
-                    // Validar Operación
-                    if (checkOK) {
-                        out = "controller?cmd=perfil-listado";
+                        // Validar Operación
+                        if (checkOK) {
+                            out = "controller?cmd=perfil-listado";
+                        } else {
+                            out = "message/operacion-cancelada";
+                        }
                     } else {
-                        out = "message/operacion-cancelada";
+                        out = "message/operacion-desconocida";
                     }
                 } else {
-                    out = "message/operacion-desconocida";
+                    out = "message/operacion-cancelada";
                 }
             } else {
                 out = "message/acceso-denegado";

@@ -14,11 +14,11 @@
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>JAPOLabs Java Framework</title>
+        <title>Control de Incidencias</title>
 
         <!-- References -->
         <meta name="author" content="2021 - José A. Pacheco Ondoño - japolabs@gmail.com" />
-        <meta name="description" content="JAPOLabs Java Framework" />
+        <meta name="description" content="Control de Incidencias" />
 
         <!-- Configuration -->
         <meta name="keywords" content="" />
@@ -42,7 +42,6 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/logo01.png" alt="Logo" />
 
                 <header>
@@ -75,7 +74,6 @@
                 <nav class="controles">
                     <a class="btn btn-borrar" href="?cmd=perfil-borrado&op=proceso&id=<%= perfil.getId()%>">Borrar</a>
                 </nav>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

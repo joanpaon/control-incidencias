@@ -20,6 +20,7 @@ import javax.servlet.ServletException;
 import java.io.IOException;
 import org.japo.java.dll.DLLPermisoPerfil;
 import org.japo.java.entities.PermisoPerfil;
+import org.japo.java.libraries.UtilesPermisoPerfil;
 
 /**
  *
@@ -38,24 +39,22 @@ public final class CommandPermisoPerfilBorrado extends Command {
             // Validar Acceso
             if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
-                DLLPermisoPerfil dalPermiso = new DLLPermisoPerfil(config);
+                DLLPermisoPerfil dllPermiso = new DLLPermisoPerfil(config);
 
-                // URL > ID Objeto
-                int id = Integer.parseInt(request.getParameter("id"));
+                // ID Entidad + BD > Entidad
+                PermisoPerfil permiso = UtilesPermisoPerfil.
+                        consultarPermisoPerfilIdRequest(config, request);
 
                 // request > ID Operación
                 String op = request.getParameter("op");
 
                 // ID Entidad + BD > JSP Modificación
                 if (op == null || op.equals("captura")) {
-                    // ID Entidad + BD > Entidad
-                    PermisoPerfil permiso = dalPermiso.consultar(id);
-
                     // Enlaza Datos > JSP
                     request.setAttribute("permiso", permiso);
                 } else if (op.equals("proceso")) {
                     // ID > Registro Borrado - true | false
-                    boolean checkOK = dalPermiso.borrar(id);
+                    boolean checkOK = dllPermiso.borrar(permiso.getId());
 
                     // Validar Operación
                     if (checkOK) {
