@@ -56,13 +56,13 @@
                 <header>
                     <h2>Listado de Procesos</h2>
                     
+                    <a class="btn btn-insertar" href="?cmd=proceso-insercion&op=captura" title="Nuevo">Nuevo</a>
+                    
                     <% if (usuario.getPerfil() >= UtilesPerfil.DEVEL_CODE) { %>
                     <a class="btn btn-principal" href="?cmd=main-devel" title="Principal">Principal</a>
                     <% } else { %>
                     <a class="btn btn-principal" href="?cmd=main-admin" title="Principal">Principal</a>
                     <% }%>
-                    
-                    <a class="btn btn-insertar" href="?cmd=proceso-insercion&op=captura" title="Nuevo">Nuevo</a>
                 </header>
 
                 <%@include file="/WEB-INF/views/partials/nav.jspf" %>

@@ -1,9 +1,13 @@
+<%@page import="org.japo.java.libraries.UtilesPerfil"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
+    // Session > Usuario
+    Usuario usuario = (Usuario) (session.getAttribute("usuario"));
+
     // Datos Inyectados
     List<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
 %>
@@ -15,11 +19,11 @@
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Galería de Usuarios</title>
+        <title>Control de Incidencias</title>
 
         <!-- References -->
         <meta name="author" content="2021 - José A. Pacheco Ondoño - japolabs@gmail.com" />
-        <meta name="description" content="Galería de Usuarios" />
+        <meta name="description" content="Control de incidencias" />
 
         <!-- Configuration -->
         <meta name="keywords" content="" />
@@ -43,13 +47,18 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
                     <h2>Galería de Usuarios</h2>
-                    <a class="btn btn-principal" href="?cmd=main-admin" title="Principal">Principal</a>
+
                     <a class="btn btn-insertar" href="?cmd=usuario-insercion&op=captura" title="Nuevo">Nuevo</a>
+
+                    <% if (usuario.getPerfil() >= UtilesPerfil.DEVEL_CODE) { %>
+                    <a class="btn btn-principal" href="?cmd=main-devel" title="Principal">Principal</a>
+                    <% } else { %>
+                    <a class="btn btn-principal" href="?cmd=main-admin" title="Principal">Principal</a>
+                    <% }%>
                 </header>
 
                 <div class="galeria">
@@ -64,7 +73,6 @@
 
                     <% }%>
                 </div>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>
