@@ -4,7 +4,6 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
@@ -37,8 +36,7 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
-                <img class="watermark" src="public/img/logo01.png" alt="Logo" />
+                <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
                     <h2>Inserción de Perfiles</h2>
@@ -86,7 +84,6 @@
                         <button class="btn btn-reset" type="reset">Reiniciar</button>
                     </div>
                 </form>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

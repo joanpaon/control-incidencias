@@ -46,7 +46,6 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
@@ -100,7 +99,6 @@
                                 <img class="backup" src="<%= usuario.getAvatar()%>" alt="Avatar" style="display: none;" />
                             </div>
                         </div>
-
                     </div>
 
                     <div class="controles">

@@ -42,8 +42,7 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
-                <img class="watermark" src="public/img/logo01.png" alt="Logo" />
+                <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
                     <h2>Modificación de Perfiles</h2>
@@ -83,7 +82,6 @@
                         <button class="btn btn-reset" type="reset">Reiniciar</button>
                     </div>
                 </form>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

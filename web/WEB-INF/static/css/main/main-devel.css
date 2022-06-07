@@ -33,13 +33,13 @@ body {
 main {
     height: 100%;
 
+    padding: 1rem;
+
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 2rem;
-
-    position: relative;
+    gap: 1rem;
 }
 
 /* --- */

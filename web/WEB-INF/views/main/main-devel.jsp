@@ -35,7 +35,6 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <h2>Página Principal del Desarrollador</h2>
@@ -55,7 +54,6 @@
                     <a class="btn" href="?cmd=incidencia-listado">Incidencias</a>
                     <a class="btn" href="?cmd=notificacion-listado">Notificaciones</a>
                 </div>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

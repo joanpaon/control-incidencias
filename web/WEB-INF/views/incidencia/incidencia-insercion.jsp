@@ -14,7 +14,6 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
@@ -47,7 +46,6 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
@@ -66,7 +64,7 @@
                                 <input id="titulo" 
                                        type="text" 
                                        name="titulo" 
-                                       pattern="<%= UtilesIncidencia.REG_TITULO %>" 
+                                       pattern="<%= UtilesIncidencia.REG_TITULO%>" 
                                        required />
                             </div>
 
@@ -106,7 +104,6 @@
                         <button class="btn" type="reset">Reiniciar</button>
                     </div>
                 </form>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

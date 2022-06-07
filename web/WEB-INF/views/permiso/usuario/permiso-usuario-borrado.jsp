@@ -10,7 +10,6 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
@@ -43,8 +42,7 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
-                <img class="watermark" src="public/img/logo01.png" alt="Logo" />
+                <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
                     <h2>Borrado de Permisos de Usuario</h2>
@@ -76,7 +74,6 @@
                 <nav class="controles">
                     <a class="btn btn-borrar" href="?cmd=permiso-usuario-borrado&op=proceso&id=<%= permiso.getId()%>">Borrar</a>
                 </nav>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

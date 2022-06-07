@@ -42,8 +42,7 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
-                <img class="watermark" src="public/img/logo01.png" alt="Logo" />
+                <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
                     <h2>Consulta de Permisos de Perfil</h2>
@@ -84,7 +83,6 @@
                     <a class="btn btn-borrar" href="?cmd=permiso-borrado&id=<%= permiso.getId()%>">Borrar</a>
                     <a class="btn btn-modificar" href="?cmd=permiso-modificacion&id=<%= permiso.getId()%>&op=captura">Modificar</a>
                 </nav>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

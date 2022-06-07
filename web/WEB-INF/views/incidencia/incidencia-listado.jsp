@@ -21,7 +21,6 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
@@ -54,7 +53,6 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
@@ -83,7 +81,6 @@
                     </thead>
 
                     <tbody>
-
                         <% for (Incidencia i : incidencias) {%>
 
                         <tr>
@@ -108,8 +105,8 @@
                         <tr>
                             <td class="mensaje"><h3>No hay incidencias que mostrar</h3></td>
                         </tr>
-                        <% }%>
                     </tbody>
+                    <% }%>
                 </table>
 
                 <%@include file="/WEB-INF/views/partials/nav.jspf" %>

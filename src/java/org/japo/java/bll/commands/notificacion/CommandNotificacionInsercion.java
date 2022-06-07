@@ -38,10 +38,16 @@ public final class CommandNotificacionInsercion extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
+            // Request > Sesión > Usuario
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+            // Capas de Datos
+            DLLNotificacion dllNotificacion = new DLLNotificacion(config);
 
             // Obtener Operación
             String op = request.getParameter("op");
 
+            // Formulario Captura Datos
             if (op == null || op.equals("captura")) {
                 // Datos a Inyectar
                 int incidencia = UtilesIncidencia.obtenerIdRequest(request);
@@ -49,12 +55,6 @@ public final class CommandNotificacionInsercion extends Command {
                 // Inyeccion de Datos
                 request.setAttribute("incidencia", incidencia);
             } else if (op.equals("proceso")) {
-                // Request > Sesión > Usuario
-                Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-
-                // Capas de Datos
-                DLLNotificacion dllNotificacion = new DLLNotificacion(config);
-
                 // Request > Parámetros
                 Date fecha = UtilesNotificacion.obtenerFechaRequest(request);
                 int incidencia = UtilesNotificacion.obtenerIncidenciaRequest(request);
@@ -62,9 +62,9 @@ public final class CommandNotificacionInsercion extends Command {
 
                 // Parámetros > Incidencia
                 Notificacion notificacion = new Notificacion(
-                        UtilesNotificacion.DEF_ID, fecha,
+                        0, fecha,
                         usuario.getId(), "", "",
-                        incidencia, "", 
+                        incidencia, "",
                         info);
 
                 // Entidad > Inserción BD - true | false

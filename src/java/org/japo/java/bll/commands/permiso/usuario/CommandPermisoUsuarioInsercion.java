@@ -69,7 +69,11 @@ public final class CommandPermisoUsuarioInsercion extends Command {
                     String info = UtilesPermisoUsuario.obtenerInfoRequest(request);
 
                     // Parámetros > Entidad
-                    PermisoUsuario permiso = new PermisoUsuario(0, usuario, "", proceso, "", info);
+                    PermisoUsuario permiso = new PermisoUsuario(
+                            0, 
+                            usuario, "", 
+                            proceso, "", 
+                            info);
 
                     // Entidad > Inserción BD - true | false
                     boolean checkOK = dalPermiso.insertar(permiso);

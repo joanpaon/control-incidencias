@@ -55,7 +55,10 @@ public final class CommandUsuarioInsercion extends Command {
                     int perfil = UtilesUsuario.obtenerPerfilRequest(request);
 
                     // Parámetros > Usuario
-                    Usuario usuario = new Usuario(0, user, pass, avatar, perfil, "");
+                    Usuario usuario = new Usuario(
+                            0, 
+                            user, pass, avatar, 
+                            perfil, "");
 
                     // Entidad > Inserción BD - true | false
                     boolean checkOK = dllUsuario.insertar(usuario);

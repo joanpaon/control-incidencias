@@ -2,16 +2,15 @@
 
 <!doctype html>
 <html lang="es">
-
     <head>
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>JAPOLabs Java Framework</title>
+        <title>Control de Incidencias</title>
 
         <!-- References -->
         <meta name="author" content="2022 - José A. Pacheco Ondoño - japolabs@gmail.com" />
-        <meta name="description" content="JAPOLabs Java Framework" />
+        <meta name="description" content="Control de Incidencias" />
 
         <!-- Configuration -->
         <meta name="keywords" content="" />
@@ -36,7 +35,6 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-                
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <h2>Comando desconocido</h2>
@@ -46,7 +44,6 @@
                 <div class="controles">
                     <%@include file="/WEB-INF/views/partials/button-login.jspf" %>
                 </div>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

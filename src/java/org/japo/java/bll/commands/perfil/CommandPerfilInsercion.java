@@ -49,6 +49,9 @@ public final class CommandPerfilInsercion extends Command {
                     // ---
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
+                    // El ID es importante porque establece realmente el perfil
+                    // Hay que ir con cuidado para evitar colisiones
+                    // Nivel desarrollador
                     int id = UtilesPerfil.obtenerIdRequest(request);
                     String nombre = UtilesPerfil.obtenerNombreRequest(request);
                     String info = UtilesPerfil.obtenerInfoRequest(request);

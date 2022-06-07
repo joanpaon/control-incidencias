@@ -70,8 +70,10 @@ public final class CommandPermisoPerfilInsercion extends Command {
 
                     // Parámetros > Entidad
                     PermisoPerfil permiso = new PermisoPerfil(
-                            UtilesPermisoPerfil.DEF_ID, 
-                            perfil, "", proceso, "", info);
+                            0, 
+                            perfil, "", 
+                            proceso, "", 
+                            info);
 
                     // Entidad > Inserción BD - true | false
                     boolean checkOK = dalPermiso.insertar(permiso);

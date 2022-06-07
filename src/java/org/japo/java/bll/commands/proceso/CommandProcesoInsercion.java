@@ -53,7 +53,7 @@ public final class CommandProcesoInsercion extends Command {
                     String info = UtilesProceso.obtenerInfoRequest(request);
 
                     // Parámetros > Entidad
-                    Proceso proceso = new Proceso(UtilesProceso.DEF_ID, nombre, info);
+                    Proceso proceso = new Proceso(0, nombre, info);
 
                     // Entidad > Inserción BD - true | false
                     boolean checkOK = dllProceso.insertar(proceso);

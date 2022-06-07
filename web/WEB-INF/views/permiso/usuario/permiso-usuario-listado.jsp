@@ -17,7 +17,6 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
@@ -51,14 +50,13 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
                     <h2>Listado de Permisos de Usuario</h2>
-                    
+
                     <a class="btn btn-insertar" href="?cmd=permiso-usuario-insercion&op=captura" title="Nuevo">Nuevo</a>
-                    
+
                     <% if (usuario.getPerfil() >= UtilesPerfil.DEVEL_CODE) { %>
                     <a class="btn btn-listar" href="?cmd=main-devel">Principal</a>
                     <% } else { %>
@@ -67,7 +65,7 @@
                 </header>
 
                 <%@include file="/WEB-INF/views/partials/nav.jspf" %>
-                
+
                 <table>
                     <thead>
                     <th>ID</th>

@@ -43,7 +43,6 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
@@ -56,6 +55,7 @@
                       enctype="multipart/form-data"
                       action="?cmd=usuario-insercion&op=proceso">
                     <input type="hidden" name="perfil" value="<%= UtilesPerfil.BASIC_CODE%>" />
+                    
                     <div class="form-content">
                         <div class="field-container">
                             <div class="field-set">
@@ -96,7 +96,6 @@
                                 <img class="backup" src="<%= UtilesUsuario.DEF_AVATAR%>" alt="Avatar" style="display: none;" />
                             </div>
                         </div>
-
                     </div>
 
                     <div class="controles">
@@ -104,7 +103,6 @@
                         <button class="btn btn-reset" type="reset">Reiniciar</button>
                     </div>
                 </form>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

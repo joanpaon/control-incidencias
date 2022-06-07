@@ -16,7 +16,6 @@
 
 <!DOCTYPE html>
 <html lang="es">
-
     <head>
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
@@ -50,7 +49,6 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
@@ -61,7 +59,7 @@
                     <% if (usuario.getPerfil() >= UtilesPerfil.DEVEL_CODE) { %>
                     <a class="btn btn-principal" href="?cmd=main-devel" title="Principal">Principal</a>
                     <% }
-                       %>
+                    %>
                 </header>
 
                 <%@include file="/WEB-INF/views/partials/nav.jspf" %>

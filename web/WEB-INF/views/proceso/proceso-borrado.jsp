@@ -42,8 +42,7 @@
             <%@include file="/WEB-INF/views/partials/header.jspf" %>
 
             <main>
-
-                <img class="watermark" src="public/img/logo01.png" alt="Logo" />
+                <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
                     <h2>Borrado de Procesos</h2>
@@ -70,13 +69,11 @@
                             </tr>
                         </tbody>
                     </table>
-
                 </div>
 
                 <nav class="controles">
                     <a class="btn btn-borrar" href="?cmd=proceso-borrado&op=proceso&id=<%= proceso.getId()%>">Borrar</a>
                 </nav>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

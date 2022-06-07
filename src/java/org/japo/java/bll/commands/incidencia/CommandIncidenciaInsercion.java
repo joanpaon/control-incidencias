@@ -30,7 +30,6 @@ import org.japo.java.entities.Incidencia;
 import org.japo.java.entities.Notificacion;
 import org.japo.java.entities.Usuario;
 import org.japo.java.libraries.UtilesIncidencia;
-import org.japo.java.libraries.UtilesNotificacion;
 
 /**
  *
@@ -38,6 +37,7 @@ import org.japo.java.libraries.UtilesNotificacion;
  */
 public final class CommandIncidenciaInsercion extends Command {
 
+    @SuppressWarnings("ConvertToStringSwitch")
     @Override
     public void process() throws ServletException, IOException {
         // Salida
@@ -45,15 +45,20 @@ public final class CommandIncidenciaInsercion extends Command {
 
         // Validar Sesión
         if (validarSesion(request)) {
+            // Sesion > Usuario
+            Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
+
+            // Capas de Datos
+            DLLDependencia dllDependencia = new DLLDependencia(config);
+            DLLEspecialidad dllEspecialidad = new DLLEspecialidad(config);
+            DLLIncidencia dllIncidencia = new DLLIncidencia(config);
+            DLLNotificacion dllNotificacion = new DLLNotificacion(config);
+
             // Obtener Operación
             String op = request.getParameter("op");
 
-            
+            // Formulario Captura Datos
             if (op == null || op.equals("captura")) {
-                // Capas de Datos
-                DLLDependencia dllDependencia = new DLLDependencia(config);
-                DLLEspecialidad dllEspecialidad = new DLLEspecialidad(config);
-
                 // Datos a Inyectar
                 List<Dependencia> dependencias = dllDependencia.listar();
                 List<Especialidad> especialidades = dllEspecialidad.listar();
@@ -62,13 +67,6 @@ public final class CommandIncidenciaInsercion extends Command {
                 request.setAttribute("dependencias", dependencias);
                 request.setAttribute("especialidades", especialidades);
             } else if (op.equals("proceso")) {
-                // Sesion > Usuario
-                Usuario usuario = (Usuario) request.getSession().getAttribute("usuario");
-
-                // Capas de Datos
-                DLLIncidencia dllIncidencia = new DLLIncidencia(config);
-                DLLNotificacion dllNotificacion = new DLLNotificacion(config);
-
                 // Request > Incidencia
                 String titulo = UtilesIncidencia.obtenerTituloRequest(request);
                 String info = UtilesIncidencia.obtenerInfoRequest(request);
@@ -78,7 +76,8 @@ public final class CommandIncidenciaInsercion extends Command {
 
                 // Parámetros > Incidencia
                 Incidencia incidencia = new Incidencia(
-                        UtilesIncidencia.DEF_ID, titulo, info,
+                        0,
+                        titulo, info,
                         UtilesIncidencia.INCIDENCIA_ABIERTA, fecha,
                         usuario.getId(), "", "",
                         dependencia, "", especialidad, "");
@@ -93,9 +92,10 @@ public final class CommandIncidenciaInsercion extends Command {
 
                     // Parámetros > Notificación
                     Notificacion notificacion = new Notificacion(
-                            UtilesNotificacion.DEF_ID, fecha,
+                            0,
+                            fecha,
                             usuario.getId(), "", "",
-                            incidencia.getId(), "", 
+                            incidencia.getId(), "",
                             incidencia.getInfo());
 
                     // Entidad > Inserción BD - true | false
