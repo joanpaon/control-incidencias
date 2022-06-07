@@ -19,11 +19,11 @@
         <!-- These lines go in the first 1024 bytes -->
         <meta charset="utf-8" />
         <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>JAPOLabs Java Framework</title>
+        <title>Control de Incidencias</title>
 
         <!-- References -->
         <meta name="author" content="2021 - José A. Pacheco Ondoño - japolabs@gmail.com" />
-        <meta name="description" content="JAPOLabs Java Framework" />
+        <meta name="description" content="Control de Incidencias" />
 
         <!-- Configuration -->
         <meta name="keywords" content="" />
