@@ -39,7 +39,7 @@ public final class CommandProcesoModificacion extends Command {
             // Validar Acceso
             if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
-                DLLProceso dalProceso = new DLLProceso(config);
+                DLLProceso dllProceso = new DLLProceso(config);
 
                 // request > Operación
                 String op = request.getParameter("op");
@@ -47,7 +47,8 @@ public final class CommandProcesoModificacion extends Command {
                 // Entidad > JSP
                 if (op == null || op.equals("captura")) {
                     // Request + ID Usuario + BD > Usuario
-                    Proceso proceso = UtilesProceso.consultarProcesoIdRequest(config, request);
+                    Proceso proceso = UtilesProceso.
+                            consultarProcesoIdRequest(config, request);
 
                     // Inyección de Datos
                     request.setAttribute("proceso", proceso);
@@ -61,7 +62,7 @@ public final class CommandProcesoModificacion extends Command {
                     Proceso proceso = new Proceso(id, nombre, info);
 
                     // Ejecutar Operación
-                    boolean checkOK = dalProceso.modificar(proceso);
+                    boolean checkOK = dllProceso.modificar(proceso);
 
                     // Validar Operación
                     if (checkOK) {

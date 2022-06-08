@@ -39,7 +39,7 @@ public final class CommandPerfilModificacion extends Command {
             // Validar Acceso
             if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
-                DLLPerfil perfilDAL = new DLLPerfil(config);
+                DLLPerfil dllPerfil = new DLLPerfil(config);
 
                 // request > Operación
                 String op = request.getParameter("op");
@@ -47,7 +47,8 @@ public final class CommandPerfilModificacion extends Command {
                 // Entidad > JSP
                 if (op == null || op.equals("captura")) {
                     // Request + ID Usuario + BD > Usuario
-                    Perfil perfil = UtilesPerfil.consultarPerfilIdRequest(config, request);
+                    Perfil perfil = UtilesPerfil.
+                            consultarPerfilIdRequest(config, request);
 
                     // Inyectar Datos > JSP
                     request.setAttribute("perfil", perfil);
@@ -61,7 +62,7 @@ public final class CommandPerfilModificacion extends Command {
                     Perfil perfil = new Perfil(id, nombre, info);
 
                     // Ejecutar Operación
-                    boolean checkOK = perfilDAL.modificar(perfil);
+                    boolean checkOK = dllPerfil.modificar(perfil);
 
                     // Validar Operación
                     if (checkOK) {

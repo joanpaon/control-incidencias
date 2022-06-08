@@ -44,9 +44,9 @@ public final class CommandPermisoUsuarioModificacion extends Command {
             // Validar Acceso
             if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
-                DLLPermisoUsuario dalPermiso = new DLLPermisoUsuario(config);
-                DLLProceso dalProceso = new DLLProceso(config);
-                DLLUsuario dalUsuario = new DLLUsuario(config);
+                DLLPermisoUsuario dllPermiso = new DLLPermisoUsuario(config);
+                DLLProceso dllProceso = new DLLProceso(config);
+                DLLUsuario dllUsuario = new DLLUsuario(config);
 
                 // request > ID Operación
                 String op = request.getParameter("op");
@@ -54,13 +54,12 @@ public final class CommandPermisoUsuarioModificacion extends Command {
                 // Captura de Datos
                 if (op == null || op.equals("captura")) {
                     // Request + ID PermisoUsuario + BD > PermisoUsuario
-                    PermisoUsuario permiso = UtilesPermisoUsuario.consultarPermisoUsuarioIdRequest(config, request);
+                    PermisoUsuario permiso = UtilesPermisoUsuario.
+                            consultarPermisoUsuarioIdRequest(config, request);
 
-                    // BD > Lista de Procesos
-                    List<Proceso> procesos = dalProceso.listar();
-
-                    // BD > Lista de Usuarios            
-                    List<Usuario> usuarios = dalUsuario.listar();
+                    // BD > Listas de Datos
+                    List<Proceso> procesos = dllProceso.listar();
+                    List<Usuario> usuarios = dllUsuario.listar();
 
                     // Inyectar Datos > JSP
                     request.setAttribute("permiso", permiso);
@@ -74,10 +73,14 @@ public final class CommandPermisoUsuarioModificacion extends Command {
                     String info = UtilesPermisoUsuario.obtenerInfoRequest(request);
 
                     // Entidad Final
-                    PermisoUsuario permiso = new PermisoUsuario(id, usuario, "", proceso, "", info);
+                    PermisoUsuario permiso = new PermisoUsuario(
+                            id, 
+                            usuario, "", 
+                            proceso, "", 
+                            info);
 
                     // Entidad > Modificación Registro BD
-                    boolean checkOK = dalPermiso.modificar(permiso);
+                    boolean checkOK = dllPermiso.modificar(permiso);
 
                     // Validar Operación
                     if (checkOK) {

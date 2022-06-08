@@ -39,7 +39,7 @@ public final class CommandUsuarioModificacion extends Command {
             // Validar Acceso
             if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
-                DLLUsuario dalUsuario = new DLLUsuario(config);
+                DLLUsuario dllUsuario = new DLLUsuario(config);
 
                 // request > Operación
                 String op = request.getParameter("op");
@@ -47,7 +47,8 @@ public final class CommandUsuarioModificacion extends Command {
                 // Captura de Datos
                 if (op == null || op.equals("captura")) {
                     // Request + ID Usuario + BD > Usuario
-                    Usuario usuario = UtilesUsuario.consultarUsuarioIdRequest(config, request);
+                    Usuario usuario = UtilesUsuario.
+                            consultarUsuarioIdRequest(config, request);
 
                     // Inyectar Datos > JSP
                     request.setAttribute("usuario", usuario);
@@ -60,10 +61,13 @@ public final class CommandUsuarioModificacion extends Command {
                     int perfil = UtilesUsuario.obtenerPerfilRequest(request);
 
                     // Parámetros > Usuario a Modificar
-                    Usuario usuario = new Usuario(id, user, pass, avatar, perfil, "");
+                    Usuario usuario = new Usuario(
+                            id, 
+                            user, pass, avatar, 
+                            perfil, "");
 
                     // Validar Operación
-                    if (dalUsuario.modificar(usuario)) {
+                    if (dllUsuario.modificar(usuario)) {
                         out = "controller?cmd=usuario-listado";
                     } else {
                         out = "message/operacion-cancelada";

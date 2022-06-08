@@ -44,9 +44,9 @@ public final class CommandPermisoPerfilModificacion extends Command {
             // Validar Acceso
             if (validarAccesoDevel(request.getSession(false))) {
                 // Capas de Datos
-                DLLPermisoPerfil dalPermiso = new DLLPermisoPerfil(config);
-                DLLProceso dalProceso = new DLLProceso(config);
-                DLLPerfil dalPerfil = new DLLPerfil(config);
+                DLLPerfil dllPerfil = new DLLPerfil(config);
+                DLLPermisoPerfil dllPermiso = new DLLPermisoPerfil(config);
+                DLLProceso dllProceso = new DLLProceso(config);
 
                 // request > ID Operación
                 String op = request.getParameter("op");
@@ -54,18 +54,17 @@ public final class CommandPermisoPerfilModificacion extends Command {
                 // Captura de Datos
                 if (op == null || op.equals("captura")) {
                     // Request + ID PermisoPerfil + BD > PermisoPerfil
-                    PermisoPerfil permiso = UtilesPermisoPerfil.consultarPermisoPerfilIdRequest(config, request);
+                    PermisoPerfil permiso = UtilesPermisoPerfil.
+                            consultarPermisoPerfilIdRequest(config, request);
 
-                    // BD > Lista de Procesos
-                    List<Proceso> procesos = dalProceso.listar();
-
-                    // BD > Lista de Perfiles            
-                    List<Perfil> perfiles = dalPerfil.listar();
+                    // BD > Lista de Datos
+                    List<Perfil> perfiles = dllPerfil.listar();
+                    List<Proceso> procesos = dllProceso.listar();
 
                     // Inyectar Datos > JSP
                     request.setAttribute("permiso", permiso);
-                    request.setAttribute("procesos", procesos);
                     request.setAttribute("perfiles", perfiles);
+                    request.setAttribute("procesos", procesos);
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
                     int id = UtilesPermisoPerfil.obtenerIdRequest(request);
@@ -75,10 +74,13 @@ public final class CommandPermisoPerfilModificacion extends Command {
 
                     // Entidad Final
                     PermisoPerfil permiso = new PermisoPerfil(
-                            id, perfil, "", proceso, "", info);
+                            id, 
+                            perfil, "", 
+                            proceso, "", 
+                            info);
 
                     // Entidad > Modificación Registro BD
-                    boolean checkOK = dalPermiso.modificar(permiso);
+                    boolean checkOK = dllPermiso.modificar(permiso);
 
                     // Validar Operación
                     if (checkOK) {
