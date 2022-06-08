@@ -1,7 +1,11 @@
 package org.japo.java.libraries;
 
 import java.io.IOException;
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
+import org.japo.java.dll.DLLDependencia;
+import org.japo.java.entities.Dependencia;
+import org.japo.java.entities.Proceso;
 
 public final class UtilesDependencia {
 
@@ -50,5 +54,19 @@ public final class UtilesDependencia {
 
         // Retorno
         return id;
+    }
+
+    public static Dependencia consultarDependenciaIdRequest(
+            ServletConfig config,
+            HttpServletRequest request)
+            throws IOException {
+        // Capas de Negocio
+        DLLDependencia dllDependencia = new DLLDependencia(config);
+
+        // Request > Id de Proceso
+        int id = obtenerIdRequest(request);
+
+        // Retorno: Proceso
+        return dllDependencia.consultar(id);
     }
 }

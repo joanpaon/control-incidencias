@@ -154,4 +154,42 @@ public final class DLLDependencia {
         // Retorno Lista
         return dependencias;
     }
+
+    public Dependencia consultar(int id) {
+        // SQL
+        String sql = ""
+                + "SELECT "
+                + "* "
+                + "FROM dependencias "
+                + "WHERE "
+                + "dependencias.id=?";
+
+        // Entidad
+        Dependencia dependencia = null;
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
+                // Parametrizar Sentencia
+                ps.setInt(1, id);
+
+                // BD > Entidad
+                try ( ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        // Fila Actual > Campos 
+                        String nombre = rs.getString("nombre");
+                        String info = rs.getString("info");
+
+                        // Campos > Entidad
+                        dependencia = new Dependencia(id, nombre, info);
+                    }
+                }
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno Entidad
+        return dependencia;
+    }
 }
