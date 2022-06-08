@@ -5,7 +5,8 @@ import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
 import org.japo.java.dll.DLLDependencia;
 import org.japo.java.entities.Dependencia;
-import org.japo.java.entities.Proceso;
+import static org.japo.java.libraries.UtilesDependencia.validarInfo;
+import static org.japo.java.libraries.UtilesDependencia.validarNombre;
 
 public final class UtilesDependencia {
 
@@ -56,6 +57,36 @@ public final class UtilesDependencia {
         return id;
     }
 
+    public static final String obtenerNombreRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Request > Nombre
+        String valor = request.getParameter("nombre");
+
+        // Validar User
+        if (!validarNombre(valor)) {
+            throw new IOException("Nombre de Dependencia Incorrecto");
+        }
+
+        // Retorno
+        return valor;
+    }
+
+    public static final String obtenerInfoRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Request > Info
+        String valor = request.getParameter("info");
+
+        // Validar User
+        if (!validarInfo(valor)) {
+            throw new IOException("Info de Dependencia Incorrecta");
+        }
+
+        // Retorno
+        return valor;
+    }
+
     public static Dependencia consultarDependenciaIdRequest(
             ServletConfig config,
             HttpServletRequest request)
@@ -63,10 +94,10 @@ public final class UtilesDependencia {
         // Capas de Negocio
         DLLDependencia dllDependencia = new DLLDependencia(config);
 
-        // Request > Id de Proceso
+        // Request > Id de Dependencia
         int id = obtenerIdRequest(request);
 
-        // Retorno: Proceso
+        // Retorno: Dependencia
         return dllDependencia.consultar(id);
     }
 }

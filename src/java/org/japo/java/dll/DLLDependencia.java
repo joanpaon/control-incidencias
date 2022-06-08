@@ -43,6 +43,132 @@ public final class DLLDependencia {
         ds = UtilesServlet.obtenerDataSource(config);
     }
 
+    public boolean borrar(int id) {
+        // SQL
+        final String SQL = ""
+                + "DELETE FROM "
+                + "dependencias "
+                + "WHERE id=?";
+
+        // Número de registros afectados
+        int numReg = 0;
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(SQL)) {
+                // Parametrizar Sentencia
+                ps.setInt(1, id);
+
+                // Ejecutar Sentencia
+                numReg = ps.executeUpdate();
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno: true | false
+        return numReg == 1;
+    }
+
+    public Dependencia consultar(int id) {
+        // SQL
+        String sql = ""
+                + "SELECT "
+                + "* "
+                + "FROM dependencias "
+                + "WHERE "
+                + "dependencias.id=?";
+
+        // Entidad
+        Dependencia dependencia = null;
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
+                // Parametrizar Sentencia
+                ps.setInt(1, id);
+
+                // BD > Entidad
+                try ( ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        // Fila Actual > Campos 
+                        String nombre = rs.getString("nombre");
+                        String info = rs.getString("info");
+
+                        // Campos > Entidad
+                        dependencia = new Dependencia(id, nombre, info);
+                    }
+                }
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno Entidad
+        return dependencia;
+    }
+
+    public Long contar() {
+        // Número de Filas
+        long filas = 0;
+
+        // SQL
+        String sql = ""
+                + "SELECT "
+                + "COUNT(*) "
+                + "FROM "
+                + "dependencias";
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
+                // Ejecutar Sentencia
+                try ( ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        filas = rs.getLong(1);
+                    }
+                }
+            }
+        } catch (SQLException | NullPointerException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno: Filas Contadas
+        return filas;
+    }
+
+    public boolean insertar(Dependencia dependencia) {
+        // SQL
+        final String SQL = ""
+                + "INSERT INTO "
+                + "dependencias "
+                + "("
+                + "nombre, info"
+                + ") "
+                + "VALUES (?, ?)";
+
+        // Número de registros afectados
+        int numReg = 0;
+
+        // Obtención del Contexto
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(SQL)) {
+                // Parametrizar Sentencia
+                ps.setString(1, dependencia.getNombre());
+                ps.setString(2, dependencia.getInfo());
+
+                // Ejecutar Sentencia
+                numReg = ps.executeUpdate();
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno: true | false
+        return numReg == 1;
+    }
+
     public List<Dependencia> listar() {
         // SQL
         String sql = ""
@@ -80,35 +206,6 @@ public final class DLLDependencia {
 
         // Retorno Lista
         return dependencias;
-    }
-
-    public Long contar() {
-        // Número de Filas
-        long filas = 0;
-
-        // SQL
-        String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "dependencias";
-
-        try {
-            try (
-                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
-                // Ejecutar Sentencia
-                try ( ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        filas = rs.getLong(1);
-                    }
-                }
-            }
-        } catch (SQLException | NullPointerException ex) {
-            logger.info(ex.getMessage());
-        }
-
-        // Retorno: Filas Contadas
-        return filas;
     }
 
     public List<Dependencia> paginar(long indice, long longitud) {
@@ -155,41 +252,35 @@ public final class DLLDependencia {
         return dependencias;
     }
 
-    public Dependencia consultar(int id) {
+    public boolean modificar(Dependencia dependencia) {
         // SQL
-        String sql = ""
-                + "SELECT "
-                + "* "
-                + "FROM dependencias "
+        final String SQL = ""
+                + "UPDATE "
+                + "dependencias "
+                + "SET "
+                + "nombre=?, info=? "
                 + "WHERE "
-                + "dependencias.id=?";
+                + "id=?";
 
-        // Entidad
-        Dependencia dependencia = null;
+        // Número de Registros Afectados
+        int numReg = 0;
 
         try {
             try (
-                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(SQL)) {
                 // Parametrizar Sentencia
-                ps.setInt(1, id);
+                ps.setString(1, dependencia.getNombre());
+                ps.setString(2, dependencia.getInfo());
+                ps.setInt(3, dependencia.getId());
 
-                // BD > Entidad
-                try ( ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        // Fila Actual > Campos 
-                        String nombre = rs.getString("nombre");
-                        String info = rs.getString("info");
-
-                        // Campos > Entidad
-                        dependencia = new Dependencia(id, nombre, info);
-                    }
-                }
+                // Ejecutar Sentencia
+                numReg = ps.executeUpdate();
             }
         } catch (NullPointerException | SQLException ex) {
             logger.info(ex.getMessage());
         }
 
-        // Retorno Entidad
-        return dependencia;
+        // Retorno: true | false
+        return numReg == 1;
     }
 }
