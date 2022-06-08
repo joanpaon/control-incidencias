@@ -208,6 +208,38 @@ public final class DLLDependencia {
         return dependencias;
     }
 
+    public boolean modificar(Dependencia dependencia) {
+        // SQL
+        final String SQL = ""
+                + "UPDATE "
+                + "dependencias "
+                + "SET "
+                + "nombre=?, info=? "
+                + "WHERE "
+                + "id=?";
+
+        // Número de Registros Afectados
+        int numReg = 0;
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(SQL)) {
+                // Parametrizar Sentencia
+                ps.setString(1, dependencia.getNombre());
+                ps.setString(2, dependencia.getInfo());
+                ps.setInt(3, dependencia.getId());
+
+                // Ejecutar Sentencia
+                numReg = ps.executeUpdate();
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno: true | false
+        return numReg == 1;
+    }
+
     public List<Dependencia> paginar(long indice, long longitud) {
         // SQL
         String sql = ""
@@ -250,37 +282,5 @@ public final class DLLDependencia {
 
         // Retorno Lista
         return dependencias;
-    }
-
-    public boolean modificar(Dependencia dependencia) {
-        // SQL
-        final String SQL = ""
-                + "UPDATE "
-                + "dependencias "
-                + "SET "
-                + "nombre=?, info=? "
-                + "WHERE "
-                + "id=?";
-
-        // Número de Registros Afectados
-        int numReg = 0;
-
-        try {
-            try (
-                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(SQL)) {
-                // Parametrizar Sentencia
-                ps.setString(1, dependencia.getNombre());
-                ps.setString(2, dependencia.getInfo());
-                ps.setInt(3, dependencia.getId());
-
-                // Ejecutar Sentencia
-                numReg = ps.executeUpdate();
-            }
-        } catch (NullPointerException | SQLException ex) {
-            logger.info(ex.getMessage());
-        }
-
-        // Retorno: true | false
-        return numReg == 1;
     }
 }

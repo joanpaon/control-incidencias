@@ -4,8 +4,10 @@ import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
-import static org.japo.java.libraries.UtilesIncidencia.validarInfo;
+import org.japo.java.dll.DLLNotificacion;
+import org.japo.java.entities.Notificacion;
 
 public final class UtilesNotificacion {
 
@@ -21,7 +23,7 @@ public final class UtilesNotificacion {
     public static final String DEF_INFO = "Notificación Indefinida";
 
     // Expresiones Regulares
-    public static final String REG_INFO = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ,\\.]{3,255}";
+    public static final String REG_INFO = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ\\-\\.#,]{3,100}";
 
     private UtilesNotificacion() {
     }
@@ -69,7 +71,8 @@ public final class UtilesNotificacion {
 
         // Request > Dato
         try {
-            fecha = new SimpleDateFormat("yyyy-MM-dd").parse(request.getParameter("fecha"));
+            fecha = new SimpleDateFormat("yyyy-MM-dd").
+                    parse(request.getParameter("fecha"));
 
             if (!validarFecha(fecha)) {
                 throw new IOException("Fecha incorrecta");
@@ -82,23 +85,31 @@ public final class UtilesNotificacion {
         return fecha;
     }
 
-    public static final String obtenerInfoRequest(
+    public static final int obtenerAutorRequest(
             HttpServletRequest request)
             throws IOException {
-        // Request > Dato
-        String info = request.getParameter("info");
+        // Referencia
+        int autor;
 
-        // Validar Dato
-        if (!validarInfo(info)) {
-            throw new IOException("Info Incorrecta");
+        // Request > Dato
+        try {
+            autor = Integer.parseInt(request.getParameter("autor"));
+
+            if (!UtilesUsuario.validarId(autor)) {
+                throw new IOException("ID de Autor incorrecto");
+            }
+        } catch (NullPointerException e) {
+            throw new IOException(e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IOException("ID de Autor Incorrecto");
         }
 
         // Retorno
-        return info;
+        return autor;
     }
 
     public static final int obtenerIncidenciaRequest(
-            HttpServletRequest request) 
+            HttpServletRequest request)
             throws IOException {
         // Referencia
         int incidencia;
@@ -118,5 +129,34 @@ public final class UtilesNotificacion {
 
         // Retorno
         return incidencia;
+    }
+
+    public static final String obtenerInfoRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Request > Dato
+        String info = request.getParameter("info");
+
+        // Validar Dato
+        if (!validarInfo(info)) {
+            throw new IOException("Info Incorrecta");
+        }
+
+        // Retorno
+        return info;
+    }
+
+    public static Notificacion consultarNotificacionIdRequest(
+            ServletConfig config,
+            HttpServletRequest request)
+            throws IOException {
+        // Capas de Negocio
+        DLLNotificacion dllNotificacion = new DLLNotificacion(config);
+
+        // Request > Id de Notificación
+        int id = obtenerIdRequest(request);
+
+        // Retorno: Dependencia
+        return dllNotificacion.consultar(id);
     }
 }
