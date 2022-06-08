@@ -12,12 +12,12 @@ public final class UtilesDependencia {
 
     // Valores Predeterminados
     public static final int DEF_ID = 0;
-    public static final String DEF_NOMBRE = "D00";
+    public static final String DEF_NOMBRE = "Indefinida";
     public static final String DEF_INFO = "Dependencia Indefinida";
 
     // Expresiones Regulares
-    public static final String REG_NOMBRE = "[\\w]{3,10}";
-    public static final String REG_INFO = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ\\-\\.#]{3,100}";
+    public static final String REG_NOMBRE = "[\\w\\-]{3,10}";
+    public static final String REG_INFO = "[\\w áéíóúüñÁÉÍÓÚÜÑçÇ\\-\\.#,]{3,100}";
 
     private UtilesDependencia() {
     }

@@ -37,7 +37,7 @@ public final class CommandDependenciaBorrado extends Command {
         // Validar Sesión
         if (validarSesion(request)) {
             // Validar Acceso
-            if (validarAccesoDevel(request.getSession(false))) {
+            if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
                 DLLDependencia dllDependencia = new DLLDependencia(config);
 

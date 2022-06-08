@@ -13,33 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.japo.java.bll.commands.dependencia;
+package org.japo.java.bll.commands.especialidad;
 
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import org.japo.java.dll.DLLDependencia;
-import org.japo.java.entities.Dependencia;
-import org.japo.java.libraries.UtilesDependencia;
+import org.japo.java.dll.DLLEspecialidad;
+import org.japo.java.entities.Especialidad;
+import org.japo.java.libraries.UtilesEspecialidad;
 
 /**
  *
  * @author José A. Pacheco Ondoño - japolabs@gmail.com
  */
-public final class CommandDependenciaInsercion extends Command {
+public final class CommandEspecialidadInsercion extends Command {
 
     @Override
     @SuppressWarnings("ConvertToStringSwitch")
     public void process() throws ServletException, IOException {
         // Salida
-        String out = "dependencia/dependencia-insercion";
+        String out = "especialidad/especialidad-insercion";
 
         // Validar Sesión
         if (validarSesion(request)) {
             // Validar Acceso
             if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
-                DLLDependencia dllDependencia = new DLLDependencia(config);
+                DLLEspecialidad dllEspecialidad = new DLLEspecialidad(config);
 
                 // Obtener Operación
                 String op = request.getParameter("op");
@@ -47,20 +47,20 @@ public final class CommandDependenciaInsercion extends Command {
                 // Invoca Formulario de Captura de Datos
                 if (op == null || op.equals("captura")) {
                     // ---
-                } else if (op.equals("dependencia")) {
+                } else if (op.equals("especialidad")) {
                     // Request > Parámetros
-                    String nombre = UtilesDependencia.obtenerNombreRequest(request);
-                    String info = UtilesDependencia.obtenerInfoRequest(request);
+                    String nombre = UtilesEspecialidad.obtenerNombreRequest(request);
+                    String info = UtilesEspecialidad.obtenerInfoRequest(request);
 
                     // Parámetros > Entidad
-                    Dependencia dependencia = new Dependencia(0, nombre, info);
+                    Especialidad especialidad = new Especialidad(0, nombre, info);
 
                     // Entidad > Inserción BD - true | false
-                    boolean checkOK = dllDependencia.insertar(dependencia);
+                    boolean checkOK = dllEspecialidad.insertar(especialidad);
 
                     // Validar Operación
                     if (checkOK) {
-                        out = "controller?cmd=dependencia-listado";
+                        out = "controller?cmd=especialidad-listado";
                     } else {
                         out = "message/operacion-cancelada";
                     }

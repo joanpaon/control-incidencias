@@ -43,6 +43,132 @@ public final class DLLEspecialidad {
         ds = UtilesServlet.obtenerDataSource(config);
     }
 
+    public boolean borrar(int id) {
+        // SQL
+        final String SQL = ""
+                + "DELETE FROM "
+                + "especialidades "
+                + "WHERE id=?";
+
+        // Número de registros afectados
+        int numReg = 0;
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(SQL)) {
+                // Parametrizar Sentencia
+                ps.setInt(1, id);
+
+                // Ejecutar Sentencia
+                numReg = ps.executeUpdate();
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno: true | false
+        return numReg == 1;
+    }
+
+    public Especialidad consultar(int id) {
+        // SQL
+        String sql = ""
+                + "SELECT "
+                + "* "
+                + "FROM especialidades "
+                + "WHERE "
+                + "especialidades.id=?";
+
+        // Entidad
+        Especialidad especialidad = null;
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
+                // Parametrizar Sentencia
+                ps.setInt(1, id);
+
+                // BD > Entidad
+                try ( ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        // Fila Actual > Campos 
+                        String nombre = rs.getString("nombre");
+                        String info = rs.getString("info");
+
+                        // Campos > Entidad
+                        especialidad = new Especialidad(id, nombre, info);
+                    }
+                }
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno Entidad
+        return especialidad;
+    }
+
+    public Long contar() {
+        // Número de Filas
+        long filas = 0;
+
+        // SQL
+        String sql = ""
+                + "SELECT "
+                + "COUNT(*) "
+                + "FROM "
+                + "especialidades";
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
+                // Ejecutar Sentencia
+                try ( ResultSet rs = ps.executeQuery()) {
+                    if (rs.next()) {
+                        filas = rs.getLong(1);
+                    }
+                }
+            }
+        } catch (SQLException | NullPointerException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno: Filas Contadas
+        return filas;
+    }
+
+    public boolean insertar(Especialidad especialidad) {
+        // SQL
+        final String SQL = ""
+                + "INSERT INTO "
+                + "especialidades "
+                + "("
+                + "nombre, info"
+                + ") "
+                + "VALUES (?, ?)";
+
+        // Número de registros afectados
+        int numReg = 0;
+
+        // Obtención del Contexto
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(SQL)) {
+                // Parametrizar Sentencia
+                ps.setString(1, especialidad.getNombre());
+                ps.setString(2, especialidad.getInfo());
+
+                // Ejecutar Sentencia
+                numReg = ps.executeUpdate();
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno: true | false
+        return numReg == 1;
+    }
+
     public List<Especialidad> listar() {
         // SQL
         String sql = ""
@@ -80,35 +206,6 @@ public final class DLLEspecialidad {
 
         // Retorno Lista
         return especialidades;
-    }
-
-    public Long contar() {
-        // Número de Filas
-        long filas = 0;
-
-        // SQL
-        String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "especialidades";
-
-        try {
-            try (
-                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
-                // Ejecutar Sentencia
-                try ( ResultSet rs = ps.executeQuery()) {
-                    if (rs.next()) {
-                        filas = rs.getLong(1);
-                    }
-                }
-            }
-        } catch (SQLException | NullPointerException ex) {
-            logger.info(ex.getMessage());
-        }
-
-        // Retorno: Filas Contadas
-        return filas;
     }
 
     public List<Especialidad> paginar(long indice, long longitud) {
@@ -153,5 +250,37 @@ public final class DLLEspecialidad {
 
         // Retorno Lista
         return especialidades;
+    }
+
+    public boolean modificar(Especialidad especialidad) {
+        // SQL
+        final String SQL = ""
+                + "UPDATE "
+                + "especialidades "
+                + "SET "
+                + "nombre=?, info=? "
+                + "WHERE "
+                + "id=?";
+
+        // Número de Registros Afectados
+        int numReg = 0;
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(SQL)) {
+                // Parametrizar Sentencia
+                ps.setString(1, especialidad.getNombre());
+                ps.setString(2, especialidad.getInfo());
+                ps.setInt(3, especialidad.getId());
+
+                // Ejecutar Sentencia
+                numReg = ps.executeUpdate();
+            }
+        } catch (NullPointerException | SQLException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno: true | false
+        return numReg == 1;
     }
 }

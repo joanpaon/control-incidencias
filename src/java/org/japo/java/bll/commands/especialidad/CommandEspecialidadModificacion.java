@@ -13,33 +13,33 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.japo.java.bll.commands.dependencia;
+package org.japo.java.bll.commands.especialidad;
 
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import org.japo.java.dll.DLLDependencia;
-import org.japo.java.entities.Dependencia;
-import org.japo.java.libraries.UtilesDependencia;
+import org.japo.java.dll.DLLEspecialidad;
+import org.japo.java.entities.Especialidad;
+import org.japo.java.libraries.UtilesEspecialidad;
 
 /**
  *
  * @author José A. Pacheco Ondoño - japolabs@gmail.com
  */
-public final class CommandDependenciaModificacion extends Command {
+public final class CommandEspecialidadModificacion extends Command {
 
     @Override
     @SuppressWarnings("ConvertToStringSwitch")
     public void process() throws ServletException, IOException {
         // Salida
-        String out = "dependencia/dependencia-modificacion";
+        String out = "especialidad/especialidad-modificacion";
 
         // Validar Sesión
         if (validarSesion(request)) {
             // Validar Acceso
             if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
-                DLLDependencia dllDependencia = new DLLDependencia(config);
+                DLLEspecialidad dllEspecialidad = new DLLEspecialidad(config);
 
                 // request > Operación
                 String op = request.getParameter("op");
@@ -47,26 +47,26 @@ public final class CommandDependenciaModificacion extends Command {
                 // Entidad > JSP
                 if (op == null || op.equals("captura")) {
                     // Request + ID Usuario + BD > Usuario
-                    Dependencia dependencia = UtilesDependencia.
-                            consultarDependenciaIdRequest(config, request);
+                    Especialidad especialidad = UtilesEspecialidad.
+                            consultarEspecialidadIdRequest(config, request);
 
                     // Inyección de Datos
-                    request.setAttribute("dependencia", dependencia);
-                } else if (op.equals("dependencia")) {
+                    request.setAttribute("especialidad", especialidad);
+                } else if (op.equals("especialidad")) {
                     // Request > Parámetros
-                    int id = UtilesDependencia.obtenerIdRequest(request);
-                    String nombre = UtilesDependencia.obtenerNombreRequest(request);
-                    String info = UtilesDependencia.obtenerInfoRequest(request);
+                    int id = UtilesEspecialidad.obtenerIdRequest(request);
+                    String nombre = UtilesEspecialidad.obtenerNombreRequest(request);
+                    String info = UtilesEspecialidad.obtenerInfoRequest(request);
 
                     // Parámetros > Entidad
-                    Dependencia dependencia = new Dependencia(id, nombre, info);
+                    Especialidad especialidad = new Especialidad(id, nombre, info);
 
                     // Ejecutar Operación
-                    boolean checkOK = dllDependencia.modificar(dependencia);
+                    boolean checkOK = dllEspecialidad.modificar(especialidad);
 
                     // Validar Operación
                     if (checkOK) {
-                        out = "controller?cmd=dependencia-listado";
+                        out = "controller?cmd=especialidad-listado";
                     } else {
                         out = "message/operacion-cancelada";
                     }
