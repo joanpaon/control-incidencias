@@ -1,6 +1,8 @@
 package org.japo.java.libraries;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.http.HttpServletRequest;
@@ -98,6 +100,74 @@ public final class UtilesIncidencia {
 
         // Retorno
         return info;
+    }
+
+    public static final int obtenerEstadoRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Referencia
+        int estado;
+
+        // Request > Dato
+        try {
+            estado = Integer.parseInt(request.getParameter("estado"));
+
+            if (!UtilesIncidencia.validarEstado(estado)) {
+                throw new IOException("Estado Incorrecto");
+            }
+        } catch (NullPointerException e) {
+            throw new IOException(e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IOException("Estado Incorrecto");
+        }
+
+        // Retorno
+        return estado;
+    }
+
+    public static final Date obtenerFechaRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Referencia
+        Date fecha;
+
+        // Request > Dato
+        try {
+            fecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").
+                    parse(request.getParameter("fecha"));
+
+            if (!validarFecha(fecha)) {
+                throw new IOException("Fecha incorrecta");
+            }
+        } catch (ParseException e) {
+            throw new IOException(e.getMessage());
+        }
+
+        // Retorno
+        return fecha;
+    }
+
+    public static final int obtenerAutorRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Referencia
+        int autor;
+
+        // Request > Dato
+        try {
+            autor = Integer.parseInt(request.getParameter("autor"));
+
+            if (!UtilesUsuario.validarId(autor)) {
+                throw new IOException("Id de Autor Fuera de Rango");
+            }
+        } catch (NullPointerException e) {
+            throw new IOException(e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IOException("Autor Incorrecto");
+        }
+
+        // Retorno
+        return autor;
     }
 
     public static final int obtenerDependenciaRequest(

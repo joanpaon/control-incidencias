@@ -57,8 +57,8 @@ public final class Incidencia implements Serializable {
     }
 
     // Constructor Parametrizado
-    public Incidencia(int id, String nombre, String info,
-            int estado, Date creacion,
+    public Incidencia(int id, String titulo, String info,
+            int estado, Date fecha,
             int autor, String autorNombre, String autorPerfil,
             int dependencia, String dependenciaNombre,
             int especialidad, String especialidadNombre) {
@@ -68,8 +68,8 @@ public final class Incidencia implements Serializable {
             this.id = UtilesIncidencia.DEF_ID;
         }
 
-        if (UtilesIncidencia.validarTitulo(nombre)) {
-            this.titulo = nombre;
+        if (UtilesIncidencia.validarTitulo(titulo)) {
+            this.titulo = titulo;
         } else {
             this.titulo = UtilesIncidencia.DEF_TITULO;
         }
@@ -86,8 +86,8 @@ public final class Incidencia implements Serializable {
             this.estado = UtilesIncidencia.DEF_ESTADO;
         }
 
-        if (UtilesIncidencia.validarFecha(creacion)) {
-            this.fecha = creacion;
+        if (UtilesIncidencia.validarFecha(fecha)) {
+            this.fecha = fecha;
         } else {
             this.fecha = UtilesIncidencia.DEF_FECHA;
         }

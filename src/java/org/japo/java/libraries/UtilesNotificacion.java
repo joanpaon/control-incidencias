@@ -71,7 +71,7 @@ public final class UtilesNotificacion {
 
         // Request > Dato
         try {
-            fecha = new SimpleDateFormat("yyyy-MM-dd").
+            fecha = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm").
                     parse(request.getParameter("fecha"));
 
             if (!validarFecha(fecha)) {

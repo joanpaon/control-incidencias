@@ -72,6 +72,7 @@
                                        value="<%= sdf.format(notificacion.getFecha())%>"
                                        required />
                             </div>
+                                       
                             <div class="field-set">
                                 <label for="autor">Autor</label>
                                 <select id="autor" name="autor" required>
@@ -84,6 +85,7 @@
                                     <% }%>
                                 </select>
                             </div>
+                                
                             <div class="field-set">
                                 <label for="incidencia">Incidencia</label>
                                 <select id="incidencia" name="incidencia" required>
@@ -96,6 +98,7 @@
                                     <% }%>
                                 </select>
                             </div>
+                                
                             <div class="field-set">
                                 <label for="info">Info</label>
                                 <input id="info" 
