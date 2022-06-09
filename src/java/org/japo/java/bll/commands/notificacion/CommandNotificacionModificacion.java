@@ -13,60 +13,81 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.japo.java.bll.commands.especialidad;
+package org.japo.java.bll.commands.notificacion;
 
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
-import org.japo.java.dll.DLLEspecialidad;
-import org.japo.java.entities.Especialidad;
-import org.japo.java.libraries.UtilesEspecialidad;
+import java.util.Date;
+import java.util.List;
+import org.japo.java.dll.DLLIncidencia;
+import org.japo.java.dll.DLLNotificacion;
+import org.japo.java.dll.DLLUsuario;
+import org.japo.java.entities.Incidencia;
+import org.japo.java.entities.Notificacion;
+import org.japo.java.entities.Usuario;
+import org.japo.java.libraries.UtilesNotificacion;
 
 /**
  *
  * @author José A. Pacheco Ondoño - japolabs@gmail.com
  */
-public final class CommandEspecialidadModificacion extends Command {
+public final class CommandNotificacionModificacion extends Command {
 
     @Override
     @SuppressWarnings("ConvertToStringSwitch")
     public void process() throws ServletException, IOException {
         // Salida
-        String out = "especialidad/especialidad-modificacion";
+        String out = "notificacion/notificacion-modificacion";
 
         // Validar Sesión
         if (validarSesion(request)) {
             // Validar Acceso
             if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
-                DLLEspecialidad dllEspecialidad = new DLLEspecialidad(config);
+                DLLIncidencia dllIncidencia = new DLLIncidencia(config);
+                DLLNotificacion dllNotificacion = new DLLNotificacion(config);
+                DLLUsuario dllUsuario = new DLLUsuario(config);
 
                 // request > Operación
                 String op = request.getParameter("op");
 
                 // Entidad > JSP
                 if (op == null || op.equals("captura")) {
+                    // Listas de Datos
+                    List<Incidencia> incidencias = dllIncidencia.listar();
+                    List<Usuario> usuarios = dllUsuario.listar();
+                    
                     // Request + ID Usuario + BD > Usuario
-                    Especialidad especialidad = UtilesEspecialidad.
-                            consultarEspecialidadIdRequest(config, request);
+                    Notificacion notificacion = UtilesNotificacion.
+                            consultarNotificacionIdRequest(config, request);
 
                     // Inyección de Datos
-                    request.setAttribute("especialidad", especialidad);
+                    request.setAttribute("notificacion", notificacion);
+                    request.setAttribute("incidencias", incidencias);
+                    request.setAttribute("usuarios", usuarios);
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
-                    int id = UtilesEspecialidad.obtenerIdRequest(request);
-                    String nombre = UtilesEspecialidad.obtenerNombreRequest(request);
-                    String info = UtilesEspecialidad.obtenerInfoRequest(request);
+                    int id = UtilesNotificacion.obtenerIdRequest(request);
+                    Date fecha = UtilesNotificacion.obtenerFechaRequest(request);
+                    int autor = UtilesNotificacion.obtenerAutorRequest(request);
+                    int incidencia = UtilesNotificacion.obtenerIncidenciaRequest(request);
+                    String info = UtilesNotificacion.obtenerInfoRequest(request);
 
                     // Parámetros > Entidad
-                    Especialidad especialidad = new Especialidad(id, nombre, info);
+                    Notificacion notificacion = new Notificacion(
+                            id,
+                            fecha,
+                            autor, "", "",
+                            incidencia, "",
+                            info);
 
                     // Ejecutar Operación
-                    boolean checkOK = dllEspecialidad.modificar(especialidad);
+                    boolean checkOK = dllNotificacion.modificar(notificacion);
 
                     // Validar Operación
                     if (checkOK) {
-                        out = "controller?cmd=especialidad-listado";
+                        out = "controller?cmd=notificacion-listado";
                     } else {
                         out = "message/operacion-cancelada";
                     }

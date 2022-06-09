@@ -52,7 +52,7 @@ public final class CommandDependenciaModificacion extends Command {
 
                     // Inyección de Datos
                     request.setAttribute("dependencia", dependencia);
-                } else if (op.equals("dependencia")) {
+                } else if (op.equals("proceso")) {
                     // Request > Parámetros
                     int id = UtilesDependencia.obtenerIdRequest(request);
                     String nombre = UtilesDependencia.obtenerNombreRequest(request);

@@ -47,7 +47,7 @@ public final class CommandDependenciaInsercion extends Command {
                 // Invoca Formulario de Captura de Datos
                 if (op == null || op.equals("captura")) {
                     // ---
-                } else if (op.equals("dependencia")) {
+                } else if (op.equals("proceso")) {
                     // Request > Parámetros
                     String nombre = UtilesDependencia.obtenerNombreRequest(request);
                     String info = UtilesDependencia.obtenerInfoRequest(request);

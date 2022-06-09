@@ -76,7 +76,7 @@
                 </div>
 
                 <nav class="controles">
-                    <a class="btn btn-borrar" href="?cmd=dependencia-borrado&op=dependencia&id=<%= dependencia.getId()%>">Borrar</a>
+                    <a class="btn btn-borrar" href="?cmd=dependencia-borrado&op=proceso&id=<%= dependencia.getId()%>">Borrar</a>
                 </nav>
             </main>
 

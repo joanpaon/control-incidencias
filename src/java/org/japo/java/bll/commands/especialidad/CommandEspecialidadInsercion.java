@@ -47,7 +47,7 @@ public final class CommandEspecialidadInsercion extends Command {
                 // Invoca Formulario de Captura de Datos
                 if (op == null || op.equals("captura")) {
                     // ---
-                } else if (op.equals("especialidad")) {
+                } else if (op.equals("proceso")) {
                     // Request > Parámetros
                     String nombre = UtilesEspecialidad.obtenerNombreRequest(request);
                     String info = UtilesEspecialidad.obtenerInfoRequest(request);

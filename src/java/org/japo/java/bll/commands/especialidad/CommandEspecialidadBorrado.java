@@ -52,7 +52,7 @@ public final class CommandEspecialidadBorrado extends Command {
                 if (op == null || op.equals("captura")) {
                     // Enlaza Datos > JSP
                     request.setAttribute("especialidad", especialidad);
-                } else if (op.equals("especialidad")) {
+                } else if (op.equals("borrado")) {
                     // ID > Registro Borrado - true | false
                     boolean checkOK = dllEspecialidad.borrar(especialidad.getId());
 

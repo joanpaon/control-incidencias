@@ -46,7 +46,7 @@
                 <form method="post" 
                       accept-charset="Windows-1252" 
                       enctype="multipart/form-data"
-                      action="?cmd=especialidad-insercion&op=especialidad">
+                      action="?cmd=especialidad-insercion&op=proceso">
                     <div class="form-content">
                         <div class="field-container">
                             <div class="field-set">

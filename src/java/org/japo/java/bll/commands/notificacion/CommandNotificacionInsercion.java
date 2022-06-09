@@ -62,7 +62,8 @@ public final class CommandNotificacionInsercion extends Command {
 
                 // Parámetros > Incidencia
                 Notificacion notificacion = new Notificacion(
-                        0, fecha,
+                        0, 
+                        fecha,
                         usuario.getId(), "", "",
                         incidencia, "",
                         info);

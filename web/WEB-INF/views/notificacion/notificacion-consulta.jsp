@@ -1,10 +1,14 @@
-<%@page import="org.japo.java.entities.Especialidad"%>
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="org.japo.java.entities.Notificacion"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 
 <%
     // Datos Inyectados
-    Especialidad especialidad = (Especialidad) request.getAttribute("especialidad");
+    Notificacion notificacion = (Notificacion) request.getAttribute("notificacion");
+
+    // Formateador Datos Temporales
+    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm");
 %>
 
 <!DOCTYPE html>
@@ -31,7 +35,7 @@
         <link href="public/img/logo.png" rel="icon" type="image/x-icon" />
 
         <!-- Style Sheet Links -->
-        <link rel="stylesheet" href="public/css/especialidad/especialidad-borrado.css" /> 
+        <link rel="stylesheet" href="public/css/notificacion/notificacion-consulta.css" /> 
         <link rel="stylesheet" href="public/css/partials/header.css" />
         <link rel="stylesheet" href="public/css/partials/footer.css" />
     </head>
@@ -45,8 +49,8 @@
                 <img class="watermark" src="public/img/water.png" alt="watermark" />
 
                 <header>
-                    <h2>Borrado de Especialidades</h2>
-                    <a class="btn btn-listar" href="?cmd=especialidad-listado">Listado</a>
+                    <h2>Consulta de Notificaciones</h2>
+                    <a class="btn btn-listar" href="?cmd=notificacion-listado">Listado</a>
                 </header>
 
                 <div class="content">
@@ -61,22 +65,31 @@
                         <tbody>
                             <tr>
                                 <td>ID</td>
-                                <td><%= especialidad.getId()%></td>
+                                <td><%= notificacion.getId()%></td>
                             </tr>
                             <tr>
-                                <td>Nombre</td>
-                                <td><%= especialidad.getNombre()%></td>
+                                <td>Fecha</td>
+                                <td><%= sdf.format(notificacion.getFecha())%></td>
+                            </tr>
+                            <tr>
+                                <td>Autor</td>
+                                <td><%= notificacion.getAutorNombre()%></td>
+                            </tr>
+                            <tr>
+                                <td>Incidencia</td>
+                                <td><%= notificacion.getIncidenciaTitulo()%></td>
                             </tr>
                             <tr>
                                 <td>Info</td>
-                                <td><%= especialidad.getInfo()%></td>
+                                <td><%= notificacion.getInfo()%></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
 
                 <nav class="controles">
-                    <a class="btn btn-borrar" href="?cmd=especialidad-borrado&op=proceso&id=<%= especialidad.getId()%>">Borrar</a>
+                    <a class="btn btn-borrar" href="?cmd=notificacion-borrado&id=<%= notificacion.getId()%>">Borrar</a>
+                    <a class="btn btn-modificar" href="?cmd=notificacion-modificacion&id=<%= notificacion.getId()%>&op=captura">Modificar</a>
                 </nav>
             </main>
 
@@ -84,7 +97,7 @@
         </div>
 
         <!-- Application Scripts -->
-        <script src="public/js/especialidad/especialidad-borrado.js"></script>
+        <script src="public/js/notificacion/notificacion-consulta.js"></script>
         <script src="public/js/partials/header.js"></script>
         <script src="public/js/partials/footer.js"></script>
     </body>

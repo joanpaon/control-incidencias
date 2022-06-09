@@ -1,0 +1,285 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+
+    box-sizing: border-box;
+}
+
+/*---*/
+
+html {
+    font-size: 16px;
+    font-size: 1.6vh;
+}
+
+/*---*/
+
+body {
+    font-family: sans-serif;
+}
+
+/*---*/
+
+#container {
+    /*height: 100vh;*/
+    min-height: 100vh;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    position: relative;
+}
+
+/*---*/
+
+main {
+    height: 100%;
+
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- */
+
+main .watermark {
+    height: 30rem;
+    height: 80%;
+
+    opacity: .2;
+
+    position: absolute;
+    z-index: -1;
+}
+
+/* --- */
+
+main header {
+    height: 4rem;
+    width: 70rem;
+
+    padding: .5rem 1rem;
+
+    border: solid #999 0.1rem;
+    border-radius: 0.3rem;
+
+    display: flex;
+    justify-content: center;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+}
+
+/* --- */
+
+main header h2 {
+    color: yellow;
+    color: gold;
+    color: #999;
+    font-size: 3rem;
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: .1rem .1rem .1rem rgba(0, 0, 0, 0.7);
+}
+
+/* --- */
+
+main header .btn {
+    height: 2.0rem;
+    width: 8rem;
+
+    color: #333;
+    /*font-size: 1.6rem;*/
+    font-size: 1rem;
+    font-weight: normal;
+    text-decoration: none;
+
+    background-color: #eee;
+    border: solid .1rem #aaa;
+    box-shadow: .1rem .1rem .2rem rgba(0, 0, 0, 0.5);
+    border-radius: .2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main header .btn:first-of-type {
+    margin-left: auto;
+}
+
+/* --- */
+
+main form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1rem
+}
+
+/* --- */
+
+main form .form-content {
+    height: 14rem;
+
+    display: flex;
+    justify-content: center;
+    /*align-items: center;*/
+    gap: 1rem;
+}
+
+main form .field-container {
+    height: 100%;
+    /*width: 70rem;*/
+
+    padding: 1rem;
+
+    border: solid #999 0.1rem;
+    border-radius: 0.3rem;
+    border-spacing: 0.5rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    justify-content: center;
+    gap: 1rem;
+    flex: auto;
+}
+
+/*---*/
+
+main form .field-set {
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+    gap: .5rem;
+}
+
+/* --- */
+
+main form .field-set label {
+    width: 8rem;
+
+    color: azure;
+    color: coral;
+
+    font-size: 1.4rem;
+    text-align: right;
+    text-shadow: .1rem .1rem .1rem rgba(0, 0, 0, 0.7);
+
+    flex: none;
+}
+
+/* --- */
+
+main form .field-set [type="datetime-local"] {
+    height: 2rem;
+
+    padding: .2rem .3rem;
+
+    font-family: sans-serif;
+    font-size: 1.2rem;
+
+    flex: auto;
+}
+
+/* --- */
+
+main form .field-set [type="text"] {
+    height: 2rem;
+
+    padding: .2rem .3rem;
+
+    font-family: sans-serif;
+    font-size: 1.2rem;
+
+    flex: auto;
+}
+
+/* --- */
+
+main form .field-set select {
+    height: 2rem;
+
+    padding: .2rem .1rem;
+
+    font-family: sans-serif;
+    font-size: 1.2rem;
+
+    flex: auto;
+}
+
+main .field-set .avatar-name {
+    height: 2rem;
+
+    background-color: #fff;
+    border: solid .1rem #666;
+    border-radius: .1rem;
+}
+
+main .field-set .btn {
+    height: 2rem;
+    width: 3rem;
+
+    padding-bottom: .2rem;
+
+    color: #333;
+    /*font-size: 1.6rem;*/
+    font-size: 1rem;
+    font-weight: normal;
+    text-decoration: none;
+
+    background-color: #eee;
+    border: solid .1rem #aaa;
+    box-shadow: .1rem .1rem .2rem rgba(0, 0, 0, 0.5);
+    border-radius: .2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* --- */
+
+main form .controles {
+    height: 4rem;
+    width: 70rem;
+
+    padding: .5rem 1rem;
+
+    border: solid #999 0.1rem;
+    border-radius: 0.3rem;
+
+    display: flex;
+    justify-content: center;
+    /*justify-content: space-between;*/
+    align-items: center;
+    gap: 1rem;
+}
+
+main form .controles .btn {
+    height: 2.0rem;
+    width: 8rem;
+
+    color: #333;
+    /*font-size: 1.6rem;*/
+    font-size: 1rem;
+    font-weight: normal;
+    text-decoration: none;
+
+    background-color: #eee;
+    border: solid .1rem #aaa;
+    box-shadow: .1rem .1rem .2rem rgba(0, 0, 0, 0.5);
+    border-radius: .2rem;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

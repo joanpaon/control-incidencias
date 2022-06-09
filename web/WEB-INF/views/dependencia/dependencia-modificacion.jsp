@@ -54,7 +54,7 @@
                 <form method="post" 
                       accept-charset="Windows-1252" 
                       enctype="multipart/form-data"
-                      action="?cmd=dependencia-modificacion&op=dependencia&id=<%= dependencia.getId()%>">
+                      action="?cmd=dependencia-modificacion&op=proceso&id=<%= dependencia.getId()%>">
                     <div class="form-content">
                         <div class="field-container">
                             <div class="field-set">

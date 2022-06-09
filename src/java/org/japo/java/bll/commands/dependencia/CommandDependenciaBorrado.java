@@ -52,7 +52,7 @@ public final class CommandDependenciaBorrado extends Command {
                 if (op == null || op.equals("captura")) {
                     // Enlaza Datos > JSP
                     request.setAttribute("dependencia", dependencia);
-                } else if (op.equals("dependencia")) {
+                } else if (op.equals("proceso")) {
                     // ID > Registro Borrado - true | false
                     boolean checkOK = dllDependencia.borrar(dependencia.getId());
 

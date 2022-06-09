@@ -54,7 +54,7 @@
                 <form method="post" 
                       accept-charset="Windows-1252" 
                       enctype="multipart/form-data"
-                      action="?cmd=especialidad-modificacion&op=especialidad&id=<%= especialidad.getId()%>">
+                      action="?cmd=especialidad-modificacion&op=proceso&id=<%= especialidad.getId()%>">
                     <div class="form-content">
                         <div class="field-container">
                             <div class="field-set">
