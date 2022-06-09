@@ -77,9 +77,9 @@
                                 <select id="autor" name="autor" required>
                                     <% for (Usuario u : usuarios) {%>
                                     <% if (u.getId() == notificacion.getAutor()) {%>
-                                    <option value="<%= u.getId()%>" selected><%= u.getUser()%></option>
+                                    <option value="<%= u.getId()%>" selected><%= u.getUser() + " (" + u.getPerfilInfo() + ")"%></option>
                                     <% } else {%>
-                                    <option value="<%= u.getId()%>"><%= u.getUser()%></option>
+                                    <option value="<%= u.getId()%>"><%= u.getUser() + " (" + u.getPerfilInfo() + ")"%></option>
                                     <% }%>
                                     <% }%>
                                 </select>

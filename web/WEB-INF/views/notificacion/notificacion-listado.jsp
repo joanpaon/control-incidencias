@@ -58,7 +58,7 @@
                 <header>
                     <h2>Listado de Notificaciones</h2>
 
-                    <a class="btn btn-insertar" href="?cmd=notificacion-insercion&op=captura" title="Nuevo">Nuevo</a>
+                    <!--<a class="btn btn-insertar" href="?cmd=notificacion-insercion&op=captura" title="Nuevo">Nuevo</a>-->
 
                     <% if (usuario.getPerfil() >= UtilesPerfil.DEVEL_CODE) { %>
                     <a class="btn btn-listar" href="?cmd=main-devel">Principal</a>
