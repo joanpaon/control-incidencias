@@ -78,6 +78,7 @@
                     <th>Estado</th>
                     <th>Dependencia</th>
                     <th>Especialidad</th>
+                    <th>Controles</th>
                     </thead>
 
                     <tbody>
@@ -90,10 +91,12 @@
                             <td><%= i.getEstado() == UtilesIncidencia.INCIDENCIA_ABIERTA ? "Abierta" : "Cerrada"%></td>
                             <td><%= i.getDependenciaNombre()%></td>
                             <td><%= i.getEspecialidadNombre()%></td>
-                            <td>
-                                <a class="btn" href="?cmd=incidencia-consulta&id=<%= i.getId()%>" title="Ver">👁</a>
+                            <td class="controles">
+                                <a class="btn btn-consultar" href="?cmd=incidencia-consulta&id=<%= i.getId()%>" title="Consulta">C</a>
+                                <a class="btn btn-modificar" href="?cmd=incidencia-modificacion&id=<%= i.getId()%>" title="Modificación">M</a>
+                                <a class="btn btn-borrar" href="?cmd=incidencia-borrado&id=<%= i.getId()%>" title="Eliminación">B</a>
                                 <% if (i.getEstado() == UtilesIncidencia.INCIDENCIA_ABIERTA) {%>
-                                <a class="btn" href="?cmd=incidencia-cierre&id=<%= i.getId()%>" title="Cerrar">🚪</a>
+                                <a class="btn" href="?cmd=incidencia-cierre&id=<%= i.getId()%>" title="Finalizar">F</a>
                                 <% } %>
                             </td>
                         </tr>

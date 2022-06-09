@@ -160,23 +160,23 @@ main table .mensaje {
     width: 100%;
 
     text-align: center;
-    
+
     background-color: tomato;
 }
 
 /* --- */
 
-main table th:nth-child(2), td:nth-child(2) {
-    width: 30rem;
+main table th:nth-child(2), main table td:nth-child(2) {
+    width: 20rem;
 
     text-align: left;
 }
 
 /* --- */
 
-main table th:nth-child(3), td:nth-child(3) {
-    width: 15rem;
-    width: auto;
+main table th:nth-child(3), main table td:nth-child(3) {
+    width: 5rem;
+    /*width: auto;*/
 
     text-align: left;
     text-overflow: ellipsis;
@@ -185,10 +185,27 @@ main table th:nth-child(3), td:nth-child(3) {
 
 /* --- */
 
-main table th:nth-child(4), td:nth-child(4) {
-    width: 7rem;
+main table th:nth-child(4), main table td:nth-child(4) {
+    width: 6rem;
 
     text-align: center;
+}
+
+/* --- */
+
+main table th:nth-child(5), main table td:nth-child(5) {
+    width: 5rem;
+    /*width: auto;*/
+    text-align: center;
+}
+
+/* --- */
+
+main table th:nth-child(6), main table td:nth-child(6) {
+    width: 15rem;
+    /*width: auto;*/
+
+    text-align: left;
 }
 
 /* --- */
@@ -199,9 +216,12 @@ main table td {
     padding: 0 0.5rem;
 }
 
-main table td:last-child {
+main table th:last-child, main table td:last-child {
+    width: auto;
+    width: 10rem;
+
     display: flex;
-    justify-content: center;
+    /*    justify-content: center;*/
     align-items: center;
     gap: .4rem;
 }
@@ -210,7 +230,7 @@ main table td:last-child {
 /* --- */
 
 main table .btn {
-    width: 3rem;
+    width: 2rem;
     height: 1.8rem;
 
     /*padding-top: .1rem;*/

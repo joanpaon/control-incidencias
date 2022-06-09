@@ -113,7 +113,7 @@
 
                 <% if (incidencia.getEstado() == UtilesIncidencia.INCIDENCIA_ABIERTA) {%>
                 <nav class="controles">
-                    <a class="btn" href="?cmd=incidencia-cierre&id=<%= incidencia.getId()%>">Cerrar</a>
+                    <a class="btn" href="?cmd=incidencia-cierre&id=<%= incidencia.getId()%>">Finalizar</a>
                     <a class="btn" href="?cmd=notificacion-insercion&id=<%= incidencia.getId()%>&op=captura">Notificar</a>
                 </nav>
                 <% }%>
