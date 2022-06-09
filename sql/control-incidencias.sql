@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 01-06-2022 a las 20:05:40
+-- Tiempo de generación: 09-06-2022 a las 18:37:41
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.5
 
@@ -42,7 +42,7 @@ CREATE TABLE `dependencias` (
 INSERT INTO `dependencias` (`id`, `nombre`, `info`) VALUES
 (1, 'A101', 'Aula de Docencia Convencional #01 - Piso 1'),
 (2, 'A102', 'Aula de Docencia Convencional #02 - Piso 1'),
-(3, 'A103', 'Aula de Docencia Convencional #02 - Piso 1'),
+(3, 'A201', 'Aula de Docencia Convencional #01 - Piso 2'),
 (11, 'I201', 'Taller de Informática #01 - Piso 2');
 
 -- --------------------------------------------------------
@@ -62,8 +62,9 @@ CREATE TABLE `especialidades` (
 --
 
 INSERT INTO `especialidades` (`id`, `nombre`, `info`) VALUES
-(1, 'Mobiliario', 'Instalación, Retirada, Reparación y Trasiego de Elementos de Mobiliario'),
-(2, 'Electricidad', 'Mantenimiento de Instalaciones Eléctricas e Iluminación');
+(1, 'Muebles y Decoración', 'Sillas, mesas, pupitres, pizarras, perchas, armarios, etc.'),
+(2, 'Electricidad', 'Instalaciones Eléctricas y Luminarias'),
+(3, 'Pintura y Rotulación', 'Paredes, Techos, Suelos, Puertas y Ventanas');
 
 -- --------------------------------------------------------
 
@@ -119,7 +120,8 @@ INSERT INTO `notificaciones` (`id`, `fecha`, `autor`, `incidencia`, `info`) VALU
 (6, '2022-05-04 15:50:12', 3, 2, 'Incidencia Cerrada por barney'),
 (7, '2022-05-04 18:50:47', 3, 3, 'Protección contra sobrecarga reamada y equipos en marcha'),
 (8, '2022-05-04 11:41:37', 1, 3, 'Al empezar la sesión, de repente, todos los equipos se han apagado a la vez'),
-(9, '2022-06-01 17:40:47', 2, 15, 'En el aula A103 hay 12 sillas y mesas y el grupo son 15 alumnos');
+(9, '2022-06-01 17:40:47', 2, 15, 'En el aula A103 hay 12 sillas y mesas y el grupo son 15 alumnos'),
+(10, '2022-06-08 22:00:00', 4, 15, 'Ejemplo de notificación');
 
 -- --------------------------------------------------------
 
@@ -316,25 +318,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `dependencias`
 --
 ALTER TABLE `dependencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT de la tabla `especialidades`
 --
 ALTER TABLE `especialidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
@@ -374,16 +376,16 @@ ALTER TABLE `usuarios`
 -- Filtros para la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  ADD CONSTRAINT `INCIDENCIA_AUTOR` FOREIGN KEY (`autor`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `INCIDENCIA_DEPENDENCIA` FOREIGN KEY (`dependencia`) REFERENCES `dependencias` (`id`),
-  ADD CONSTRAINT `INCIDENCIA_ESPECIALIDAD` FOREIGN KEY (`especialidad`) REFERENCES `especialidades` (`id`);
+  ADD CONSTRAINT `INCIDENCIA_AUTOR` FOREIGN KEY (`autor`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `INCIDENCIA_DEPENDENCIA` FOREIGN KEY (`dependencia`) REFERENCES `dependencias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `INCIDENCIA_ESPECIALIDAD` FOREIGN KEY (`especialidad`) REFERENCES `especialidades` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  ADD CONSTRAINT `NOTIFICACION_AUTOR` FOREIGN KEY (`autor`) REFERENCES `usuarios` (`id`),
-  ADD CONSTRAINT `NOTIFICACION_INCIDENCIA` FOREIGN KEY (`incidencia`) REFERENCES `incidencias` (`id`);
+  ADD CONSTRAINT `NOTIFICACION_AUTOR` FOREIGN KEY (`autor`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `NOTIFICACION_INCIDENCIA` FOREIGN KEY (`incidencia`) REFERENCES `incidencias` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

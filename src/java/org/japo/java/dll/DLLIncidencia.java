@@ -503,8 +503,8 @@ public final class DLLIncidencia {
                 + "INNER JOIN "
                 + "especialidades ON especialidades.id = incidencias.especialidad "
                 + "WHERE "
-//               + "incidencias.fecha=? "
-//                + "AND "
+                //               + "incidencias.fecha=? "
+                //                + "AND "
                 + "incidencias.autor=? "
                 + "ORDER BY incidencias.fecha DESC";
 
@@ -518,7 +518,7 @@ public final class DLLIncidencia {
 //                ps.setTimestamp(1, new java.sql.Timestamp(fecha.getTime()));
 //                ps.setInt(2, autor);
                 ps.setInt(1, autor);
-                
+
                 // BD > Entidad
                 try ( ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
@@ -620,6 +620,33 @@ public final class DLLIncidencia {
                 numReg = ps.executeUpdate();
             }
         } catch (SQLException | NullPointerException ex) {
+            logger.info(ex.getMessage());
+        }
+
+        // Retorno: true | false
+        return numReg == 1;
+    }
+
+    public boolean borrar(int id) {
+        // SQL
+        final String SQL = ""
+                + "DELETE FROM "
+                + "incidencias "
+                + "WHERE id=?";
+
+        // Número de registros afectados
+        int numReg = 0;
+
+        try {
+            try (
+                     Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(SQL)) {
+                // Parametrizar Sentencia
+                ps.setInt(1, id);
+
+                // Ejecutar Sentencia
+                numReg = ps.executeUpdate();
+            }
+        } catch (NullPointerException | SQLException ex) {
             logger.info(ex.getMessage());
         }
 
