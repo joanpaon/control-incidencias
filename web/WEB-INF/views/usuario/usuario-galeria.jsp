@@ -67,7 +67,8 @@
                     <a href="?cmd=usuario-consulta&id=<%= u.getId()%>" class="ficha">
                         <img src="<%= u.getAvatar()%>" alt="avatar"/>
                         <p class="id"><%= u.getId()%></p>
-                        <p class="nombre"><%= u.getUser()%></p>
+                        <p class="nombre"><%= u.getAlias()%></p>
+                        <p class="email"><%= u.getEmail()%></p>
                         <p class="perfil"><%= u.getPerfilInfo()%></p>
                     </a>
 

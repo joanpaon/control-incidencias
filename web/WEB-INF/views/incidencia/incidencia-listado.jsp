@@ -103,10 +103,11 @@
                                 <% } %>
                             </td>
                         </tr>
-
                         <% }%>
                     </tbody>
+                    
                     <% } else {%>
+                    
                     <tbody>
                         <tr>
                             <td class="mensaje"><h3>No hay incidencias que mostrar</h3></td>

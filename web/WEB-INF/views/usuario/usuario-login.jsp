@@ -43,14 +43,13 @@
                       accept-charset="Windows-1252">
 
                     <div class="fieldset">
-                        <label for="user">Usuario</label>
+                        <label for="email">EMail</label>
                         <input
-                            id="user"
-                            type="text"
-                            name="user"
+                            id="email"
+                            type="email"
+                            name="email"
                             required
-                            pattern="\w{3,20}"
-                            autocomplete="username"
+                            autocomplete="email"
                             />
                     </div>
 

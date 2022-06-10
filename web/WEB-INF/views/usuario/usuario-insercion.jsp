@@ -55,7 +55,7 @@
                       enctype="multipart/form-data"
                       action="?cmd=usuario-insercion&op=proceso">
                     <input type="hidden" name="perfil" value="<%= UtilesPerfil.BASIC_CODE%>" />
-                    
+
                     <div class="form-content">
                         <div class="field-container">
                             <div class="field-set">
@@ -63,7 +63,15 @@
                                 <input id="user" 
                                        type="text" 
                                        name="user" 
-                                       pattern="<%= UtilesUsuario.REG_USER%>" 
+                                       pattern="<%= UtilesUsuario.REG_ALIAS%>" 
+                                       required />
+                            </div>
+
+                            <div class="field-set">
+                                <label for="mail">EMail</label>
+                                <input id="mail" 
+                                       type="email" 
+                                       name="mail" 
                                        required />
                             </div>
 

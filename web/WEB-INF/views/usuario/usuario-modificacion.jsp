@@ -64,9 +64,18 @@
                                 <input id="user" 
                                        type="text" 
                                        name="user" 
-                                       pattern="<%= UtilesUsuario.REG_USER%>" 
+                                       pattern="<%= UtilesUsuario.REG_ALIAS%>" 
                                        required 
-                                       value="<%= usuario.getUser()%>"/>
+                                       value="<%= usuario.getAlias()%>"/>
+                            </div>
+
+                            <div class="field-set">
+                                <label for="email">EMail</label>
+                                <input id="email" 
+                                       type="email" 
+                                       name="email" 
+                                       required 
+                                       value="<%= usuario.getEmail()%>"/>
                             </div>
 
                             <div class="field-set">

@@ -55,15 +55,16 @@ public final class CommandUsuarioModificacion extends Command {
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
                     int id = UtilesUsuario.obtenerIdRequest(request);
-                    String user = UtilesUsuario.obtenerUserRequest(request);
+                    String alias = UtilesUsuario.obtenerAliasRequest(request);
+                    String email = UtilesUsuario.obtenerEmailRequest(request);
                     String pass = UtilesUsuario.obtenerPassRequest(request);
                     String avatar = UtilesUsuario.obtenerAvatarRequest(config, request);
                     int perfil = UtilesUsuario.obtenerPerfilRequest(request);
 
                     // Parámetros > Usuario a Modificar
                     Usuario usuario = new Usuario(
-                            id, 
-                            user, pass, avatar, 
+                            id,
+                            alias, email, pass, avatar,
                             perfil, "");
 
                     // Validar Operación

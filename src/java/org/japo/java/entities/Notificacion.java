@@ -40,7 +40,7 @@ public final class Notificacion implements Serializable {
         id = UtilesIncidencia.DEF_ID;
         fecha = UtilesIncidencia.DEF_FECHA;
         autor = UtilesUsuario.DEF_ID;
-        autorNombre = UtilesUsuario.DEF_USER;
+        autorNombre = UtilesUsuario.DEF_ALIAS;
         autorPerfil = UtilesPerfil.DEF_NOMBRE;
         incidencia = UtilesIncidencia.DEF_ID;
         incidenciaTitulo = UtilesIncidencia.DEF_TITULO;
@@ -70,10 +70,10 @@ public final class Notificacion implements Serializable {
             this.autor = UtilesUsuario.DEF_ID;
         }
 
-        if (UtilesUsuario.validarUser(autorNombre)) {
+        if (UtilesUsuario.validarAlias(autorNombre)) {
             this.autorNombre = autorNombre;
         } else {
-            this.autorNombre = UtilesUsuario.DEF_USER;
+            this.autorNombre = UtilesUsuario.DEF_ALIAS;
         }
 
         if (UtilesPerfil.validarNombre(autorPerfil)) {
@@ -136,7 +136,7 @@ public final class Notificacion implements Serializable {
     }
 
     public void setAutorNombre(String autorNombre) {
-        if (UtilesUsuario.validarUser(autorNombre)) {
+        if (UtilesUsuario.validarAlias(autorNombre)) {
             this.autorNombre = autorNombre;
         }
     }
@@ -146,7 +146,7 @@ public final class Notificacion implements Serializable {
     }
 
     public void setAutorPerfil(String autorPerfil) {
-        if (UtilesUsuario.validarUser(autorPerfil)) {
+        if (UtilesUsuario.validarAlias(autorPerfil)) {
             this.autorPerfil = autorPerfil;
         }
     }

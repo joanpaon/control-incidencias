@@ -48,7 +48,7 @@ public final class Incidencia implements Serializable {
         estado = UtilesIncidencia.DEF_ESTADO;
         fecha = UtilesIncidencia.DEF_FECHA;
         autor = UtilesUsuario.DEF_ID;
-        autorNombre = UtilesUsuario.DEF_USER;
+        autorNombre = UtilesUsuario.DEF_ALIAS;
         autorPerfil = UtilesPerfil.DEF_NOMBRE;
         dependencia = UtilesDependencia.DEF_ID;
         dependenciaNombre = UtilesDependencia.DEF_NOMBRE;
@@ -98,10 +98,10 @@ public final class Incidencia implements Serializable {
             this.autor = UtilesUsuario.DEF_ID;
         }
 
-        if (UtilesUsuario.validarUser(autorNombre)) {
+        if (UtilesUsuario.validarAlias(autorNombre)) {
             this.autorNombre = autorNombre;
         } else {
-            this.autorNombre = UtilesUsuario.DEF_USER;
+            this.autorNombre = UtilesUsuario.DEF_ALIAS;
         }
 
         if (UtilesPerfil.validarNombre(autorPerfil)) {
@@ -200,7 +200,7 @@ public final class Incidencia implements Serializable {
     }
 
     public void setAutorNombre(String autorNombre) {
-        if (UtilesUsuario.validarUser(autorNombre)) {
+        if (UtilesUsuario.validarAlias(autorNombre)) {
             this.autorNombre = autorNombre;
         }
     }

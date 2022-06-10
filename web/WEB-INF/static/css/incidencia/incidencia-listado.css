@@ -159,9 +159,17 @@ main table .id {
 main table .mensaje {
     width: 100%;
 
+    /*text-align: center;*/
+
+    /*background-color: tomato;*/
+}
+
+main table .mensaje h3 {
+    width: 100%;
+
     text-align: center;
 
-    background-color: tomato;
+    /*background-color: tomato;*/
 }
 
 /* --- */
@@ -218,7 +226,7 @@ main table td {
 
 main table th:last-child, main table td:last-child {
     width: auto;
-    width: 10rem;
+    /*width: 10rem;*/
 
     display: flex;
     /*    justify-content: center;*/

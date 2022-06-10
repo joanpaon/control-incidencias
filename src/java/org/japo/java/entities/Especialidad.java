@@ -35,7 +35,7 @@ public final class Especialidad implements Serializable {
         nombre = UtilesEspecialidad.DEF_NOMBRE;
         info = UtilesEspecialidad.DEF_INFO;
         responsable = UtilesUsuario.DEF_ID;
-        responsableNombre = UtilesUsuario.DEF_USER;
+        responsableNombre = UtilesUsuario.DEF_ALIAS;
     }
 
     // Constructor Parametrizado
@@ -65,10 +65,10 @@ public final class Especialidad implements Serializable {
             this.responsable = UtilesUsuario.DEF_ID;
         }
 
-        if (UtilesUsuario.validarUser(responsableNombre)) {
+        if (UtilesUsuario.validarAlias(responsableNombre)) {
             this.responsableNombre = responsableNombre;
         } else {
-            this.responsableNombre = UtilesUsuario.DEF_USER;
+            this.responsableNombre = UtilesUsuario.DEF_ALIAS;
         }
     }
 
@@ -117,7 +117,7 @@ public final class Especialidad implements Serializable {
     }
 
     public void setResponsable(String responsableNombre) {
-        if (UtilesUsuario.validarUser(responsableNombre)) {
+        if (UtilesUsuario.validarAlias(responsableNombre)) {
             this.responsableNombre = responsableNombre;
         }
     }

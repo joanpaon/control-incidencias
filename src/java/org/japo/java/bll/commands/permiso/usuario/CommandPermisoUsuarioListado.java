@@ -47,7 +47,7 @@ public final class CommandPermisoUsuarioListado extends Command {
 
                 // Generar Entidad Navegación
                 ParamPagina param = UtilesParamPagina.generar(
-                        request, rowCount, "permiso-perfil-listado");
+                        request, rowCount, "permiso-usuario-listado");
 
                 // BD > Lista de Permisos de Perfil
                 List<PermisoUsuario> permisos = dllPermiso.paginar(

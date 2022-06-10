@@ -66,7 +66,11 @@
                             </tr>
                             <tr>
                                 <td>Nombre</td>
-                                <td><%= usuario.getUser()%></td>
+                                <td><%= usuario.getAlias()%></td>
+                            </tr>
+                            <tr>
+                                <td>EMail</td>
+                                <td><%= usuario.getEmail()%></td>
                             </tr>
                             <tr>
                                 <td>Perfil</td>
@@ -77,7 +81,7 @@
 
                     <div class="imagen">
                         <div class="imagen-margen">
-                            <img src="<%= usuario.getAvatar()%>" alt="<%= usuario.getUser()%>"/> 
+                            <img src="<%= usuario.getAvatar()%>" alt="<%= usuario.getAlias()%>"/> 
                         </div>
                     </div>
                 </div>

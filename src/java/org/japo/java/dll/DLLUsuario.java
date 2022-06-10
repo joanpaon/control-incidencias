@@ -49,7 +49,8 @@ public final class DLLUsuario {
         String sql = ""
                 + "SELECT "
                 + "usuarios.id AS id, "
-                + "usuarios.user AS user, "
+                + "usuarios.alias AS alias, "
+                + "usuarios.email AS email, "
                 + "usuarios.pass AS pass, "
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
@@ -65,21 +66,24 @@ public final class DLLUsuario {
         try {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
-                
 
                 // BD > Lista de Entidades
                 try ( ResultSet rs = ps.executeQuery()) {
                     while (rs.next()) {
                         // Fila Actual > Campos 
                         int id = rs.getInt("id");
-                        String user = rs.getString("user");
+                        String alias = rs.getString("alias");
+                        String email = rs.getString("email");
                         String pass = rs.getString("pass");
                         String avatar = rs.getString("avatar");
                         int perfil = rs.getInt("perfil");
                         String perfilInfo = rs.getString("perfil_info");
 
                         // Campos > Entidad
-                        Usuario usuario = new Usuario(id, user, pass, avatar, perfil, perfilInfo);
+                        Usuario usuario = new Usuario(
+                                id,
+                                alias, email, pass, avatar,
+                                perfil, perfilInfo);
 
                         // Entidad > Lista
                         usuarios.add(usuario);
@@ -99,7 +103,8 @@ public final class DLLUsuario {
         String sql = ""
                 + "SELECT "
                 + "usuarios.id AS id, "
-                + "usuarios.user AS user, "
+                + "usuarios.alias AS alias, "
+                + "usuarios.email AS email, "
                 + "usuarios.pass AS pass, "
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
@@ -125,14 +130,18 @@ public final class DLLUsuario {
                     while (rs.next()) {
                         // Fila Actual > Campos 
                         int id = rs.getInt("id");
-                        String user = rs.getString("user");
+                        String alias = rs.getString("alias");
+                        String email = rs.getString("email");
                         String pass = rs.getString("pass");
                         String avatar = rs.getString("avatar");
                         int perfil = rs.getInt("perfil");
                         String perfilInfo = rs.getString("perfil_info");
 
                         // Campos > Entidad
-                        Usuario usuario = new Usuario(id, user, pass, avatar, perfil, perfilInfo);
+                        Usuario usuario = new Usuario(
+                                id,
+                                alias, email, pass, avatar,
+                                perfil, perfilInfo);
 
                         // Entidad > Lista
                         usuarios.add(usuario);
@@ -152,7 +161,8 @@ public final class DLLUsuario {
         String sql = ""
                 + "SELECT "
                 + "usuarios.id AS id, "
-                + "usuarios.user AS user, "
+                + "usuarios.alias AS alias, "
+                + "usuarios.email AS email, "
                 + "usuarios.pass AS pass, "
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
@@ -175,14 +185,18 @@ public final class DLLUsuario {
                 try ( ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         // Fila Actual > Campos 
-                        String user = rs.getString("user");
+                        String alias = rs.getString("alias");
+                        String email = rs.getString("email");
                         String pass = rs.getString("pass");
                         String avatar = rs.getString("avatar");
                         int perfil = rs.getInt("perfil");
                         String perfilInfo = rs.getString("perfil_info");
 
                         // Campos > Entidad
-                        usuario = new Usuario(id, user, pass, avatar, perfil, perfilInfo);
+                        usuario = new Usuario(
+                                id,
+                                alias, email, pass, avatar,
+                                perfil, perfilInfo);
                     }
                 }
             }
@@ -194,12 +208,13 @@ public final class DLLUsuario {
         return usuario;
     }
 
-    public Usuario consultar(String user) {
+    public Usuario consultar(String email) {
         // SQL
         String sql = ""
                 + "SELECT "
                 + "usuarios.id AS id, "
-                + "usuarios.user AS user, "
+                + "usuarios.alias AS alias, "
+                + "usuarios.email AS email, "
                 + "usuarios.pass AS pass, "
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
@@ -209,7 +224,7 @@ public final class DLLUsuario {
                 + "INNER JOIN "
                 + "perfiles ON perfiles.id = usuarios.perfil "
                 + "WHERE "
-                + "usuarios.user=?";
+                + "usuarios.email=?";
 
         // Entidad
         Usuario usuario = null;
@@ -218,20 +233,24 @@ public final class DLLUsuario {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
                 // Parametrizar Sentencia
-                ps.setString(1, user);
+                ps.setString(1, email);
 
                 // BD > Lista de Entidades
                 try ( ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
                         // Fila Actual > Campos 
                         int id = rs.getInt("id");
+                        String alias = rs.getString("alias");
                         String pass = rs.getString("pass");
                         String avatar = rs.getString("avatar");
                         int perfil = rs.getInt("perfil");
                         String perfilInfo = rs.getString("perfil_info");
 
                         // Campos > Entidad
-                        usuario = new Usuario(id, user, pass, avatar, perfil, perfilInfo);
+                        usuario = new Usuario(
+                                id,
+                                alias, email, pass, avatar,
+                                perfil, perfilInfo);
                     }
                 }
             }
@@ -249,9 +268,9 @@ public final class DLLUsuario {
                 + "INSERT INTO "
                 + "usuarios "
                 + "("
-                + "user, pass, avatar, perfil"
+                + "alias, email, pass, avatar, perfil"
                 + ") "
-                + "VALUES (?, ?, ?, ?)";
+                + "VALUES (?, ?, ?, ?, ?)";
 
         // Número de registros afectados
         int numReg = 0;
@@ -261,10 +280,11 @@ public final class DLLUsuario {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
                 // Parametrizar Sentencia
-                ps.setString(1, usuario.getUser());
-                ps.setString(2, usuario.getPass());
-                ps.setString(3, usuario.getAvatar());
-                ps.setInt(4, usuario.getPerfil());
+                ps.setString(1, usuario.getAlias());
+                ps.setString(2, usuario.getEmail());
+                ps.setString(3, usuario.getPass());
+                ps.setString(4, usuario.getAvatar());
+                ps.setInt(5, usuario.getPerfil());
 
                 // Ejecutar Sentencia
                 numReg = ps.executeUpdate();
@@ -309,7 +329,7 @@ public final class DLLUsuario {
                 + "UPDATE "
                 + "usuarios "
                 + "SET "
-                + "user=?, pass=?, avatar=?, perfil=? "
+                + "alias=?, email=?, pass=?, avatar=?, perfil=? "
                 + "WHERE "
                 + "id=?";
 
@@ -320,11 +340,12 @@ public final class DLLUsuario {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
                 // Parametrizar Sentencia
-                ps.setString(1, usuario.getUser());
-                ps.setString(2, usuario.getPass());
-                ps.setString(3, usuario.getAvatar());
-                ps.setInt(4, usuario.getPerfil());
-                ps.setInt(5, usuario.getId());
+                ps.setString(1, usuario.getAlias());
+                ps.setString(2, usuario.getEmail());
+                ps.setString(3, usuario.getPass());
+                ps.setString(4, usuario.getAvatar());
+                ps.setInt(5, usuario.getPerfil());
+                ps.setInt(6, usuario.getId());
 
                 // Ejecutar Sentencia
                 numReg = ps.executeUpdate();
@@ -404,7 +425,8 @@ public final class DLLUsuario {
         String sql = ""
                 + "SELECT "
                 + "usuarios.id AS id, "
-                + "usuarios.user AS user, "
+                + "usuarios.alias AS alias, "
+                + "usuarios.email AS email, "
                 + "usuarios.pass AS pass, "
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
@@ -430,14 +452,18 @@ public final class DLLUsuario {
                     while (rs.next()) {
                         // Fila Actual > Campos 
                         int id = rs.getInt("id");
-                        String user = rs.getString("user");
+                        String alias = rs.getString("alias");
+                        String email = rs.getString("email");
                         String pass = rs.getString("pass");
                         String avatar = rs.getString("avatar");
                         int perfil = rs.getInt("perfil");
                         String perfilInfo = rs.getString("perfil_info");
 
                         // Campos > Entidad
-                        Usuario usuario = new Usuario(id, user, pass, avatar, perfil, perfilInfo);
+                        Usuario usuario = new Usuario(
+                                id,
+                                alias, email, pass, avatar,
+                                perfil, perfilInfo);
 
                         // Entidad > Lista
                         usuarios.add(usuario);

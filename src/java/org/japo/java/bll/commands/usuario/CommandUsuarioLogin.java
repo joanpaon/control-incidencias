@@ -46,7 +46,7 @@ public final class CommandUsuarioLogin extends Command {
                 // Vista Predeterminada
             } else if (op.equals("proceso")) {
                 // Entrada + BD > Usuario
-                Usuario usuario = UtilesUsuario.obtenerUsuarioUserRequest(config, request);
+                Usuario usuario = UtilesUsuario.obtenerUsuarioEmailRequest(config, request);
 
                 // Validar Usuario
                 if (usuario == null) {

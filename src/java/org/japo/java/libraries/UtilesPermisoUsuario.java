@@ -30,7 +30,7 @@ public final class UtilesPermisoUsuario {
     // Valores por Defecto
     public static final int DEF_ID = 0;
     public static final int DEF_USUARIO = UtilesUsuario.DEF_ID;
-    public static final String DEF_USUARIO_NAME = UtilesUsuario.DEF_USER;
+    public static final String DEF_USUARIO_NAME = UtilesUsuario.DEF_ALIAS;
     public static final int DEF_PROCESO = UtilesProceso.DEF_ID;
     public static final String DEF_PROCESO_INFO = UtilesProceso.DEF_INFO;
     public static final String DEF_INFO = "Permiso de Usuario NO Definido";

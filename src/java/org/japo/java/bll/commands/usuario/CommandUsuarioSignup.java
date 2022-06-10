@@ -45,13 +45,17 @@ public final class CommandUsuarioSignup extends Command {
             // ---
         } else if (op.equals("proceso")) {
             // Request > Parámetros
-            String user = UtilesUsuario.obtenerUserRequest(request);
+            String alias = UtilesUsuario.obtenerAliasRequest(request);
+            String email = UtilesUsuario.obtenerEmailRequest(request);
             String pass = UtilesUsuario.obtenerPassRequest(request);
             String avatar = UtilesUsuario.obtenerAvatarRequest(config, request);
             int perfil = UtilesUsuario.obtenerPerfilRequest(request);
 
             // Parámetros > Entidad
-            Usuario usuario = new Usuario(0, user, pass, avatar, perfil, "");
+            Usuario usuario = new Usuario(
+                    0,
+                    alias, email, pass, avatar,
+                    perfil, "");
 
             // Entidad > Inserción BD - true | false
             boolean operacionOK = dllUsuario.insertar(usuario);

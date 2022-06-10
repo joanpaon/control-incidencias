@@ -38,7 +38,7 @@ public final class PermisoUsuario implements Serializable {
     public PermisoUsuario() {
         id = UtilesPermisoUsuario.DEF_ID;
         usuario = UtilesUsuario.DEF_ID;
-        usuarioName = UtilesUsuario.DEF_USER;
+        usuarioName = UtilesUsuario.DEF_ALIAS;
         proceso = UtilesProceso.DEF_ID;
         procesoInfo = UtilesProceso.DEF_INFO;
         info = UtilesPermisoUsuario.DEF_INFO;
@@ -61,10 +61,10 @@ public final class PermisoUsuario implements Serializable {
             this.usuario = UtilesUsuario.DEF_ID;
         }
 
-        if (UtilesUsuario.validarUser(usuarioName)) {
+        if (UtilesUsuario.validarAlias(usuarioName)) {
             this.usuarioName = usuarioName;
         } else {
-            this.usuarioName = UtilesUsuario.DEF_USER;
+            this.usuarioName = UtilesUsuario.DEF_ALIAS;
         }
 
         if (UtilesProceso.validarId(proceso)) {
@@ -111,7 +111,7 @@ public final class PermisoUsuario implements Serializable {
     }
 
     public void setUsuarioName(String usuarioName) {
-        if (UtilesUsuario.validarUser(usuarioName)) {
+        if (UtilesUsuario.validarAlias(usuarioName)) {
             this.usuarioName = usuarioName;
         }
     }

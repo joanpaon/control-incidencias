@@ -113,9 +113,9 @@
                                 <select id="autor" name="autor" required>
                                     <% for (Usuario u : usuarios) {%>
                                     <% if (u.getId() == incidencia.getAutor()) {%>
-                                    <option value="<%= u.getId()%>" selected><%= u.getUser() + " (" + u.getPerfilInfo() + ")"%></option>
+                                    <option value="<%= u.getId()%>" selected><%= u.getAlias() + " (" + u.getPerfilInfo() + ")"%></option>
                                     <% } else {%>
-                                    <option value="<%= u.getId()%>"><%= u.getUser() + " (" + u.getPerfilInfo() + ")"%></option>
+                                    <option value="<%= u.getId()%>"><%= u.getAlias() + " (" + u.getPerfilInfo() + ")"%></option>
                                     <% }%>
                                     <% }%>
                                 </select>

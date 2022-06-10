@@ -68,7 +68,8 @@
                 <table>
                     <thead>
                     <th>ID</th>
-                    <th>Usuario</th>
+                    <th>Nombre</th>
+                    <th>Email</th>
                     <th>Perfil</th>
                     <th>Acciones</th>
                     </thead>
@@ -78,7 +79,8 @@
 
                         <tr>
                             <td><%= u.getId()%></td>
-                            <td><%= u.getUser()%></td>
+                            <td><%= u.getAlias()%></td>
+                            <td><%= u.getEmail()%></td>
                             <td><%= u.getPerfilInfo()%></td>
                             <td>
                                 <a class="btn btn-consultar" href="?cmd=usuario-consulta&id=<%= u.getId()%>" title="Consulta">C</a>

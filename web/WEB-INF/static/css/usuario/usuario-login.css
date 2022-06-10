@@ -88,7 +88,7 @@ main form label {
     text-shadow: 0.05rem 0.05rem 0.1rem rgba(0, 0, 0, 0.5);
 }
 
-main form [type="text"] {
+main form [type="email"] {
     height: 3rem;
 
     padding: 0 0.5rem;

@@ -19,6 +19,7 @@ import java.io.Serializable;
 import java.util.Objects;
 import org.japo.java.libraries.UtilesPerfil;
 import org.japo.java.libraries.UtilesUsuario;
+import org.japo.java.libraries.UtilesValidacion;
 
 /**
  *
@@ -28,7 +29,8 @@ public final class Usuario implements Serializable {
 
     // Campos
     private int id;
-    private String user;
+    private String alias;
+    private String email;
     private String pass;
     private String avatar;
     private int perfil;
@@ -37,7 +39,8 @@ public final class Usuario implements Serializable {
     // Constructor Predeterminado
     public Usuario() {
         id = UtilesUsuario.DEF_ID;
-        user = UtilesUsuario.DEF_USER;
+        alias = UtilesUsuario.DEF_ALIAS;
+        email = UtilesUsuario.DEF_EMAIL;
         pass = UtilesUsuario.DEF_PASS;
         avatar = UtilesUsuario.DEF_AVATAR;
         perfil = UtilesPerfil.DEF_ID;
@@ -45,7 +48,7 @@ public final class Usuario implements Serializable {
     }
 
     // Constructor Parametrizado
-    public Usuario(int id, String user, String pass,
+    public Usuario(int id, String alias, String email, String pass,
             String avatar, int perfil, String perfilInfo) {
         if (UtilesUsuario.validarId(id)) {
             this.id = id;
@@ -53,10 +56,16 @@ public final class Usuario implements Serializable {
             this.id = UtilesUsuario.DEF_ID;
         }
 
-        if (UtilesUsuario.validarUser(user)) {
-            this.user = user;
+        if (UtilesUsuario.validarAlias(alias)) {
+            this.alias = alias;
         } else {
-            this.user = UtilesUsuario.DEF_USER;
+            this.alias = UtilesUsuario.DEF_ALIAS;
+        }
+
+        if (UtilesValidacion.validarEMail(email)) {
+            this.email = email;
+        } else {
+            this.email = UtilesUsuario.DEF_EMAIL;
         }
 
         if (UtilesUsuario.validarPass(pass)) {
@@ -94,13 +103,23 @@ public final class Usuario implements Serializable {
         }
     }
 
-    public String getUser() {
-        return user;
+    public String getAlias() {
+        return alias;
     }
 
-    public void setUser(String user) {
-        if (UtilesUsuario.validarUser(user)) {
-            this.user = user;
+    public void setAlias(String alias) {
+        if (UtilesUsuario.validarAlias(alias)) {
+            this.alias = alias;
+        }
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        if (UtilesValidacion.validarEMail(email)) {
+            this.email = email;
         }
     }
 
@@ -154,7 +173,8 @@ public final class Usuario implements Serializable {
             // Validación Usuario
             testOK = true
                     && u.getId() == id
-                    && u.getUser().equals(user)
+                    && u.getAlias().equals(alias)
+                    && u.getEmail().equals(email)
                     && u.getPass().equals(pass)
                     && u.getAvatar().equals(avatar)
                     && u.getPerfil() == perfil
@@ -169,7 +189,8 @@ public final class Usuario implements Serializable {
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + this.id;
-        hash = 53 * hash + Objects.hashCode(this.user);
+        hash = 53 * hash + Objects.hashCode(this.alias);
+        hash = 53 * hash + Objects.hashCode(this.email);
         hash = 53 * hash + Objects.hashCode(this.pass);
         hash = 53 * hash + Objects.hashCode(this.avatar);
         hash = 53 * hash + this.perfil;

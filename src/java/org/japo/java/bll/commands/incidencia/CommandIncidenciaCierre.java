@@ -62,7 +62,7 @@ public final class CommandIncidenciaCierre extends Command {
 
                 // Notificación de Cierre
                 Date fecha = new Date();
-                String info = "Incidencia Cerrada por " + usuario.getUser();
+                String info = "Incidencia Cerrada por " + usuario.getAlias();
                 Notificacion notificacion = new Notificacion(
                         UtilesNotificacion.DEF_ID, fecha,
                         usuario.getId(), "", "",

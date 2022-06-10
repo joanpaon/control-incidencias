@@ -53,13 +53,17 @@ public final class CommandUsuarioProfile extends Command {
                 DLLUsuario dllUsuario = new DLLUsuario(config);
 
                 // Request > Parámetros
-                String user = UtilesUsuario.obtenerUserRequest(request);
+                String alias = UtilesUsuario.obtenerAliasRequest(request);
+                String email = UtilesUsuario.obtenerEmailRequest(request);
                 String pass = UtilesUsuario.obtenerPassRequest(request);
                 String avatar = UtilesUsuario.obtenerAvatarRequest(config, request);
                 int perfil = UtilesUsuario.obtenerPerfilRequest(request);
 
                 // Parámetros > Entidad
-                usuario = new Usuario(usuario.getId(), user, pass, avatar, perfil, "");
+                usuario = new Usuario(
+                        usuario.getId(),
+                        alias, email, pass, avatar,
+                        perfil, "");
 
                 // Ejecutar Operación
                 boolean checkOK = dllUsuario.modificar(usuario);
