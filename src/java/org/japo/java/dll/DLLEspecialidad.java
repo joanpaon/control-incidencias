@@ -74,8 +74,14 @@ public final class DLLEspecialidad {
         // SQL
         String sql = ""
                 + "SELECT "
-                + "* "
+                + "especialidades.id AS id, "
+                + "especialidades.nombre AS nombre, "
+                + "especialidades.info AS info, "
+                + "especialidades.responsable AS responsable, "
+                + "usuarios.user AS responsable_nombre "
                 + "FROM especialidades "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = especialidades.responsable "
                 + "WHERE "
                 + "especialidades.id=?";
 
@@ -94,9 +100,13 @@ public final class DLLEspecialidad {
                         // Fila Actual > Campos 
                         String nombre = rs.getString("nombre");
                         String info = rs.getString("info");
+                        int responsable = rs.getInt("responsable");
+                        String responsableNombre = rs.getString("responsable_nombre");
 
                         // Campos > Entidad
-                        especialidad = new Especialidad(id, nombre, info);
+                        especialidad = new Especialidad(
+                                id, nombre, info,
+                                responsable, responsableNombre);
                     }
                 }
             }
@@ -143,9 +153,9 @@ public final class DLLEspecialidad {
                 + "INSERT INTO "
                 + "especialidades "
                 + "("
-                + "nombre, info"
+                + "nombre, info, responsable"
                 + ") "
-                + "VALUES (?, ?)";
+                + "VALUES (?, ?, ?)";
 
         // Número de registros afectados
         int numReg = 0;
@@ -157,6 +167,7 @@ public final class DLLEspecialidad {
                 // Parametrizar Sentencia
                 ps.setString(1, especialidad.getNombre());
                 ps.setString(2, especialidad.getInfo());
+                ps.setInt(3, especialidad.getResponsable());
 
                 // Ejecutar Sentencia
                 numReg = ps.executeUpdate();
@@ -173,9 +184,14 @@ public final class DLLEspecialidad {
         // SQL
         String sql = ""
                 + "SELECT "
-                + "* "
-                + "FROM "
-                + "especialidades";
+                + "especialidades.id AS id, "
+                + "especialidades.nombre AS nombre, "
+                + "especialidades.info AS info, "
+                + "especialidades.responsable AS responsable, "
+                + "usuarios.user AS responsable_nombre "
+                + "FROM especialidades "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = especialidades.responsable";
 
         // Lista Vacía
         List<Especialidad> especialidades = new ArrayList<>();
@@ -190,10 +206,13 @@ public final class DLLEspecialidad {
                         int id = rs.getInt("id");
                         String nombre = rs.getString("nombre");
                         String info = rs.getString("info");
+                        int responsable = rs.getInt("responsable");
+                        String responsableNombre = rs.getString("responsable_nombre");
 
                         // Campos > Entidad
                         Especialidad especialidad = new Especialidad(
-                                id, nombre, info);
+                                id, nombre, info,
+                                responsable, responsableNombre);
 
                         // Entidad > Lista
                         especialidades.add(especialidad);
@@ -212,9 +231,14 @@ public final class DLLEspecialidad {
         // SQL
         String sql = ""
                 + "SELECT "
-                + "* "
-                + "FROM "
-                + "especialidades "
+                + "especialidades.id AS id, "
+                + "especialidades.nombre AS nombre, "
+                + "especialidades.info AS info, "
+                + "especialidades.responsable AS responsable, "
+                + "usuarios.user AS responsable_nombre "
+                + "FROM especialidades "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = especialidades.responsable "
                 + "LIMIT ?, ?";
 
         // Lista Vacía
@@ -234,10 +258,13 @@ public final class DLLEspecialidad {
                         int id = rs.getInt("id");
                         String nombre = rs.getString("nombre");
                         String info = rs.getString("info");
+                        int responsable = rs.getInt("responsable");
+                        String responsableNombre = rs.getString("responsable_nombre");
 
                         // Campos > Entidad
                         Especialidad especialidad = new Especialidad(
-                                id, nombre, info);
+                                id, nombre, info,
+                                responsable, responsableNombre);
 
                         // Entidad > Lista
                         especialidades.add(especialidad);
@@ -258,7 +285,7 @@ public final class DLLEspecialidad {
                 + "UPDATE "
                 + "especialidades "
                 + "SET "
-                + "nombre=?, info=? "
+                + "nombre=?, info=?, responsable=? "
                 + "WHERE "
                 + "id=?";
 
@@ -271,7 +298,8 @@ public final class DLLEspecialidad {
                 // Parametrizar Sentencia
                 ps.setString(1, especialidad.getNombre());
                 ps.setString(2, especialidad.getInfo());
-                ps.setInt(3, especialidad.getId());
+                ps.setInt(3, especialidad.getResponsable());
+                ps.setInt(4, especialidad.getId());
 
                 // Ejecutar Sentencia
                 numReg = ps.executeUpdate();

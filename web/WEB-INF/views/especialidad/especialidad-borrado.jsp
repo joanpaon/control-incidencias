@@ -71,6 +71,13 @@
                                 <td>Info</td>
                                 <td><%= especialidad.getInfo()%></td>
                             </tr>
+                            <tr>
+                                <td>Responsable</td>
+                                <td><%= "" 
+                                        + especialidad.getResponsable() + " - " 
+                                        + especialidad.getResponsableNombre()%>
+                                </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>

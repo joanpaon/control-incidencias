@@ -70,6 +70,7 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Info</th>
+                    <th>Responsable</th>
                     <th>Acciones</th>
                     </thead>
 
@@ -77,9 +78,10 @@
                         <% for (Especialidad e : especialidades) {%>
 
                         <tr>
-                            <td><%= e.getId()%></td>
+                            <td class="id"><%= e.getId()%></td>
                             <td><%= e.getNombre()%></td>
                             <td><%= e.getInfo()%></td>
+                            <td><%= e.getResponsableNombre()%></td>
                             <td>
                                 <a class="btn btn-consultar" href="?cmd=especialidad-consulta&id=<%= e.getId()%>" title="Consulta">C</a>
                                 <a class="btn btn-modificar" href="?cmd=especialidad-modificacion&id=<%= e.getId()%>" title="Modificación">M</a>

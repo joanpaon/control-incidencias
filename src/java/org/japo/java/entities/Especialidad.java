@@ -18,6 +18,7 @@ package org.japo.java.entities;
 import java.io.Serializable;
 import java.util.Objects;
 import org.japo.java.libraries.UtilesEspecialidad;
+import org.japo.java.libraries.UtilesUsuario;
 
 public final class Especialidad implements Serializable {
 
@@ -25,16 +26,21 @@ public final class Especialidad implements Serializable {
     private int id;
     private String nombre;
     private String info;
+    int responsable;
+    String responsableNombre;
 
     // Constructor Predeterminado
     public Especialidad() {
         id = UtilesEspecialidad.DEF_ID;
         nombre = UtilesEspecialidad.DEF_NOMBRE;
         info = UtilesEspecialidad.DEF_INFO;
+        responsable = UtilesUsuario.DEF_ID;
+        responsableNombre = UtilesUsuario.DEF_USER;
     }
 
     // Constructor Parametrizado
-    public Especialidad(int id, String nombre, String info) {
+    public Especialidad(int id, String nombre, String info,
+            int responsable, String responsableNombre) {
         if (UtilesEspecialidad.validarId(id)) {
             this.id = id;
         } else {
@@ -51,6 +57,18 @@ public final class Especialidad implements Serializable {
             this.info = info;
         } else {
             this.info = UtilesEspecialidad.DEF_INFO;
+        }
+
+        if (UtilesUsuario.validarId(responsable)) {
+            this.responsable = responsable;
+        } else {
+            this.responsable = UtilesUsuario.DEF_ID;
+        }
+
+        if (UtilesUsuario.validarUser(responsableNombre)) {
+            this.responsableNombre = responsableNombre;
+        } else {
+            this.responsableNombre = UtilesUsuario.DEF_USER;
         }
     }
 
@@ -84,6 +102,26 @@ public final class Especialidad implements Serializable {
         }
     }
 
+    public int getResponsable() {
+        return responsable;
+    }
+
+    public void setResponsable(int responsable) {
+        if (UtilesUsuario.validarId(responsable)) {
+            this.responsable = responsable;
+        }
+    }
+
+    public String getResponsableNombre() {
+        return responsableNombre;
+    }
+
+    public void setResponsable(String responsableNombre) {
+        if (UtilesUsuario.validarUser(responsableNombre)) {
+            this.responsableNombre = responsableNombre;
+        }
+    }
+
     @Override
     public boolean equals(Object o) {
         boolean testOK = false;
@@ -91,7 +129,8 @@ public final class Especialidad implements Serializable {
             testOK = true
                     && id == e.getId()
                     && nombre.equals(e.getNombre())
-                    && info.equals(e.getInfo());
+                    && info.equals(e.getInfo())
+                    && responsable == e.getResponsable();
         }
         return testOK;
     }
@@ -102,6 +141,7 @@ public final class Especialidad implements Serializable {
         hash = 67 * hash + this.id;
         hash = 67 * hash + Objects.hashCode(this.nombre);
         hash = 67 * hash + Objects.hashCode(this.info);
+        hash = 67 * hash + this.responsable;
         return hash;
     }
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-06-2022 a las 18:37:41
+-- Tiempo de generación: 10-06-2022 a las 16:34:49
 -- Versión del servidor: 10.4.24-MariaDB
 -- Versión de PHP: 8.1.5
 
@@ -54,17 +54,19 @@ INSERT INTO `dependencias` (`id`, `nombre`, `info`) VALUES
 CREATE TABLE `especialidades` (
   `id` int(11) NOT NULL,
   `nombre` varchar(50) NOT NULL,
-  `info` varchar(255) NOT NULL
+  `info` varchar(255) NOT NULL,
+  `responsable` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Volcado de datos para la tabla `especialidades`
 --
 
-INSERT INTO `especialidades` (`id`, `nombre`, `info`) VALUES
-(1, 'Muebles y Decoración', 'Sillas, mesas, pupitres, pizarras, perchas, armarios, etc.'),
-(2, 'Electricidad', 'Instalaciones Eléctricas y Luminarias'),
-(3, 'Pintura y Rotulación', 'Paredes, Techos, Suelos, Puertas y Ventanas');
+INSERT INTO `especialidades` (`id`, `nombre`, `info`, `responsable`) VALUES
+(1, 'Mobiliario', 'Sillas, mesas, pupitres, pizarras, perchas, etc.', 1),
+(2, 'Electricidad', 'Instalaciones Eléctricas y Luminarias', 13),
+(3, 'Pintura', 'Paredes, Techos, Suelos, Puertas, etc', 2),
+(4, 'Comunicaciones', 'LAN e Internet', 14);
 
 -- --------------------------------------------------------
 
@@ -253,7 +255,8 @@ ALTER TABLE `dependencias`
 -- Indices de la tabla `especialidades`
 --
 ALTER TABLE `especialidades`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `ESPECIALIDADES_USUARIOS_FK` (`responsable`);
 
 --
 -- Indices de la tabla `incidencias`
@@ -324,19 +327,19 @@ ALTER TABLE `dependencias`
 -- AUTO_INCREMENT de la tabla `especialidades`
 --
 ALTER TABLE `especialidades`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT de la tabla `notificaciones`
 --
 ALTER TABLE `notificaciones`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT de la tabla `perfiles`
@@ -371,6 +374,12 @@ ALTER TABLE `usuarios`
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `especialidades`
+--
+ALTER TABLE `especialidades`
+  ADD CONSTRAINT `ESPECIALIDADES_USUARIOS_FK` FOREIGN KEY (`responsable`) REFERENCES `usuarios` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `incidencias`

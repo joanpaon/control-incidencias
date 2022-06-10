@@ -1,6 +1,13 @@
+<%@page import="java.util.ArrayList"%>
+<%@page import="java.util.List"%>
 <%@page import="org.japo.java.libraries.UtilesEspecialidad"%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+
+<%
+    // Datos inyectados
+    List<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
+%>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -66,6 +73,15 @@
                                        pattern="<%= UtilesEspecialidad.REG_INFO%>" 
                                        required />
                             </div>
+
+                            <div class="field-set">
+                                <label for="responsable">Responsable</label>
+                                <select id="responsable" name="responsable" required>
+                                    <% for (Usuario u : usuarios) {%>
+                                    <option value="<%= u.getId()%>"><%= u.getUser() + " (" + u.getPerfilInfo() + ")"%></option>
+                                    <% }%>
+                                </select>
+                            </div>                                       
                         </div>
                     </div>
 

@@ -18,8 +18,11 @@ package org.japo.java.bll.commands.especialidad;
 import org.japo.java.bll.commands.Command;
 import javax.servlet.ServletException;
 import java.io.IOException;
+import java.util.List;
 import org.japo.java.dll.DLLEspecialidad;
+import org.japo.java.dll.DLLUsuario;
 import org.japo.java.entities.Especialidad;
+import org.japo.java.entities.Usuario;
 import org.japo.java.libraries.UtilesEspecialidad;
 
 /**
@@ -40,26 +43,33 @@ public final class CommandEspecialidadModificacion extends Command {
             if (validarAccesoAdmin(request.getSession(false))) {
                 // Capas de Datos
                 DLLEspecialidad dllEspecialidad = new DLLEspecialidad(config);
+                DLLUsuario dllusuario = new DLLUsuario(config);
 
                 // request > Operación
                 String op = request.getParameter("op");
 
                 // Entidad > JSP
                 if (op == null || op.equals("captura")) {
+                    // Listas de Datos
+                    List<Usuario> usuarios = dllusuario.listar();
+                    
                     // Request + ID Usuario + BD > Usuario
                     Especialidad especialidad = UtilesEspecialidad.
                             consultarEspecialidadIdRequest(config, request);
 
                     // Inyección de Datos
                     request.setAttribute("especialidad", especialidad);
+                    request.setAttribute("usuarios", usuarios);
                 } else if (op.equals("proceso")) {
                     // Request > Parámetros
                     int id = UtilesEspecialidad.obtenerIdRequest(request);
                     String nombre = UtilesEspecialidad.obtenerNombreRequest(request);
                     String info = UtilesEspecialidad.obtenerInfoRequest(request);
+                    int responsable = UtilesEspecialidad.obtenerResponsableRequest(request);
 
                     // Parámetros > Entidad
-                    Especialidad especialidad = new Especialidad(id, nombre, info);
+                    Especialidad especialidad = new Especialidad(
+                            id, nombre, info, responsable, "");
 
                     // Ejecutar Operación
                     boolean checkOK = dllEspecialidad.modificar(especialidad);

@@ -85,6 +85,29 @@ public final class UtilesEspecialidad {
         return valor;
     }
 
+    public static final int obtenerResponsableRequest(
+            HttpServletRequest request)
+            throws IOException {
+        // Referencia
+        int responsable;
+
+        // URL > Dato
+        try {
+            responsable = Integer.parseInt(request.getParameter("responsable"));
+
+            if (!UtilesUsuario.validarId(responsable)) {
+                throw new IOException("ID de Responsable Fuera de Rango");
+            }
+        } catch (NullPointerException e) {
+            throw new IOException(e.getMessage());
+        } catch (NumberFormatException e) {
+            throw new IOException("ID de Responsable Incorrecta");
+        }
+
+        // Retorno
+        return responsable;
+    }
+
     public static Especialidad consultarEspecialidadIdRequest(
             ServletConfig config,
             HttpServletRequest request)

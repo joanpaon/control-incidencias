@@ -1,5 +1,6 @@
 <%@page import="org.japo.java.libraries.UtilesEspecialidad"%>
 <%@page import="org.japo.java.entities.Especialidad"%>
+<%@page import="org.japo.java.entities.Usuario"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="java.util.List"%>
 
@@ -8,6 +9,7 @@
 <%
     // Datos Inyectados
     Especialidad especialidad = (Especialidad) request.getAttribute("especialidad");
+    List<Usuario> usuarios = (ArrayList<Usuario>) request.getAttribute("usuarios");
 %>
 
 <!DOCTYPE html>
@@ -76,6 +78,19 @@
                                        required 
                                        value="<%= especialidad.getInfo()%>"/>
                             </div>
+
+                            <div class="field-set">
+                                <label for="responsable">Responsable</label>
+                                <select id="responsable" name="responsable" required>
+                                    <% for (Usuario u : usuarios) {%>
+                                    <% if (u.getId() == especialidad.getResponsable()) {%>
+                                    <option value="<%= u.getId()%>" selected><%= u.getUser() + " (" + u.getPerfilInfo() + ")"%></option>
+                                    <% } else {%>
+                                    <option value="<%= u.getId()%>"><%= u.getUser() + " (" + u.getPerfilInfo() + ")"%></option>
+                                    <% }%>
+                                    <% }%>
+                                </select>
+                            </div>                         
                         </div>
                     </div>
 
