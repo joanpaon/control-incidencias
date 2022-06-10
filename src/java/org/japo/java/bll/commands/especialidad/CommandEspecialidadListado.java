@@ -47,7 +47,7 @@ public final class CommandEspecialidadListado extends Command {
 
                 // Generar Entidad Navegación
                 ParamPagina param = UtilesParamPagina.generar(
-                        request, rowCount, "dependencia-listado");
+                        request, rowCount, "especialidad-listado");
 
                 // BD > Lista de Especialidades
                 List<Especialidad> especialidades = dllEspecialidad.paginar(
