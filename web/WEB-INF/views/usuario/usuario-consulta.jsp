@@ -25,6 +25,7 @@
 
                 <header>
                     <h2>Consulta de Usuarios</h2>
+                    
                     <a class="btn btn-listar" href="?cmd=usuario-listado">Listado</a>
                 </header>
 
@@ -42,14 +43,17 @@
                                 <td>ID</td>
                                 <td><%= usuario.getId()%></td>
                             </tr>
+                            
                             <tr>
                                 <td>Nombre</td>
                                 <td><%= usuario.getAlias()%></td>
                             </tr>
+                            
                             <tr>
                                 <td>EMail</td>
                                 <td><%= usuario.getEmail()%></td>
                             </tr>
+                            
                             <tr>
                                 <td>Perfil</td>
                                 <td><%= usuario.getPerfilInfo()%></td>
@@ -68,7 +72,6 @@
                     <a class="btn btn-borrar" href="?cmd=usuario-borrado&id=<%= usuario.getId()%>">Borrar</a>
                     <a class="btn btn-modificar" href="?cmd=usuario-modificacion&id=<%= usuario.getId()%>&op=captura">Modificar</a>
                 </nav>
-
             </main>
 
             <%@include file="/WEB-INF/views/partials/footer.jspf" %>

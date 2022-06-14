@@ -20,29 +20,9 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        <!-- These lines go in the first 1024 bytes -->
-        <meta charset="utf-8" />
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <title>Control de Incidencias</title>
+        <%@include file="/WEB-INF/views/partials/common-head.jspf" %>
 
-        <!-- References -->
-        <meta name="author" content="2021 - José A. Pacheco Ondoño - japolabs@gmail.com" />
-        <meta name="description" content="Control de Incidencias" />
-
-        <!-- Configuration -->
-        <meta name="keywords" content="" />
-        <meta name="robots" content="noindex, nofollow" />
-
-        <!-- Viewport Setup for mobile devices -->
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
-        <!-- Favicon -->
-        <link href="public/img/logo.png" rel="icon" type="image/x-icon" />
-
-        <!-- Style Sheet Links -->
         <link rel="stylesheet" href="public/css/notificacion/notificacion-modificacion.css" /> 
-        <link rel="stylesheet" href="public/css/partials/header.css" />
-        <link rel="stylesheet" href="public/css/partials/footer.css" />
     </head>
 
     <body>
@@ -72,20 +52,20 @@
                                        value="<%= sdf.format(notificacion.getFecha())%>"
                                        required />
                             </div>
-                                       
+
                             <div class="field-set">
                                 <label for="autor">Autor</label>
                                 <select id="autor" name="autor" required>
                                     <% for (Usuario u : usuarios) {%>
                                     <% if (u.getId() == notificacion.getAutor()) {%>
-                                    <option value="<%= u.getId()%>" selected><%= u.getUser() + " (" + u.getPerfilInfo() + ")"%></option>
+                                    <option value="<%= u.getId()%>" selected><%= u.getAlias() + " (" + u.getPerfilInfo() + ")"%></option>
                                     <% } else {%>
-                                    <option value="<%= u.getId()%>"><%= u.getUser() + " (" + u.getPerfilInfo() + ")"%></option>
+                                    <option value="<%= u.getId()%>"><%= u.getAlias() + " (" + u.getPerfilInfo() + ")"%></option>
                                     <% }%>
                                     <% }%>
                                 </select>
                             </div>
-                                
+
                             <div class="field-set">
                                 <label for="incidencia">Incidencia</label>
                                 <select id="incidencia" name="incidencia" required>
@@ -98,7 +78,7 @@
                                     <% }%>
                                 </select>
                             </div>
-                                
+
                             <div class="field-set">
                                 <label for="info">Info</label>
                                 <input id="info" 

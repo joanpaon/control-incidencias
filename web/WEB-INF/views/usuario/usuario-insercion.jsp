@@ -27,6 +27,7 @@
 
                 <header>
                     <h2>Inserción de Usuarios</h2>
+                    
                     <a class="btn btn-listar" href="?cmd=usuario-listado">Listado</a>
                 </header>
 

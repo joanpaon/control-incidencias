@@ -26,6 +26,7 @@
 
                 <header>
                     <h2>Borrado de Usuarios - Confirmación</h2>
+                    
                     <a class="btn btn-listar" href="?cmd=usuario-listado">Listado</a>
                 </header>
 

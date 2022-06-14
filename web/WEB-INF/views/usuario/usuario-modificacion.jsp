@@ -29,6 +29,7 @@
 
                 <header>
                     <h2>Modificación de Usuarios</h2>
+                    
                     <a class="btn btn-listar" href="?cmd=usuario-listado">Listado</a>
                 </header>
 
