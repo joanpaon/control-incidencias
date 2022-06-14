@@ -182,7 +182,7 @@ public final class Notificacion implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         boolean testOK = false;
         if (o instanceof Notificacion n) {
             testOK = true
@@ -196,7 +196,7 @@ public final class Notificacion implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int hash = 7;
         hash = 67 * hash + id;
         hash = 67 * hash + Objects.hashCode(this.fecha);

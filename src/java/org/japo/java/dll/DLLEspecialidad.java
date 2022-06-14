@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Joanpaon.
+ * Copyright 2022 JAPOLabs - japolabs@gmail.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,8 +46,7 @@ public final class DLLEspecialidad {
     public boolean borrar(int id) {
         // SQL
         final String SQL = ""
-                + "DELETE FROM "
-                + "especialidades "
+                + "DELETE FROM especialidades "
                 + "WHERE id=?";
 
         // Número de registros afectados
@@ -82,8 +81,7 @@ public final class DLLEspecialidad {
                 + "FROM especialidades "
                 + "INNER JOIN usuarios "
                 + "ON usuarios.id = especialidades.responsable "
-                + "WHERE "
-                + "especialidades.id=?";
+                + "WHERE especialidades.id=?";
 
         // Entidad
         Especialidad especialidad = null;
@@ -124,10 +122,8 @@ public final class DLLEspecialidad {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "especialidades";
+                + "SELECT COUNT(*) "
+                + "FROM especialidades";
 
         try {
             try (
@@ -150,11 +146,8 @@ public final class DLLEspecialidad {
     public boolean insertar(Especialidad especialidad) {
         // SQL
         final String SQL = ""
-                + "INSERT INTO "
-                + "especialidades "
-                + "("
-                + "nombre, info, responsable"
-                + ") "
+                + "INSERT INTO especialidades "
+                + "(nombre, info, responsable) "
                 + "VALUES (?, ?, ?)";
 
         // Número de registros afectados
@@ -282,12 +275,9 @@ public final class DLLEspecialidad {
     public boolean modificar(Especialidad especialidad) {
         // SQL
         final String SQL = ""
-                + "UPDATE "
-                + "especialidades "
-                + "SET "
-                + "nombre=?, info=?, responsable=? "
-                + "WHERE "
-                + "id=?";
+                + "UPDATE especialidades "
+                + "SET nombre=?, info=?, responsable=? "
+                + "WHERE id=?";
 
         // Número de Registros Afectados
         int numReg = 0;

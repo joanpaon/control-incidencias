@@ -30,7 +30,7 @@ public final class UtilesValidacion {
     }
 
     // Dato + Expresión Regular
-    public static boolean validarDato(String dato, String expReg) {
+    public static final boolean validarDato(String dato, String expReg) {
         // Semáforo de validación
         boolean testOK = false;
 
@@ -53,7 +53,7 @@ public final class UtilesValidacion {
     }
 
     // Campo de texto + DNI + Texto campo vacío
-    public static boolean validarCampoDNI(
+    public static final boolean validarCampoDNI(
             JTextField txfActual, String textoCampoVacio) {
         // Texto del campo - No espaciadores
         String textoActual = txfActual.getText().trim();
@@ -78,7 +78,7 @@ public final class UtilesValidacion {
     }
 
     // Campo de texto + FECHA + Texto campo vacío
-    public static boolean validarCampoFecha(
+    public static final boolean validarCampoFecha(
             JTextField txfActual, String textoCampoVacio) {
         // Texto del campo - No espaciadores
         String textoActual = txfActual.getText().trim();
@@ -103,7 +103,7 @@ public final class UtilesValidacion {
     }
 
     // Campo de texto + ExpReg + Texto campo vacío
-    public static boolean validarCampoTexto(
+    public static final boolean validarCampoTexto(
             JTextField txfActual, String expReg, String textoCampoVacio) {
         // Texto del campo - No espaciadores
         String textoActual = txfActual.getText().trim();
@@ -131,7 +131,7 @@ public final class UtilesValidacion {
     }
 
     // Validar URL
-    public static boolean validarURL(String url) {
+    public static final boolean validarURL(String url) {
         // Expresión Regular
         final String ER = "^(https?://)?(([\\w!~*'().&=+$%-]+: )?[\\w!~*'().&=+$%-]+@)?(([0-9]{1,3}\\.){3}[0-9]{1,3}|([\\w!~*'()-]+\\.)*([\\w^-][\\w-]{0,61})?[\\w]\\.[a-z]{2,6})(:[0-9]{1,4})?((/*)|(/+[\\w!~*'().;?:@&=+$,%#-]+)+/*)$";
 
@@ -140,7 +140,7 @@ public final class UtilesValidacion {
     }
 
     // Validar email
-    public static boolean validarEMail(String email) {
+    public static final boolean validarEMail(String email) {
         // Expresión Regular
         final String ER = "[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*";
 

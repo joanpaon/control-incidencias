@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Joanpaon.
+ * Copyright 2022 JAPOLabs - japolabs@gmail.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -60,16 +60,15 @@ public final class DLLIncidencia {
                 + "dependencias.nombre AS dependencia_nombre, "
                 + "incidencias.especialidad AS especialidad, "
                 + "especialidades.nombre AS especialidad_nombre "
-                + "FROM "
-                + "incidencias "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = incidencias.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "dependencias ON dependencias.id = incidencias.dependencia "
-                + "INNER JOIN "
-                + "especialidades ON especialidades.id = incidencias.especialidad";
+                + "FROM incidencias "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = incidencias.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN dependencias "
+                + "ON dependencias.id = incidencias.dependencia "
+                + "INNER JOIN especialidades "
+                + "ON especialidades.id = incidencias.especialidad";
 
         // Lista Vacía
         List<Incidencia> incidencias = new ArrayList<>();
@@ -130,18 +129,16 @@ public final class DLLIncidencia {
                 + "dependencias.nombre AS dependencia_nombre, "
                 + "incidencias.especialidad AS especialidad, "
                 + "especialidades.nombre AS especialidad_nombre "
-                + "FROM "
-                + "incidencias "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = incidencias.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "dependencias ON dependencias.id = incidencias.dependencia "
-                + "INNER JOIN "
-                + "especialidades ON especialidades.id = incidencias.especialidad "
-                + "WHERE "
-                + "incidencias.autor = ?";
+                + "FROM incidencias "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = incidencias.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN dependencias "
+                + "ON dependencias.id = incidencias.dependencia "
+                + "INNER JOIN especialidades "
+                + "ON especialidades.id = incidencias.especialidad "
+                + "WHERE incidencias.autor = ?";
 
         // Lista Vacía
         List<Incidencia> incidencias = new ArrayList<>();
@@ -194,11 +191,10 @@ public final class DLLIncidencia {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "incidencias";
+                + "SELECT COUNT(*) "
+                + "FROM incidencias";
 
+        // BD > Número Incidencias
         try {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -223,13 +219,11 @@ public final class DLLIncidencia {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "incidencias "
-                + "WHERE "
-                + "incidencias.autor = ?";
+                + "SELECT COUNT(*) "
+                + "FROM incidencias "
+                + "WHERE incidencias.autor = ?";
 
+        // BD + Autor > Número de Inciencias
         try {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
@@ -267,16 +261,15 @@ public final class DLLIncidencia {
                 + "dependencias.nombre AS dependencia_nombre, "
                 + "incidencias.especialidad AS especialidad, "
                 + "especialidades.nombre AS especialidad_nombre "
-                + "FROM "
-                + "incidencias "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = incidencias.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "dependencias ON dependencias.id = incidencias.dependencia "
-                + "INNER JOIN "
-                + "especialidades ON especialidades.id = incidencias.especialidad "
+                + "FROM incidencias "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = incidencias.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN dependencias "
+                + "ON dependencias.id = incidencias.dependencia "
+                + "INNER JOIN especialidades "
+                + "ON especialidades.id = incidencias.especialidad "
                 + "LIMIT ?, ?";
 
         // Lista Vacía
@@ -342,18 +335,16 @@ public final class DLLIncidencia {
                 + "dependencias.nombre AS dependencia_nombre, "
                 + "incidencias.especialidad AS especialidad, "
                 + "especialidades.nombre AS especialidad_nombre "
-                + "FROM "
-                + "incidencias "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = incidencias.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "dependencias ON dependencias.id = incidencias.dependencia "
-                + "INNER JOIN "
-                + "especialidades ON especialidades.id = incidencias.especialidad "
-                + "WHERE "
-                + "incidencias.autor = ? "
+                + "FROM incidencias "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = incidencias.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN dependencias "
+                + "ON dependencias.id = incidencias.dependencia "
+                + "INNER JOIN especialidades "
+                + "ON especialidades.id = incidencias.especialidad "
+                + "WHERE incidencias.autor = ? "
                 + "LIMIT ?, ?";
 
         // Lista Vacía
@@ -421,18 +412,16 @@ public final class DLLIncidencia {
                 + "dependencias.nombre AS dependencia_nombre, "
                 + "incidencias.especialidad AS especialidad, "
                 + "especialidades.nombre AS especialidad_nombre "
-                + "FROM "
-                + "incidencias "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = incidencias.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "dependencias ON dependencias.id = incidencias.dependencia "
-                + "INNER JOIN "
-                + "especialidades ON especialidades.id = incidencias.especialidad "
-                + "WHERE "
-                + "incidencias.id=?";
+                + "FROM incidencias "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = incidencias.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN dependencias "
+                + "ON dependencias.id = incidencias.dependencia "
+                + "INNER JOIN especialidades "
+                + "ON especialidades.id = incidencias.especialidad "
+                + "WHERE incidencias.id=?";
 
         // Entidad
         Incidencia incidencia = null;
@@ -492,20 +481,16 @@ public final class DLLIncidencia {
                 + "dependencias.nombre AS dependencia_nombre, "
                 + "incidencias.especialidad AS especialidad, "
                 + "especialidades.nombre AS especialidad_nombre "
-                + "FROM "
-                + "incidencias "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = incidencias.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "dependencias ON dependencias.id = incidencias.dependencia "
-                + "INNER JOIN "
-                + "especialidades ON especialidades.id = incidencias.especialidad "
-                + "WHERE "
-                //               + "incidencias.fecha=? "
-                //                + "AND "
-                + "incidencias.autor=? "
+                + "FROM incidencias "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = incidencias.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN dependencias "
+                + "ON dependencias.id = incidencias.dependencia "
+                + "INNER JOIN especialidades "
+                + "ON especialidades.id = incidencias.especialidad "
+                + "WHERE incidencias.autor=? "
                 + "ORDER BY incidencias.fecha DESC";
 
         // Entidad
@@ -515,8 +500,6 @@ public final class DLLIncidencia {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
                 // Parametrizar Sentencia
-//                ps.setTimestamp(1, new java.sql.Timestamp(fecha.getTime()));
-//                ps.setInt(2, autor);
                 ps.setInt(1, autor);
 
                 // BD > Entidad
@@ -554,13 +537,11 @@ public final class DLLIncidencia {
     public boolean modificar(Incidencia incidencia) {
         // SQL
         String sql = ""
-                + "UPDATE "
-                + "incidencias "
+                + "UPDATE incidencias "
                 + "SET "
                 + "titulo=?, info=?, estado=?, fecha=?, "
                 + "autor=?, dependencia=?, especialidad=? "
-                + "WHERE "
-                + "id=?";
+                + "WHERE id=?";
 
         // Número de Registros Afectados
         int numReg = 0;
@@ -592,12 +573,9 @@ public final class DLLIncidencia {
     public boolean insertar(Incidencia incidencia) {
         // SQL
         String sql = ""
-                + "INSERT INTO "
-                + "incidencias "
-                + "("
-                + "titulo, info, estado, fecha, autor, "
-                + "dependencia, especialidad"
-                + ") "
+                + "INSERT INTO incidencias "
+                + "(titulo, info, estado, fecha, autor, "
+                + "dependencia, especialidad) "
                 + "VALUES (?, ?, ?, ?, ?, ?, ?)";
 
         // Número de registros afectados
@@ -630,8 +608,7 @@ public final class DLLIncidencia {
     public boolean borrar(int id) {
         // SQL
         final String SQL = ""
-                + "DELETE FROM "
-                + "incidencias "
+                + "DELETE FROM incidencias "
                 + "WHERE id=?";
 
         // Número de registros afectados

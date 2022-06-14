@@ -46,10 +46,8 @@ public final class DLLProceso {
     public List<Proceso> listar() {
         // SQL
         String sql = ""
-                + "SELECT "
-                + "* "
-                + "FROM "
-                + "procesos";
+                + "SELECT * "
+                + "FROM procesos";
 
         // Lista Vacía
         List<Proceso> procesos = new ArrayList<>();
@@ -84,11 +82,9 @@ public final class DLLProceso {
     public Proceso consultar(int id) {
         // SQL
         String sql = ""
-                + "SELECT "
-                + "* "
+                + "SELECT * "
                 + "FROM procesos "
-                + "WHERE "
-                + "procesos.id=?";
+                + "WHERE procesos.id=?";
 
         // Entidad
         Proceso proceso = null;
@@ -122,11 +118,9 @@ public final class DLLProceso {
     public Proceso consultar(String nombre) {
         // SQL
         String sql = ""
-                + "SELECT "
-                + "* "
+                + "SELECT * "
                 + "FROM procesos "
-                + "WHERE "
-                + "procesos.nombre=?";
+                + "WHERE procesos.nombre=?";
 
         // Entidad
         Proceso proceso = null;
@@ -160,11 +154,8 @@ public final class DLLProceso {
     public boolean insertar(Proceso proceso) {
         // SQL
         final String SQL = ""
-                + "INSERT INTO "
-                + "procesos "
-                + "("
-                + "nombre, info"
-                + ") "
+                + "INSERT INTO procesos "
+                + "(nombre, info) "
                 + "VALUES (?, ?)";
 
         // Número de registros afectados
@@ -192,8 +183,7 @@ public final class DLLProceso {
     public boolean borrar(int id) {
         // SQL
         final String SQL = ""
-                + "DELETE FROM "
-                + "procesos "
+                + "DELETE FROM procesos "
                 + "WHERE id=?";
 
         // Número de registros afectados
@@ -219,12 +209,9 @@ public final class DLLProceso {
     public boolean modificar(Proceso proceso) {
         // SQL
         final String SQL = ""
-                + "UPDATE "
-                + "procesos "
-                + "SET "
-                + "nombre=?, info=? "
-                + "WHERE "
-                + "id=?";
+                + "UPDATE procesos "
+                + "SET nombre=?, info=? "
+                + "WHERE id=?";
 
         // Número de Registros Afectados
         int numReg = 0;
@@ -254,10 +241,8 @@ public final class DLLProceso {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "procesos";
+                + "SELECT COUNT(*) "
+                + "FROM procesos";
 
         try {
             try (
@@ -279,10 +264,8 @@ public final class DLLProceso {
     public List<Proceso> paginar(long indice, int longitud) {
         // SQL
         String sql = ""
-                + "SELECT "
-                + "* "
-                + "FROM "
-                + "procesos "
+                + "SELECT * "
+                + "FROM procesos "
                 + "LIMIT ?, ?";
 
         // Lista Vacía

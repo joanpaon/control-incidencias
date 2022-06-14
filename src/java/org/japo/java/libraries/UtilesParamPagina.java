@@ -23,7 +23,7 @@ import org.japo.java.entities.ParamPagina;
  *
  * @author Joanpaon
  */
-public class UtilesParamPagina {
+public final class UtilesParamPagina {
 
     public static final int ROWS_PAGE01 = 10;
     public static final int ROWS_PAGE02 = 20;
@@ -40,6 +40,9 @@ public class UtilesParamPagina {
     public static String DEF_COMMAND = "unknown";
 
     public static String REG_COMMAND = "[a-z\\-]+";
+
+    private UtilesParamPagina() {
+    }
 
     public static final boolean validarRowCount(long rowCount) {
         return rowCount >= DEF_ROW_COUNT;

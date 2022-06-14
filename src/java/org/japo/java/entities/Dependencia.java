@@ -85,7 +85,7 @@ public final class Dependencia implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         boolean testOK = false;
         if (o instanceof Dependencia d) {
             testOK = true
@@ -97,7 +97,7 @@ public final class Dependencia implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int hash = 7;
         hash = 67 * hash + this.id;
         hash = 67 * hash + Objects.hashCode(this.nombre);

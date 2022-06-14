@@ -53,12 +53,11 @@ public final class DLLPermisoPerfil {
                 + "permisos_perfil.proceso AS proceso, "
                 + "procesos.info AS proceso_info, "
                 + "permisos_perfil.info AS info "
-                + "FROM "
-                + "permisos_perfil "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = permisos_perfil.perfil "
-                + "INNER JOIN "
-                + "procesos ON procesos.id = permisos_perfil.proceso";
+                + "FROM permisos_perfil "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = permisos_perfil.perfil "
+                + "INNER JOIN procesos "
+                + "ON procesos.id = permisos_perfil.proceso";
 
         // Lista Vacía
         List<PermisoPerfil> permisos = new ArrayList<>();
@@ -103,14 +102,12 @@ public final class DLLPermisoPerfil {
                 + "permisos_perfil.proceso AS proceso, "
                 + "procesos.info AS proceso_info, "
                 + "permisos_perfil.info AS info "
-                + "FROM "
-                + "permisos_perfil "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = permisos_perfil.perfil "
-                + "INNER JOIN "
-                + "procesos ON procesos.id = permisos_perfil.proceso "
-                + "WHERE "
-                + "permisos_perfil.id=?";
+                + "FROM permisos_perfil "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = permisos_perfil.perfil "
+                + "INNER JOIN procesos "
+                + "ON procesos.id = permisos_perfil.proceso "
+                + "WHERE permisos_perfil.id = ?";
 
         // Entidad
         PermisoPerfil permiso = null;
@@ -154,14 +151,12 @@ public final class DLLPermisoPerfil {
                 + "permisos_perfil.proceso AS proceso, "
                 + "procesos.info AS proceso_info, "
                 + "permisos_perfil.info AS info "
-                + "FROM "
-                + "permisos_perfil "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = permisos_perfil.perfil "
-                + "INNER JOIN "
-                + "procesos ON procesos.id = permisos_perfil.proceso "
-                + "WHERE "
-                + "permisos_perfil.perfil=?";
+                + "FROM permisos_perfil "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = permisos_perfil.perfil "
+                + "INNER JOIN procesos "
+                + "ON procesos.id = permisos_perfil.proceso "
+                + "WHERE permisos_perfil.perfil = ?";
 
         // Lista Vacía
         List<PermisoPerfil> permisos = new ArrayList<>();
@@ -201,11 +196,8 @@ public final class DLLPermisoPerfil {
     public boolean insertar(PermisoPerfil permiso) {
         // SQL
         final String SQL = ""
-                + "INSERT INTO "
-                + "permisos_perfil "
-                + "("
-                + "perfil, proceso, info"
-                + ") "
+                + "INSERT INTO permisos_perfil "
+                + "(perfil, proceso, info) "
                 + "VALUES (?, ?, ?)";
 
         // Número de registros afectados
@@ -234,9 +226,8 @@ public final class DLLPermisoPerfil {
     public boolean borrar(int id) {
         // SQL
         final String SQL = ""
-                + "DELETE FROM "
-                + "permisos_perfil "
-                + "WHERE id=?";
+                + "DELETE FROM permisos_perfil "
+                + "WHERE id = ?";
 
         // Número de registros afectados
         int numReg = 0;
@@ -263,10 +254,8 @@ public final class DLLPermisoPerfil {
     public boolean borrar(PermisoPerfil permiso) {
         // SQL
         final String SQL
-                = "DELETE FROM "
-                + "permisos_perfil "
-                + "WHERE "
-                + "proceso=? AND perfil=?";
+                = "DELETE FROM permisos_perfil "
+                + "WHERE proceso = ? AND perfil = ?";
 
         // Número de Registros Afectados
         int numReg = 0;
@@ -292,12 +281,9 @@ public final class DLLPermisoPerfil {
     public boolean modificar(PermisoPerfil permiso) {
         // SQL
         final String SQL = ""
-                + "UPDATE "
-                + "permisos_perfil "
-                + "SET "
-                + "perfil=?, proceso=?, info=? "
-                + "WHERE "
-                + "id=?";
+                + "UPDATE permisos_perfil "
+                + "SET perfil=?, proceso=?, info=? "
+                + "WHERE id=?";
 
         // Número de Registros Afectados
         int numReg = 0;
@@ -328,10 +314,8 @@ public final class DLLPermisoPerfil {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "permisos_perfil";
+                + "SELECT COUNT(*) "
+                + "FROM permisos_perfil";
 
         try {
             try (
@@ -360,12 +344,11 @@ public final class DLLPermisoPerfil {
                 + "permisos_perfil.proceso AS proceso, "
                 + "procesos.info AS proceso_info, "
                 + "permisos_perfil.info AS info "
-                + "FROM "
-                + "permisos_perfil "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = permisos_perfil.perfil "
-                + "INNER JOIN "
-                + "procesos ON procesos.id = permisos_perfil.proceso "
+                + "FROM permisos_perfil "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = permisos_perfil.perfil "
+                + "INNER JOIN procesos "
+                + "ON procesos.id = permisos_perfil.proceso "
                 + "LIMIT ?, ?";
 
         // Lista Vacía

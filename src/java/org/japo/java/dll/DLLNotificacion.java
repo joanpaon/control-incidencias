@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 JAPO Labs.
+ * Copyright 2022 JAPOLabs - japolabs@gmail.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -47,8 +47,7 @@ public final class DLLNotificacion {
     public boolean borrar(int id) {
         // SQL
         final String SQL = ""
-                + "DELETE FROM "
-                + "notificaciones "
+                + "DELETE FROM notificaciones "
                 + "WHERE id=?";
 
         // Número de registros afectados
@@ -83,16 +82,14 @@ public final class DLLNotificacion {
                 + "notificaciones.incidencia AS incidencia, "
                 + "incidencias.titulo AS incidencia_titulo, "
                 + "notificaciones.info AS info "
-                + "FROM "
-                + "notificaciones "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = notificaciones.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "incidencias ON incidencias.id = notificaciones.incidencia "
-                + "WHERE "
-                + "notificaciones.id=?";
+                + "FROM notificaciones "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = notificaciones.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN incidencias "
+                + "ON incidencias.id = notificaciones.incidencia "
+                + "WHERE notificaciones.id=?";
 
         // Entidad
         Notificacion notificacion = null;
@@ -138,10 +135,8 @@ public final class DLLNotificacion {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "notificaciones";
+                + "SELECT COUNT(*) "
+                + "FROM notificaciones";
 
         try {
             try (
@@ -164,11 +159,8 @@ public final class DLLNotificacion {
     public boolean insertar(Notificacion notificacion) {
         // SQL
         final String SQL = ""
-                + "INSERT INTO "
-                + "notificaciones "
-                + "("
-                + "fecha, autor, incidencia, info"
-                + ") "
+                + "INSERT INTO notificaciones "
+                + "(fecha, autor, incidencia, info) "
                 + "VALUES (?, ?, ?, ?)";
 
         // Número de registros afectados
@@ -208,14 +200,13 @@ public final class DLLNotificacion {
                 + "notificaciones.incidencia AS incidencia, "
                 + "incidencias.titulo AS incidencia_titulo, "
                 + "notificaciones.info AS info "
-                + "FROM "
-                + "notificaciones "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = notificaciones.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "incidencias ON incidencias.id = notificaciones.incidencia "
+                + "FROM notificaciones "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = notificaciones.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN incidencias "
+                + "ON incidencias.id = notificaciones.incidencia "
                 + "ORDER BY notificaciones.fecha ASC";
 
         // Lista Vacía
@@ -269,16 +260,14 @@ public final class DLLNotificacion {
                 + "notificaciones.incidencia AS incidencia, "
                 + "incidencias.titulo AS incidencia_titulo, "
                 + "notificaciones.info AS info "
-                + "FROM "
-                + "notificaciones "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = notificaciones.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "incidencias ON incidencias.id = notificaciones.incidencia "
-                + "WHERE "
-                + "notificaciones.incidencia = ? "
+                + "FROM notificaciones "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = notificaciones.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN incidencias "
+                + "ON incidencias.id = notificaciones.incidencia "
+                + "WHERE notificaciones.incidencia = ? "
                 + "ORDER BY notificaciones.fecha ASC";
 
         // Lista Vacía
@@ -334,14 +323,13 @@ public final class DLLNotificacion {
                 + "notificaciones.incidencia AS incidencia, "
                 + "incidencias.titulo AS incidencia_titulo, "
                 + "notificaciones.info AS info "
-                + "FROM "
-                + "notificaciones "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = notificaciones.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "incidencias ON incidencias.id = notificaciones.incidencia "
+                + "FROM notificaciones "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = notificaciones.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN incidencias "
+                + "ON incidencias.id = notificaciones.incidencia "
                 + "LIMIT ?, ?";
 
         // Lista Vacía
@@ -390,12 +378,9 @@ public final class DLLNotificacion {
     public boolean modificar(Notificacion notificacion) {
         // SQL
         final String SQL = ""
-                + "UPDATE "
-                + "notificaciones "
-                + "SET "
-                + "fecha=?, autor=?, incidencia=?, info=? "
-                + "WHERE "
-                + "id=?";
+                + "UPDATE notificaciones "
+                + "SET fecha=?, autor=?, incidencia=?, info=? "
+                + "WHERE id=?";
 
         // Número de Registros Afectados
         int numReg = 0;
@@ -433,17 +418,15 @@ public final class DLLNotificacion {
                 + "notificaciones.incidencia AS incidencia, "
                 + "incidencias.titulo AS incidencia_titulo, "
                 + "notificaciones.info AS info "
-                + "FROM "
-                + "notificaciones "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = notificaciones.autor "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "INNER JOIN "
-                + "incidencias ON incidencias.id = notificaciones.incidencia "
+                + "FROM notificaciones "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = notificaciones.autor "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "INNER JOIN incidencias "
+                + "ON incidencias.id = notificaciones.incidencia "
                 + "LIMIT ?, ? "
-                + "WHERE "
-                + "notificaciones.incidencia = ?";
+                + "WHERE notificaciones.incidencia = ?";
 
         // Lista Vacía
         List<Notificacion> notificaciones = new ArrayList<>();

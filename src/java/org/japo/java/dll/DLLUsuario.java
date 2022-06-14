@@ -55,10 +55,9 @@ public final class DLLUsuario {
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
                 + "perfiles.nombre AS perfil_info "
-                + "FROM "
-                + "usuarios "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil ";
+                + "FROM usuarios "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil ";
 
         // Lista Vacía
         List<Usuario> usuarios = new ArrayList<>();
@@ -109,12 +108,10 @@ public final class DLLUsuario {
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
                 + "perfiles.nombre AS perfil_info "
-                + "FROM "
-                + "usuarios "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "WHERE "
-                + "usuarios.perfil < ?";
+                + "FROM usuarios "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "WHERE usuarios.perfil < ?";
 
         // Lista Vacía
         List<Usuario> usuarios = new ArrayList<>();
@@ -167,10 +164,9 @@ public final class DLLUsuario {
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
                 + "perfiles.nombre AS perfil_info "
-                + "FROM "
-                + "usuarios "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
+                + "FROM usuarios "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
                 + "WHERE usuarios.id=?";
 
         // Entidad
@@ -219,12 +215,10 @@ public final class DLLUsuario {
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
                 + "perfiles.nombre AS perfil_info "
-                + "FROM "
-                + "usuarios "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
-                + "WHERE "
-                + "usuarios.email=?";
+                + "FROM usuarios "
+                + "INNER JOIN perfiles "
+                + "ON perfiles.id = usuarios.perfil "
+                + "WHERE usuarios.email=?";
 
         // Entidad
         Usuario usuario = null;
@@ -265,11 +259,8 @@ public final class DLLUsuario {
     public boolean insertar(Usuario usuario) {
         // SQL
         String sql = ""
-                + "INSERT INTO "
-                + "usuarios "
-                + "("
-                + "alias, email, pass, avatar, perfil"
-                + ") "
+                + "INSERT INTO usuarios "
+                + "(alias, email, pass, avatar, perfil) "
                 + "VALUES (?, ?, ?, ?, ?)";
 
         // Número de registros afectados
@@ -326,12 +317,9 @@ public final class DLLUsuario {
     public boolean modificar(Usuario usuario) {
         // SQL
         String sql = ""
-                + "UPDATE "
-                + "usuarios "
-                + "SET "
-                + "alias=?, email=?, pass=?, avatar=?, perfil=? "
-                + "WHERE "
-                + "id=?";
+                + "UPDATE usuarios "
+                + "SET alias=?, email=?, pass=?, avatar=?, perfil=? "
+                + "WHERE id=?";
 
         // Número de Registros Afectados
         int numReg = 0;
@@ -364,10 +352,8 @@ public final class DLLUsuario {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "usuarios";
+                + "SELECT COUNT(*) "
+                + "FROM usuarios";
 
         try {
             try (
@@ -392,12 +378,9 @@ public final class DLLUsuario {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "usuarios "
-                + "WHERE "
-                + "usuarios.perfil < ?";
+                + "SELECT COUNT(*) "
+                + "FROM usuarios "
+                + "WHERE usuarios.perfil < ?";
 
         try {
             try (
@@ -431,10 +414,8 @@ public final class DLLUsuario {
                 + "usuarios.avatar AS avatar, "
                 + "usuarios.perfil AS perfil, "
                 + "perfiles.nombre AS perfil_info "
-                + "FROM "
-                + "usuarios "
-                + "INNER JOIN "
-                + "perfiles ON perfiles.id = usuarios.perfil "
+                + "FROM usuarios "
+                + "INNER JOIN perfiles ON perfiles.id = usuarios.perfil "
                 + "LIMIT ?, ?";
 
         // Lista Vacía

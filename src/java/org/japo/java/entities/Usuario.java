@@ -164,7 +164,7 @@ public final class Usuario implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         // Semáforo
         boolean testOK = false;
 
@@ -186,7 +186,7 @@ public final class Usuario implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int hash = 7;
         hash = 53 * hash + this.id;
         hash = 53 * hash + Objects.hashCode(this.alias);

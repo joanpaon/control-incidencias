@@ -89,7 +89,7 @@ public final class Perfil implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         // Semáforo
         boolean testOK = false;
 
@@ -107,7 +107,7 @@ public final class Perfil implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int hash = 7;
         hash = 37 * hash + this.id;
         hash = 37 * hash + Objects.hashCode(this.nombre);

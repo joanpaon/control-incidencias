@@ -89,7 +89,7 @@ public final class Proceso implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         // Semáforo
         boolean testOK = false;
 
@@ -107,7 +107,7 @@ public final class Proceso implements Serializable {
     }
 
     @Override
-    public int hashCode() {
+    public final int hashCode() {
         int hash = 5;
         hash = 23 * hash + this.id;
         hash = 23 * hash + Objects.hashCode(this.nombre);

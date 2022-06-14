@@ -1,5 +1,5 @@
 /*
- * Copyright 2022 Joanpaon.
+ * Copyright 2022 JAPOLabs - japolabs@gmail.com.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -46,8 +46,8 @@ public final class DLLDependencia {
     public boolean borrar(int id) {
         // SQL
         final String SQL = ""
-                + "DELETE FROM "
-                + "dependencias "
+                + "DELETE "
+                + "FROM dependencias "
                 + "WHERE id=?";
 
         // Número de registros afectados
@@ -73,11 +73,9 @@ public final class DLLDependencia {
     public Dependencia consultar(int id) {
         // SQL
         String sql = ""
-                + "SELECT "
-                + "* "
+                + "SELECT * "
                 + "FROM dependencias "
-                + "WHERE "
-                + "dependencias.id=?";
+                + "WHERE dependencias.id=?";
 
         // Entidad
         Dependencia dependencia = null;
@@ -114,10 +112,8 @@ public final class DLLDependencia {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "dependencias";
+                + "SELECT COUNT(*) "
+                + "FROM dependencias";
 
         try {
             try (
@@ -140,8 +136,7 @@ public final class DLLDependencia {
     public boolean insertar(Dependencia dependencia) {
         // SQL
         final String SQL = ""
-                + "INSERT INTO "
-                + "dependencias "
+                + "INSERT INTO dependencias "
                 + "("
                 + "nombre, info"
                 + ") "
@@ -172,10 +167,8 @@ public final class DLLDependencia {
     public List<Dependencia> listar() {
         // SQL
         String sql = ""
-                + "SELECT "
-                + "* "
-                + "FROM "
-                + "dependencias";
+                + "SELECT * "
+                + "FROM dependencias";
 
         // Lista Vacía
         List<Dependencia> dependencias = new ArrayList<>();
@@ -211,12 +204,9 @@ public final class DLLDependencia {
     public boolean modificar(Dependencia dependencia) {
         // SQL
         final String SQL = ""
-                + "UPDATE "
-                + "dependencias "
-                + "SET "
-                + "nombre=?, info=? "
-                + "WHERE "
-                + "id=?";
+                + "UPDATE dependencias "
+                + "SET nombre=?, info=? "
+                + "WHERE id=?";
 
         // Número de Registros Afectados
         int numReg = 0;
@@ -243,10 +233,8 @@ public final class DLLDependencia {
     public List<Dependencia> paginar(long indice, long longitud) {
         // SQL
         String sql = ""
-                + "SELECT "
-                + "* "
-                + "FROM "
-                + "dependencias "
+                + "SELECT * "
+                + "FROM dependencias "
                 + "LIMIT ?, ?";
 
         // Lista Vacía

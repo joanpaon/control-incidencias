@@ -53,12 +53,11 @@ public final class DLLPermisoUsuario {
                 + "permisos_usuario.proceso AS proceso, "
                 + "procesos.info AS proceso_info, "
                 + "permisos_usuario.info AS info "
-                + "FROM "
-                + "permisos_usuario "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = permisos_usuario.usuario "
-                + "INNER JOIN "
-                + "procesos ON procesos.id = permisos_usuario.proceso";
+                + "FROM permisos_usuario "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = permisos_usuario.usuario "
+                + "INNER JOIN procesos "
+                + "ON procesos.id = permisos_usuario.proceso";
 
         // Lista Vacía
         List<PermisoUsuario> permisos = new ArrayList<>();
@@ -103,14 +102,12 @@ public final class DLLPermisoUsuario {
                 + "permisos_usuario.proceso AS proceso, "
                 + "procesos.info AS proceso_info, "
                 + "permisos_usuario.info AS info "
-                + "FROM "
-                + "permisos_usuario "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = permisos_usuario.usuario "
-                + "INNER JOIN "
-                + "procesos ON procesos.id = permisos_usuario.proceso "
-                + "WHERE "
-                + "permisos_usuario.id=?";
+                + "FROM permisos_usuario "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = permisos_usuario.usuario "
+                + "INNER JOIN procesos "
+                + "ON procesos.id = permisos_usuario.proceso "
+                + "WHERE permisos_usuario.id=?";
 
         // Entidad
         PermisoUsuario permiso = null;
@@ -154,14 +151,12 @@ public final class DLLPermisoUsuario {
                 + "permisos_usuario.proceso AS proceso, "
                 + "procesos.info AS proceso_info, "
                 + "permisos_usuario.info AS info "
-                + "FROM "
-                + "permisos_usuario "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = permisos_usuario.usuario "
-                + "INNER JOIN "
-                + "procesos ON procesos.id = permisos_usuario.proceso "
-                + "WHERE "
-                + "permisos_usuario.usuario=?";
+                + "FROM permisos_usuario "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = permisos_usuario.usuario "
+                + "INNER JOIN procesos "
+                + "ON procesos.id = permisos_usuario.proceso "
+                + "WHERE permisos_usuario.usuario=?";
 
         // Lista Vacía
         List<PermisoUsuario> permisos = new ArrayList<>();
@@ -201,11 +196,8 @@ public final class DLLPermisoUsuario {
     public boolean insertar(PermisoUsuario permiso) {
         // SQL
         final String SQL = ""
-                + "INSERT INTO "
-                + "permisos_usuario "
-                + "("
-                + "usuario, proceso, info"
-                + ") "
+                + "INSERT INTO permisos_usuario "
+                + "(usuario, proceso, info) "
                 + "VALUES (?, ?, ?)";
 
         // Número de registros afectados
@@ -234,8 +226,7 @@ public final class DLLPermisoUsuario {
     public boolean borrar(int id) {
         // SQL
         final String SQL = ""
-                + "DELETE FROM "
-                + "permisos_usuario "
+                + "DELETE FROM permisos_usuario "
                 + "WHERE id=?";
 
         // Número de registros afectados
@@ -263,10 +254,8 @@ public final class DLLPermisoUsuario {
     public boolean borrar(PermisoUsuario permiso) {
         // SQL
         final String SQL
-                = "DELETE FROM "
-                + "permisos_usuario "
-                + "WHERE "
-                + "usuario=? AND proceso=?";
+                = "DELETE FROM permisos_usuario "
+                + "WHERE usuario=? AND proceso=?";
 
         // Número de Registros Afectados
         int numReg = 0;
@@ -292,12 +281,9 @@ public final class DLLPermisoUsuario {
     public boolean modificar(PermisoUsuario permiso) {
         // SQL
         final String SQL = ""
-                + "UPDATE "
-                + "permisos_usuario "
-                + "SET "
-                + "usuario=?, proceso=?, info=? "
-                + "WHERE "
-                + "id=?";
+                + "UPDATE permisos_usuario "
+                + "SET usuario=?, proceso=?, info=? "
+                + "WHERE id=?";
 
         // Número de Registros Afectados
         int numReg = 0;
@@ -328,10 +314,8 @@ public final class DLLPermisoUsuario {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "permisos_usuario";
+                + "SELECT COUNT(*) "
+                + "FROM permisos_usuario";
 
         try {
             try (
@@ -360,12 +344,11 @@ public final class DLLPermisoUsuario {
                 + "permisos_usuario.proceso AS proceso, "
                 + "procesos.info AS proceso_info, "
                 + "permisos_usuario.info AS info "
-                + "FROM "
-                + "permisos_usuario "
-                + "INNER JOIN "
-                + "usuarios ON usuarios.id = permisos_usuario.usuario "
-                + "INNER JOIN "
-                + "procesos ON procesos.id = permisos_usuario.proceso "
+                + "FROM permisos_usuario "
+                + "INNER JOIN usuarios "
+                + "ON usuarios.id = permisos_usuario.usuario "
+                + "INNER JOIN procesos "
+                + "ON procesos.id = permisos_usuario.proceso "
                 + "LIMIT ?, ?";
 
         // Lista Vacía

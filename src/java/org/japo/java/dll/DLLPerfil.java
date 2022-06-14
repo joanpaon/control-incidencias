@@ -46,10 +46,8 @@ public final class DLLPerfil {
     public List<Perfil> listar() {
         // SQL 
         String sql = ""
-                + "SELECT "
-                + "* "
-                + "FROM "
-                + "perfiles";
+                + "SELECT * "
+                + "FROM perfiles";
 
         // Lista Vacía
         List<Perfil> perfiles = new ArrayList<>();
@@ -84,12 +82,9 @@ public final class DLLPerfil {
     public Perfil consultar(int id) {
         // SQL
         String sql = ""
-                + "SELECT "
-                + "* "
-                + "FROM "
-                + "perfiles "
-                + "WHERE "
-                + "perfiles.id=" + id;
+                + "SELECT * "
+                + "FROM perfiles "
+                + "WHERE perfiles.id = ?";
 
         // Perfil Buscado
         Perfil perfil = null;
@@ -97,6 +92,9 @@ public final class DLLPerfil {
         try {
             try (
                      Connection conn = ds.getConnection();  PreparedStatement ps = conn.prepareStatement(sql)) {
+                // Paramerizar Sentencia
+                ps.setInt(1, id);
+
                 // BD > Lista de Entidades
                 try ( ResultSet rs = ps.executeQuery()) {
                     if (rs.next()) {
@@ -120,11 +118,8 @@ public final class DLLPerfil {
     public boolean insertar(Perfil perfil) {
         // SQL
         String sql = ""
-                + "INSERT INTO "
-                + "perfiles "
-                + "("
-                + "id, nombre, info "
-                + ") "
+                + "INSERT INTO perfiles "
+                + "(id, nombre, info) "
                 + "VALUES (?, ?, ?)";
 
         // Número de registros afectados
@@ -153,10 +148,8 @@ public final class DLLPerfil {
     public boolean borrar(int id) {
         // SQL
         final String SQL = ""
-                + "DELETE FROM "
-                + "perfiles "
-                + "WHERE "
-                + "id=?";
+                + "DELETE FROM perfiles "
+                + "WHERE id = ?";
 
         // Número de registros afectados
         int numReg = 0;
@@ -181,10 +174,8 @@ public final class DLLPerfil {
     public boolean modificar(Perfil perfil) {
         // SQL
         final String SQL = ""
-                + "UPDATE "
-                + "perfiles "
-                + "SET "
-                + "nombre=?, info=? "
+                + "UPDATE perfiles "
+                + "SET nombre=?, info=? "
                 + "WHERE id=?";
 
         // Número de Registros Afectados
@@ -215,10 +206,8 @@ public final class DLLPerfil {
 
         // SQL
         String sql = ""
-                + "SELECT "
-                + "COUNT(*) "
-                + "FROM "
-                + "perfiles";
+                + "SELECT COUNT(*) "
+                + "FROM perfiles";
 
         // Obtención del Contexto
         try {
@@ -242,10 +231,8 @@ public final class DLLPerfil {
     public List<Perfil> paginar(long indice, long longitud) {
         // SQL
         String sql = ""
-                + "SELECT "
-                + "* "
-                + "FROM "
-                + "perfiles "
+                + "SELECT * "
+                + "FROM perfiles "
                 + "LIMIT ?, ?";
 
         // Lista Vacía
