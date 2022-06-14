@@ -191,6 +191,19 @@ main form .field-set [type="text"] {
 
 /* --- */
 
+main form .field-set [type="email"] {
+    height: 2rem;
+
+    padding: .2rem .3rem;
+
+    font-family: sans-serif;
+    font-size: 1.2rem;
+
+    flex: auto;
+}
+
+/* --- */
+
 main form .field-set select {
     height: 2rem;
 
@@ -204,7 +217,7 @@ main form .field-set select {
 
 main .field-set .avatar-name {
     height: 2rem;
-    
+
     background-color: #fff;
     border: solid .1rem #666;
     border-radius: .1rem;
